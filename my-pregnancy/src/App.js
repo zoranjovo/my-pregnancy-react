@@ -1,23 +1,27 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import useScrollToTop from './global-components/scrollToTop.js';
+//import useScrollToTop from './global-components/scrollToTop.js';
+
+import StartupPage from './pages/startup/startuppage.js'
 
 import HomePage from './pages/home/homepage.js'
-
 import CreateAccountPage from './pages/createaccount/createaccountpage.js'
 import LoginPage from './pages/login/loginpage.js'
 
 import NotFoundPage from './pages/notfound/notfoundpage.js'
 
+import './global.css'
+
 
 function Wrapper() {
-    useScrollToTop();
+    //useScrollToTop();
 
     return (
         <Routes>
-            <Route path="/" element={<HomePage/>}/>
+            <Route path="/" element={<StartupPage/>}/>
 
+            <Route path="/home" element={<HomePage/>}/>
             <Route path="/createaccount" element={<CreateAccountPage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
         

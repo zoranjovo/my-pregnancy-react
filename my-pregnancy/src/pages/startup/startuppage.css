@@ -1,0 +1,400 @@
+body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+.section1 {
+    height: 800px;
+    border: 1px solid rgb(0,0,0,0);
+}
+
+.woman {
+    overflow: hidden;
+    position: absolute;
+    left: -100px;
+    margin-top: 20px;
+    width: 700px;
+}
+
+.circle1 {
+    overflow: hidden;
+    position: absolute;
+    left: -200px;
+    margin-top: 370px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(76.75% 76.75% at 70% 23.25%, #FBDEF4 0%, #FFB7DE 100%);
+}
+
+.text1 {
+    font-size: 35px;
+    position: absolute;
+    width: 500px;
+    text-align: center;
+    right: 300px;
+    margin-top: 80px;
+}
+
+.join-box {
+    overflow: hidden;
+    position: absolute;
+    width: 400px;
+    text-align: center;
+    right: 300px;
+    margin-top: 250px;
+}
+
+.text2 {
+    font-size: 25px;
+    text-align: center;
+}
+
+.email-input {
+    width: 300px;
+    padding: 6px 10px;
+    border: 1px solid #888888;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.signup-btn {
+    margin: 10px;
+    width: 300px;
+    background: linear-gradient(90deg, #fca6d4 30%, #ffdbf7 90%);
+    padding: 10px;
+    border-radius: 10px;
+    transition: background-position 0.25s;
+    background-size: 200% 200%;
+    background-position: right;
+}
+  
+.signup-btn:hover {
+    background-position: left;
+}
+
+.text3 {
+    font-size: 35px;
+    width: 700px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 600px;
+}
+
+.text4 {
+    color: #081D3E;
+    font-weight: 700;
+    font-size: 30px;
+    text-align: center;
+}
+
+.s2box {
+    display: flex;
+    justify-content: center;
+    gap: 200px;
+}
+
+.reviews {
+    width: 400px;
+}
+.review {
+    border: 1px solid rgba(187, 187, 187, 0.5);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    background-color: white;
+}
+.review img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50px;
+}
+.review-details {
+    margin-left: 10px;
+    padding-top: 5px;
+}
+.review-stars {
+    color: rgb(241, 188, 40);
+}
+
+.points {
+    width: 300px;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(221, 221, 221, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(143, 143, 143, 0.3);
+}
+
+.points ul {
+    margin-left: 20px;
+    list-style-type: disc;
+}
+.points li {
+    font-size: 25px;
+}
+
+.circle2 {
+    z-index: -1;
+    overflow: hidden;
+    position: absolute;
+    margin-top: 20px;
+    right: 100px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(76.75% 76.75% at 70% 23.25%, #FBDEF4 0%, #F6A2B8 100%)
+}
+.circle3 {
+    overflow: hidden;
+    position: absolute;
+    margin-top: 75px;
+    margin-left: 75px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(81.25% 81.25% at 67.32% 18.75%, #274E8B 0%, #081D3E 100%)
+}
+
+.join-box2 {
+    overflow: hidden;
+    width: 400px;
+    text-align: center;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+}
+
+@media (max-width: 1400px) {
+    .text1 {
+        right: 100px;
+    }
+    .join-box {
+        right: 100px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .text1 {
+        font-size: 30px;
+        right: 50px;
+    }
+    .join-box {
+        right: 50px;
+    }
+    .text3 {
+        font-size: 30px;
+        width: 500px;
+    }
+    .s2box {
+        gap: 100px;
+    }
+}
+
+@media (max-width: 950px) {
+    .text1 {
+        width: 400px;
+        font-size: 28px;
+        right: 20px;
+    }
+    .join-box {
+        right: 0px;
+    }
+    .text3 {
+        font-size: 28px;
+        width: 400px;
+    }
+    .s2box {
+        gap: 50px;
+    }
+    .circle2 {
+        right: 20px;
+    }
+}
+
+@media (max-width: 850px) {
+    .text1 {
+        width: 330px;
+        font-size: 25px;
+        right: 30px;
+    }
+    .join-box {
+        right: 0px;
+    }
+    .text2 {
+        font-size: 25px;
+    }
+    .text3 {
+        font-size: 25px;
+        width: 400px;
+        margin-top: 520px;
+    }
+    .woman {
+        width: 550px;
+    }
+    .circle1 {
+        left: -150px;
+        margin-top: 320px;
+        width: 300px;
+        height: 300px;
+    }
+    .section1 {
+        height: 680px;
+    }
+    .reviews {
+        width: 250px;
+    }
+    .review img {
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 700px) {
+    .text1 {
+        width: 300px;
+        font-size: 25px;
+        right: 40px;
+    }
+    .woman {
+        width: 550px;
+    }
+    .circle1 {
+        left: -150px;
+        margin-top: 320px;
+        width: 300px;
+        height: 300px;
+    }
+    .join-box {
+        width: 300px;
+    }
+    .email-input {
+        width: 200px;
+        margin: 6px;
+    }
+    .signup-btn {
+        margin: 6px;
+        width: 200px;
+    }
+    .points {
+        width: 250px;
+        height: 200px;
+    }
+    .points li {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 630px) {
+    .text1 {
+        font-size: 22px;
+        right: 20px;
+    }
+    .woman {
+        width: 450px;
+    }
+    .circle1 {
+        left: -125px;
+        margin-top: 280px;
+        width: 250px;
+        height: 250px;
+    }
+    .join-box {
+        width: 250px;
+    }
+    .text3 {
+        margin-top: 440px;
+    }
+    .section1 {
+        height: 590px;
+    }
+}
+
+@media (max-width: 580px) {
+    .text1 {
+        width: 250px;
+        font-size: 20px;
+        right: 10px;
+    }
+    .woman {
+        width: 350px;
+    }
+    .circle1 {
+        left: -90px;
+        margin-top: 220px;
+        width: 180px;
+        height: 180px;
+    }
+    .text3 {
+        width: 300px;
+        font-size: 20px;
+        margin-top: 420px;
+    }
+    .section1 {
+        height: 550px;
+    }
+    .s2box {
+        gap: 0px;
+        display: unset;
+    }
+    .reviews {
+        width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .points {
+        width: 300px;
+        margin-left: auto;
+        margin-right: 50px;
+    }
+    .circle2 {
+        margin-top: 230px;
+        right: 0px;
+        width: 200px;
+        height: 200px;
+    }
+    .circle3 {
+        width: 100px;
+        height: 100px;
+        margin-top: 50px;
+        margin-left: 50px;
+    }
+}
+
+@media (max-width: 450px) {
+    .text1 {
+        width: 200px;
+        font-size: 18px;
+        right: 10px;
+    }
+    .woman {
+        left: -90px;
+        width: 300px;
+    }
+    .circle1 {
+        left: -70px;
+        margin-top: 190px;
+        width: 140px;
+        height: 140px;
+    }
+    .text3 {
+        width: 300px;
+        font-size: 20px;
+        margin-top: 420px;
+    }
+    .section1 {
+        height: 540px;
+    }
+    .points {
+        margin-right: auto;
+    }
+    .join-box2 {
+        width: 220px;
+    }
+}
