@@ -14,11 +14,11 @@ function Footer(){
             <div className='links'>
                 <h1>Quick Links</h1>
                 <ul>
-                    <a href='/aboutus'><li>About Us</li></a>
+                    <a href='/about'><li>About Us</li></a>
                     <a href='/privacypolicy'><li>Privacy Policy</li></a>
                     <a href='/faq'><li>FAQ</li></a>
                     <a href='/contact'><li>Contact Us</li></a>
-                    <a href='/signup'><li>Join Now!</li></a>
+                    <a href='/createaccount'><li>Join Now!</li></a>
                 </ul>
             </div>
             <div className='socials'>

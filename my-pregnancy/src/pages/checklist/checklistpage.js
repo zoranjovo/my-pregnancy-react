@@ -1,12 +1,12 @@
 import Footer from "../../global-components/footer/footer";
-import Navbar from "../../global-components/navbar1/navbar1.js"
+import Navbar from "../../global-components/navbar2/navbar2.js"
 
-function CreateAccountPage(){
+function ChecklistPage(){
     return (
         <div>
             <div style={{minHeight: 'calc(100vh - 202px)'}}>
                 <Navbar></Navbar>
-                <h1>create account</h1>
+                <h1>checklist</h1>
             </div>
             
             <Footer></Footer>
@@ -14,4 +14,4 @@ function CreateAccountPage(){
     );
 }
 
-export default CreateAccountPage;
+export default ChecklistPage;

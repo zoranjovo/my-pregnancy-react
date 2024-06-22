@@ -1,4 +1,4 @@
-import Navbar from './navbar.js';
+import Navbar from '../../global-components/navbar1/navbar1.js';
 import Footer from '../../global-components/footer/footer.js';
 
 import './startuppage.css';

@@ -102,3 +102,25 @@
         width: 80px;
     }
 }
+
+@media (max-width: 415px) {
+    .navbar-button {
+        font-size: 13px;
+        padding: 6px 1px;
+        width: 48px;
+        margin: 2px;
+    }
+    .navbar-logo {
+        width: 80px;
+    }
+    .navbar-logo-shadow {
+        width: 80px;
+    }
+    .navbar-left {
+        margin-left: -80px;
+    }
+    
+    .navbar-right {
+        margin-right: -80px;
+    }
+}

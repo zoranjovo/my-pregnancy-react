@@ -1,0 +1,48 @@
+.navbar-fake {
+    height: 80px;
+}
+
+.navbar {
+    display: flex;
+    padding: 0px 20px;
+    background-color: #ffffff;
+    height: 50px;
+    border-radius: 10px;
+    width: calc(100% - 100px);
+    margin-left: 50px;
+    margin-top: 20px;
+    box-shadow: 0px 5px 5px rgb(0, 0, 0, 0.3);
+    position: fixed;
+}
+
+.navbar-link {
+    display: inline-block;
+}
+
+.navbar-button {
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 10px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+    transition-duration: 0.1s;
+    width: 110px;
+    margin: 3px 5px;
+}
+
+.acc {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.navbar-button:hover {
+    background-color: rgb(255, 184, 222);
+}
+
+
+@media (max-width: 1000px) {
+    .navbar {
+        
+    }
+}
