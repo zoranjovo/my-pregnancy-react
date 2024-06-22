@@ -24,7 +24,7 @@ function Navbar(){
                 <Link to="/fitness" className={styles['navbar-link']}>
                     <h1 className={styles['navbar-button']}>Fitness</h1>
                 </Link>
-                <Link to="/account" className={styles['navbar-link', 'acc']}>
+                <Link to="/account" className={`${styles['navbar-link']} ${styles['acc']}`}>
                     <h1 className={styles['navbar-button']}>Account</h1>
                 </Link>
             </nav>
