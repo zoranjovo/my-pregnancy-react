@@ -1,0 +1,56 @@
+.page {
+    display: flex;
+}
+
+.img {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    width: 50%;
+    height: calc(100vh - 202px);
+    object-fit: cover;
+    z-index: -1;
+}
+
+.signuppane {
+    width: 50%;
+}
+
+.signupBtn {
+    width: calc(100% - 40px);
+    margin: 0px 20px;
+    background: linear-gradient(90deg, #fca6d4 30%, #ffdbf7 90%);
+    padding: 10px;
+    border-radius: 10px;
+    transition: background-position 0.25s;
+    background-size: 200% 200%;
+    background-position: right;
+    border: 1px solid #f886ac67;
+    font-weight: 700;
+}
+  
+.signupBtn:hover {
+    background-position: left;
+}
+
+.pinkyText {
+    color: #e91e63; /* Pink color */
+}
+
+.pinkyTextHover:hover {
+    color: #f06292; /* Lighter pink color for hover */
+}
+
+.txtbox {
+    padding: 7px 10px;
+}
+
+
+@media (max-width: 600px) {
+    .img {
+        display: none;
+    }
+    .signuppane {
+        margin-top: 50px;
+        width: 100%;
+    }
+}

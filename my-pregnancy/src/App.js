@@ -10,7 +10,6 @@ import AccountPage from './pages/account/accountpage.js';
 import ChecklistPage from './pages/checklist/checklistpage.js';
 import ConsultationPage from './pages/consultation/consultationpage.js';
 import ContactPage from './pages/contact/contactpage.js';
-import CreateaccountPage from './pages/createaccount/createaccountpage.js';
 import DiscussionPage from './pages/discussion/discussionpage.js';
 import EditaccountPage from './pages/editaccount/editaccountpage.js';
 import FAQPage from './pages/faq/faqpage.js';
@@ -26,6 +25,7 @@ import PrivacyPolicyPage from './pages/privacypolicy/privacypolicypage.js';
 import ResetpasswordPage from './pages/resetpassword/resetpasswordpage.js';
 import ResourcearticlePage from './pages/resourcearticle/resourcearticlepage.js';
 import ResourcesPage from './pages/resources/resourcespage.js';
+import SignUpPage from './pages/signup/signuppage.js';
 
 import './global.css'
 
@@ -42,7 +42,6 @@ function Wrapper() {
             <Route path="/checklist" element={<ChecklistPage/>}/>
             <Route path="/consultation" element={<ConsultationPage/>}/>
             <Route path="/contact" element={<ContactPage/>}/>
-            <Route path="/createaccount" element={<CreateaccountPage/>}/>
             <Route path="/discussion" element={<DiscussionPage/>}/>
             <Route path="/editaccount" element={<EditaccountPage/>}/>
             <Route path="/faq" element={<FAQPage/>}/>
@@ -57,6 +56,7 @@ function Wrapper() {
             <Route path="/resetpassword" element={<ResetpasswordPage/>}/>
             <Route path="/resourcearticle" element={<ResourcearticlePage/>}/>
             <Route path="/resources" element={<ResourcesPage/>}/>
+            <Route path="/signup" element={<SignUpPage/>}/>
         
             <Route path="*" element={<NotFoundPage/>}/>
         </Routes>
