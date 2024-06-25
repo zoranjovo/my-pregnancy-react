@@ -21,7 +21,7 @@ function Footer() {
                     <li><button onClick={() => navigate('/privacypolicy')} className={styles.textButton}>Privacy Policy</button></li>
                     <li><button onClick={() => navigate('/faq')} className={styles.textButton}>FAQ</button></li>
                     <li><button onClick={() => navigate('/contact')} className={styles.textButton}>Contact Us</button></li>
-                    <li><button onClick={() => navigate('/createaccount')} className={styles.textButton}>Join Now!</button></li>
+                    <li><button onClick={() => navigate('/signup')} className={styles.textButton}>Join Now!</button></li>
                 </ul>
             </div>
             <div className={styles.socials}>

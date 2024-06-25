@@ -6,7 +6,7 @@
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
     width: 50%;
-    height: calc(100vh - 202px);
+    min-height: calc(100vh - 202px);
     object-fit: cover;
     z-index: -1;
 }
@@ -33,15 +33,19 @@
 }
 
 .pinkyText {
-    color: #e91e63; /* Pink color */
+    color: #e91e63;
 }
 
 .pinkyTextHover:hover {
-    color: #f06292; /* Lighter pink color for hover */
+    color: #f06292;
 }
 
 .txtbox {
     padding: 7px 10px;
+}
+
+.hidden {
+    display: none;
 }
 
 

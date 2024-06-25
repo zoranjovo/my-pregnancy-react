@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { getToken, clearToken } from '../auth.js'
+import { getToken, clearToken } from './auth.js'
 
-const apiurl = process.env.REACT_APP_API_URL
+const apiurl = 'https://'//process.env.REACT_APP_API_URL
 
 export const getAccount = async () => {
     const token = getToken()
@@ -24,3 +24,16 @@ export const getAccount = async () => {
         }
     }
 };
+
+export const SignUp = async (fullname, email, password, callback) => {
+    try {
+        const response = await axios.post(`${apiurl}/signup`, {
+            fullname: fullname,
+            email: email,
+            password: password,
+        });
+        return callback(response);
+    } catch (error) {
+        return callback({error: true, errorMsg: "Server not reponding"})
+    }
+}
