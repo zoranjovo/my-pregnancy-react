@@ -1,8 +1,8 @@
 .navbar-fake {
-    height: 80px;
+    height: 90px;
 }
 
-.navbar {
+.navbarbig {
     display: flex;
     padding: 0px 20px;
     background-color: #ffffff;
@@ -14,11 +14,38 @@
     box-shadow: 0px 5px 5px rgb(0, 0, 0, 0.3);
     position: fixed;
 }
+.navbarsmall {
+    display: flex;
+    padding: 0px 20px;
+    background-color: #ffffff;
+    height: 50px;
+    border-radius: 10px;
+    width: calc(100% - 100px);
+    margin-left: 50px;
+    margin-top: 20px;
+    box-shadow: 0px 5px 5px rgb(0, 0, 0, 0.3);
+    position: fixed;
+    display: none;
+}
+.navbarsmallexpand {
+    width: 100%;
+    height: 225;
+    margin-top: 6px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    box-shadow: 0px 5px 5px rgb(0, 0, 0, 0.3);
+    opacity: 100%;
+    pointer-events: all;
+}
+.navbarsmallexpand.open {
+    opacity: 0%;
+    pointer-events: none;
+}
 
 .navbar-link {
     display: inline-block;
 }
-
 .navbar-button {
     border: none;
     color: rgb(0, 0, 0);
@@ -31,6 +58,21 @@
     margin: 3px 5px;
 }
 
+
+.navbar-button-2 {
+    cursor: pointer;
+    transition-duration: 0.1s;
+    width: 100%;
+    padding: 10px 20px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.267);
+    height: 45px;
+    border-radius: 4px;
+}
+.navbar-button-2:hover {
+    background-color: rgb(255, 184, 222);
+}
+
+
 .acc {
     margin-left: auto;
     margin-right: 10px;
@@ -42,7 +84,38 @@
 
 
 @media (max-width: 1000px) {
-    .navbar {
-        
+    .navbar-link {
+        display: inline-block;
+    }
+    .acc {
+        margin-right: 0px;
+    }
+    .navbar-button {
+        padding: 11px 6px;
+        width: 90px;
+        margin: 3px 5px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 850px) {
+    .navbarbig {
+        display: none;
+    }
+    .navbarsmall {
+        display: unset;
+    }
+}
+
+@media (max-width: 430px) {
+    .navbar-button {
+        padding: 10px 4px;
+        width: 85px;
+        margin: 4px 3px;
+    }
+    .navbarsmall {
+        width: calc(100% - 50px);
+        margin-left: 25px;
+        padding: 0px 10px;
     }
 }

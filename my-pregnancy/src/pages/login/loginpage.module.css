@@ -6,7 +6,7 @@
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
     width: 50%;
-    height: calc(100vh - 202px);
+    min-height: calc(100vh - 202px);
     object-fit: cover;
     z-index: -1;
 }

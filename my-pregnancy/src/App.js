@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-//import useScrollToTop from './global-components/scrollToTop.js';
+import useScrollToTop from './global-components/scrollToTop.js';
 
 import StartupPage from './pages/startup/startuppage.js';
 
@@ -31,7 +31,7 @@ import './global.css'
 
 
 function Wrapper() {
-    //useScrollToTop();
+    useScrollToTop();
 
     return (
         <Routes>
