@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { dotWave } from 'ldrs'
 
-import { SignUp } from '../../util/apireq';
+import { signUp } from '../../util/apireq';
 import styles from './signuppage.module.css'
 
 function useQuery() {
@@ -60,12 +60,10 @@ function SignUpPane(){
             return
         }
         
-        console.log('sending')
+        console.log('sending sign up request')
         setErrorMsgShown(false)
         setLoadingShown(true)
-        SignUp(fullname, email, password, signupCallback)
-        
-        
+        signUp(fullname, email, password, signupCallback)
     }
 
     function signupCallback(response){
@@ -75,6 +73,10 @@ function SignUpPane(){
             setLoadingShown(false)
             return
         }
+
+        //TODO
+        //display the checkmark
+        //shortly after redirect to account screen to enter additonal info
     }
 
 

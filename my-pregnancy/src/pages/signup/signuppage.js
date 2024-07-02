@@ -1,9 +1,6 @@
 import Footer from "../../global-components/footer/footer";
-//import Navbar from "../../global-components/navbar1/navbar1.js"
-
-import SignUpPane from './signuppane.js'
-
-import styles from './signuppage.module.css'
+import SignUpPane from './signuppane.js';
+import styles from './signuppage.module.css';
 
 function SignUpPage(){
     return (

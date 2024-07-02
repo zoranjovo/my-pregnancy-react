@@ -1,31 +1,29 @@
 import axios from 'axios';
-import { getToken, clearToken } from './auth.js'
+import { getToken } from './auth.js'
 
 const apiurl = 'https://'//process.env.REACT_APP_API_URL
 
-export const getAccount = async () => {
+//TODO make sure there will be a function for just checking if a provided token is valid
+export const checkToken = async () => {
     const token = getToken()
-    if(token) {
+    if(token){
         try {
-            const response = await axios.get(`${apiurl}/getaccount`, {
+            const response = await axios.get(`${apiurl}/users`, {
                 headers: { token: `${token}` }
             });
             if(response.data.error){
-                if(response.data.errorMsg === 'Invalid token'){
-                    clearToken()
-                    console.log("Invalid token Redirecting...");
-                    window.location.href = '/login';
-                    return;
-                }
+                return false
+            } else {
+                return true
             }
-            return response;
         } catch (error) {
-            console.error('Error fetching user data:', error);
+            console.error(error);
         }
     }
 };
 
-export const SignUp = async (fullname, email, password, callback) => {
+//TODO thisq
+export const signUp = async (fullname, email, password, callback) => {
     try {
         const response = await axios.post(`${apiurl}/signup`, {
             fullname: fullname,
@@ -37,3 +35,16 @@ export const SignUp = async (fullname, email, password, callback) => {
         return callback({error: true, errorMsg: "Server not reponding"})
     }
 }
+
+//TODO this
+export const resetPassword = async (email, callback) => {
+    try {
+        const response = await axios.post(`${apiurl}/resetpassword`, {
+            email: email,
+        });
+        return callback(response);
+    } catch (error) {
+        return callback({error: true, errorMsg: "Server not reponding"})
+    }
+}
+

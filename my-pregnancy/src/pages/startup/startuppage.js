@@ -77,8 +77,8 @@ function StartupPage() {
                 <div className={styles.section3}>
                     <div className={styles.joinBox2}>
                         <h1 className={styles.text2}>Join us today!</h1>
-                        <input className={styles.emailInput} placeholder='Email' />
-                        <button className={styles.signupBtn}>Sign up</button>
+                        <input className={styles.emailInput} placeholder='Email' ref={emailRef} onKeyPress={handleKeyPress}/>
+                        <button className={styles.signupBtn} onClick={directToSignup}>Sign up</button>
                     </div>
                 </div>
             </div>
