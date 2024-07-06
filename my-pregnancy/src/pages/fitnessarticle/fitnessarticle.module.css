@@ -1,0 +1,63 @@
+.topinfo {
+    padding: 10px;
+}
+.backBtn {
+    margin: 10px;
+    font-size: 16px;
+}
+
+.body {
+    border-top: 1px solid rgb(180, 180, 180);
+    border-bottom: 1px solid rgb(180, 180, 180);
+    background-color: #fff;
+}
+.innerbody {
+    width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+.embed {
+    margin-top: 20px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    border-radius: 10px;
+    background-color: #2b2b2b;
+}
+.time {
+    color: #646464;
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 10px;
+}
+.desc {
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+
+@media (max-width: 1100px) {
+    .innerbody {
+        width: 600px;
+    }
+}
+
+@media (max-width: 800px) {
+    .innerbody {
+        width: 500px;
+    }
+}
+
+@media (max-width: 600px) {
+    .innerbody {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .innerbody {
+        padding: 20px 10px;
+    }
+}

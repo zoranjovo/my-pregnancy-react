@@ -46,7 +46,7 @@ function Wrapper() {
             <Route path="/editaccount" element={<EditaccountPage/>}/>
             <Route path="/faq" element={<FAQPage/>}/>
             <Route path="/fitness" element={<FitnessPage/>}/>
-            <Route path="/fitnessarticle" element={<FitnessarticlePage/>}/>
+            <Route path="/fitnessarticle/:id" element={<FitnessarticlePage/>}/>
             <Route path="/forums" element={<ForumsPage/>}/>
             <Route path="/home" element={<HomePage/>}/>
             <Route path="/journal" element={<JournalPage/>}/>
