@@ -42,17 +42,18 @@ function FitnessHome(){
                 </input>
                 
                 <div className={styles.videosdiv}>
-                {visibleVideos.length === 0 ? (
+                {visibleVideos.length === 0 && (
                     <h1 className={styles.nonefound}>No videos found</h1>
-                ) : (
+                )}
+                {
                     videos.map((v, i) => (
                         <div key={i} className={!isVideoVisible(v) ? styles.hidden : ''}>
-                          <Link to={`/fitnessarticle/${i}`}>
-                            <FitnessVideo name={v.name} desc={v.desc} url={v.url} time={v.time} />
-                          </Link>
+                            <Link to={`/fitnessarticle/${v.url}`}>
+                                <FitnessVideo name={v.name} desc={v.desc} url={v.url} time={v.time} />
+                            </Link>
                         </div>
-                      ))
-                )}
+                    ))
+                }
                     
                 </div>
             </div>

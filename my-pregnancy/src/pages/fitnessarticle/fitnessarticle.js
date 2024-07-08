@@ -16,7 +16,8 @@ const videos = [
 ];
 
 function FitnessArticle(param){
-    const video = videos[param.id]
+    const video = videos.find(video => video.url === param.id);
+
     return (
         <div>
             <div className={styles.topinfo}>
