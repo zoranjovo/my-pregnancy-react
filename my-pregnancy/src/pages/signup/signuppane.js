@@ -41,22 +41,26 @@ function SignUpPane(){
         return emailRegex.test(email);
     }
 
+    function displayErr(txt){
+        setLoadingShown(false)
+        setErrorMsg(txt)
+        setErrorMsgShown(true)
+    }
+
     function signupBtn(){
-        if(!fullname){return}
-        if(!email){return}
-        if(!isValidEmail(email)){return}
-        if(!password){return}
-        if(!passwordConfirm){return}
+        if(!fullname){return displayErr('Please enter your full name')}
+        if(!email){return displayErr('Please enter your email')}
+        if(!isValidEmail(email)){return displayErr('Please enter a valid email')}
+        if(!password){return displayErr('Please enter a password')}
+        if(!passwordConfirm){return displayErr('Please confirm your password')}
 
         if(password !== passwordConfirm){
-            setErrorMsg('Passwords do not match')
-            setErrorMsgShown(true)
+            displayErr('Passwords do not match')
             return
         }
 
         if(!boxChecked){
-            setErrorMsg('Please agree to the terms and conditions')
-            setErrorMsgShown(true)
+            displayErr('Please agree to the terms and conditions')
             return
         }
         
@@ -74,9 +78,16 @@ function SignUpPane(){
             return
         }
 
-        //TODO
-        //display the checkmark
-        //shortly after redirect to account screen to enter additonal info
+        if(response.status === 200){
+            setLoadingShown(false)
+            alert('sign up success, user added to database') //temporary msg
+    
+            //TODO
+            //display the checkmark
+            //shortly after redirect to account screen to enter additonal info
+        }
+        
+        //TODO account for other http statuses and consider other error scenarios
     }
 
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getToken } from './auth.js'
 
-const apiurl = 'https://'//process.env.REACT_APP_API_URL
+const apiurl = process.env.REACT_APP_API_URL;
 
 //TODO make sure there will be a function for just checking if a provided token is valid
 export const checkToken = async () => {
@@ -25,8 +25,8 @@ export const checkToken = async () => {
 //TODO thisq
 export const signUp = async (fullname, email, password, callback) => {
     try {
-        const response = await axios.post(`${apiurl}/signup`, {
-            fullname: fullname,
+        const response = await axios.post(`${apiurl}/users`, {
+            name: fullname,
             email: email,
             password: password,
         });

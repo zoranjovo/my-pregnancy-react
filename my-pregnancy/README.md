@@ -3,9 +3,10 @@
 1. Make sure you have node js installed
 2. Clone/download the repository
 3. Navigate into the `my-pregnancy` folder (there should be a public and src folder in it)
-4. Open a terminal window in this directory
-5. Run `npm install` and wait until its done
-6. Run `npm run build` and wait until its done
-7. Now navigate into the build folder using `cd build`
-8. Type `serve` to serve the generated static files (if you do not have serve run `npm install --global serve`)
-9. It will give you a local url, put it into  your browser and the site will load
+4. Create a `.env` file in this directory and paste the following in: `REACT_APP_API_URL=http://localhost:3000/api` (change the url when needed, this is the default for a locally hosted backend)
+5. Open a terminal window in this directory
+6. Run `npm install` and wait until its done
+7. Run `npm run build` and wait until its done
+8. Now navigate into the build folder using `cd build`
+9. Type `serve` to serve the generated static files (if you do not have serve run `npm install --global serve`)
+10. It will give you a local url, put it into  your browser and the site will load
