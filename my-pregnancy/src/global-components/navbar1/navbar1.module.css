@@ -59,7 +59,7 @@
 }
 
 .navbar-button:hover {
-    background-color: rgb(255, 184, 222);
+    background-color: var(--pink1);
 }
 
 

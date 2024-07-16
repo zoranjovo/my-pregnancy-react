@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { dotWave } from 'ldrs'
 
 import { signUp } from '../../util/apireq';
-import styles from './signuppage.module.css'
+import buttons from '../../css/buttons.module.css';
+import styles from './signuppage.module.css';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -207,7 +208,7 @@ function SignUpPane(){
             <div className={`${loadingShown ? 'hidden' : ''}`}>
               <button
                 onClick={signupBtn}
-                className={styles.signupBtn}
+                className={`${buttons.stylisedBtn} ${styles.signupBtn}`}
               >
                 Sign up
               </button>

@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App.js';
 import reportWebVitals from './reportWebVitals';
 
-import './global.css';
+import './css/variables.css';
+import './css/global.css';
 import './tailwind.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

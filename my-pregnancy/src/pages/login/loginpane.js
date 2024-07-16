@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import styles from './loginpage.module.css'
+import buttons from '../../css/buttons.module.css';
+import styles from './loginpage.module.css';
 
 function LoginPane(){
     const navigate = useNavigate();
@@ -66,7 +67,7 @@ function LoginPane(){
             <div>
               <button
                 type="submit"
-                className={styles.signupBtn}
+                className={`${buttons.stylisedBtn} ${styles.signupBtn}`}
               >
                 Sign in
               </button>

@@ -46,6 +46,7 @@
 .navbar-link {
     display: inline-block;
 }
+
 .navbar-button {
     border: none;
     color: rgb(0, 0, 0);
@@ -57,7 +58,9 @@
     width: 110px;
     margin: 3px 5px;
 }
-
+.navbar-button:hover {
+    background-color: var(--pink1);
+}
 
 .navbar-button-2 {
     cursor: pointer;
@@ -69,18 +72,14 @@
     border-radius: 4px;
 }
 .navbar-button-2:hover {
-    background-color: rgb(255, 184, 222);
+    background-color: var(--pink1);
 }
-
 
 .acc {
     margin-left: auto;
     margin-right: 10px;
 }
 
-.navbar-button:hover {
-    background-color: rgb(255, 184, 222);
-}
 
 
 @media (max-width: 1000px) {

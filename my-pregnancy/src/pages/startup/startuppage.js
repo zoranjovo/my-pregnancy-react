@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../global-components/navbar1/navbar1.js';
 import Footer from '../../global-components/footer/footer.js';
 
+import buttons from '../../css/buttons.module.css';
 import styles from './startuppage.module.css';
 
 function StartupPage() {
@@ -36,7 +37,7 @@ function StartupPage() {
                     <div className={styles.joinBox}>
                         <h1 className={styles.text2}>Join us today!</h1>
                         <input className={styles.emailInput} placeholder='Email' ref={emailRef} onKeyPress={handleKeyPress}/>
-                        <button className={styles.signupBtn} onClick={directToSignup}>Sign up</button>
+                        <button className={`${buttons.stylisedBtn} ${styles.signupBtn}`} onClick={directToSignup}>Sign up</button>
                     </div>
                     <h1 className={styles.text3}>Your trusted community for support, sharing, and knowledge during pregnancy.</h1>
                 </div>
@@ -78,7 +79,7 @@ function StartupPage() {
                     <div className={styles.joinBox2}>
                         <h1 className={styles.text2}>Join us today!</h1>
                         <input className={styles.emailInput} placeholder='Email' ref={emailRef} onKeyPress={handleKeyPress}/>
-                        <button className={styles.signupBtn} onClick={directToSignup}>Sign up</button>
+                        <button className={`${buttons.stylisedBtn} ${styles.signupBtn}`} onClick={directToSignup}>Sign up</button>
                     </div>
                 </div>
             </div>

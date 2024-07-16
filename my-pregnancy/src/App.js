@@ -27,8 +27,6 @@ import ResourcearticlePage from './pages/resourcearticle/resourcearticlepage.js'
 import ResourcesPage from './pages/resources/resourcespage.js';
 import SignUpPage from './pages/signup/signuppage.js';
 
-import './global.css'
-
 
 function Wrapper() {
     useScrollToTop();
