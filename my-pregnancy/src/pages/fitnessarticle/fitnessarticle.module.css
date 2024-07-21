@@ -36,6 +36,11 @@
     font-size: 16px;
     margin-top: 20px;
 }
+.invalidID {
+    text-align: center;
+    padding: 30px 0px;
+    font-size: 30px;
+}
 
 
 @media (max-width: 1100px) {

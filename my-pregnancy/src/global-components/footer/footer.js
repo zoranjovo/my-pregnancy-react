@@ -2,12 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './footer.module.css';
 
-import facebook from './icons/facebook.webp';
-import instagram from './icons/instagram.png';
-import youtube from './icons/youtube.webp';
-import tiktok from './icons/tiktok.png';
-import x from './icons/x.png';
-
 function Footer() {
     const navigate = useNavigate();
 
@@ -27,11 +21,11 @@ function Footer() {
             <div className={styles.socials}>
                 <h1>Follow us on</h1>
                 <div className={styles.icons}>
-                    <a href='https://facebook.com'><img src={facebook} alt='facebook' /></a>
-                    <a href='https://instagram.com'><img src={instagram} alt='instagram' /></a>
-                    <a href='https://youtube.com'><img src={youtube} alt='youtube' /></a>
-                    <a href='https://tiktok.com'><img src={tiktok} alt='tiktok' /></a>
-                    <a href='https://x.com'><img src={x} alt='x' /></a>
+                    <a href='https://facebook.com'><img src={`assets/footer-icons/facebook.webp`} alt='facebook' /></a>
+                    <a href='https://instagram.com'><img src={`assets/footer-icons/instagram.png`} alt='instagram' /></a>
+                    <a href='https://youtube.com'><img src={`assets/footer-icons/youtube.webp`} alt='youtube' /></a>
+                    <a href='https://tiktok.com'><img src={`assets/footer-icons/tiktok.png`} alt='tiktok' /></a>
+                    <a href='https://x.com'><img src={`assets/footer-icons/x.png`} alt='x' /></a>
                 </div>
                 <div className={styles.info}>
                     <h3>Wollongong, New South Wales - 2500</h3>

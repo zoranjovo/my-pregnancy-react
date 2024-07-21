@@ -29,44 +29,44 @@ import SignUpPage from './pages/signup/signuppage.js';
 
 
 function Wrapper() {
-    useScrollToTop();
+  useScrollToTop();
 
-    return (
-        <Routes>
-            <Route path="/" element={<StartupPage/>}/>
+  return (
+    <Routes>
+      <Route path="/" element={<StartupPage/>}/>
 
-            <Route path="/about" element={<AboutPage/>}/>
-            <Route path="/account" element={<AccountPage/>}/>
-            <Route path="/checklist" element={<ChecklistPage/>}/>
-            <Route path="/consultation" element={<ConsultationPage/>}/>
-            <Route path="/contact" element={<ContactPage/>}/>
-            <Route path="/discussion" element={<DiscussionPage/>}/>
-            <Route path="/editaccount" element={<EditaccountPage/>}/>
-            <Route path="/faq" element={<FAQPage/>}/>
-            <Route path="/fitness" element={<FitnessPage/>}/>
-            <Route path="/fitnessarticle/:id" element={<FitnessarticlePage/>}/>
-            <Route path="/forums" element={<ForumsPage/>}/>
-            <Route path="/home" element={<HomePage/>}/>
-            <Route path="/journal" element={<JournalPage/>}/>
-            <Route path="/login" element={<LoginPage/>}/>
-            <Route path="/post" element={<PostPage/>}/>
-            <Route path="/privacypolicy" element={<PrivacyPolicyPage/>}/>
-            <Route path="/resetpassword" element={<ResetpasswordPage/>}/>
-            <Route path="/resourcearticle" element={<ResourcearticlePage/>}/>
-            <Route path="/resources" element={<ResourcesPage/>}/>
-            <Route path="/signup" element={<SignUpPage/>}/>
-        
-            <Route path="*" element={<NotFoundPage/>}/>
-        </Routes>
-    );
+      <Route path="/about" element={<AboutPage/>}/>
+      <Route path="/account" element={<AccountPage/>}/>
+      <Route path="/checklist" element={<ChecklistPage/>}/>
+      <Route path="/consultation" element={<ConsultationPage/>}/>
+      <Route path="/contact" element={<ContactPage/>}/>
+      <Route path="/discussion" element={<DiscussionPage/>}/>
+      <Route path="/editaccount" element={<EditaccountPage/>}/>
+      <Route path="/faq" element={<FAQPage/>}/>
+      <Route path="/fitness" element={<FitnessPage/>}/>
+      <Route path="/fitnessarticle/:id" element={<FitnessarticlePage/>}/>
+      <Route path="/forums" element={<ForumsPage/>}/>
+      <Route path="/home" element={<HomePage/>}/>
+      <Route path="/journal" element={<JournalPage/>}/>
+      <Route path="/login" element={<LoginPage/>}/>
+      <Route path="/post" element={<PostPage/>}/>
+      <Route path="/privacypolicy" element={<PrivacyPolicyPage/>}/>
+      <Route path="/resetpassword" element={<ResetpasswordPage/>}/>
+      <Route path="/resourcearticle" element={<ResourcearticlePage/>}/>
+      <Route path="/resources" element={<ResourcesPage/>}/>
+      <Route path="/signup" element={<SignUpPage/>}/>
+  
+      <Route path="*" element={<NotFoundPage/>}/>
+    </Routes>
+  );
 }
 
 function App() {
-    return (
-        <Router>
-            <Wrapper/>
-        </Router>
-    );
+  return (
+    <Router>
+      <Wrapper/>
+    </Router>
+  );
 }
 
 export default App;
