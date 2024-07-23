@@ -13,7 +13,7 @@ function useQuery() {
 
 function SignUpPane(){
   const navigate = useNavigate();
-  dotWave.register()
+  dotWave.register();
 
   const query = useQuery();
   const [fullname, setFullname] = useState('');
@@ -43,52 +43,42 @@ function SignUpPane(){
   }
 
   function displayErr(txt){
-    setLoadingShown(false)
-    setErrorMsg(txt)
-    setErrorMsgShown(true)
+    setLoadingShown(false);
+    setErrorMsg(txt);
+    setErrorMsgShown(true);
   }
 
   function signupBtn(){
-    if(!fullname){return displayErr('Please enter your full name')}
-    if(!email){return displayErr('Please enter your email')}
-    if(!isValidEmail(email)){return displayErr('Please enter a valid email')}
-    if(!password){return displayErr('Please enter a password')}
-    if(!passwordConfirm){return displayErr('Please confirm your password')}
-
-    if(password !== passwordConfirm){
-      displayErr('Passwords do not match')
-      return
-    }
-
-    if(!boxChecked){
-      displayErr('Please agree to the terms and conditions')
-      return
-    }
+    if(!fullname){return displayErr('Please enter your full name');}
+    if(!email){return displayErr('Please enter your email');}
+    if(!isValidEmail(email)){return displayErr('Please enter a valid email');}
+    if(!password){return displayErr('Please enter a password');}
+    if(!passwordConfirm){return displayErr('Please confirm your password');}
+    if(password !== passwordConfirm){return displayErr('Passwords do not match');}
+    if(!boxChecked){return displayErr('Please agree to the terms and conditions');}
     
-    console.log('sending sign up request')
-    setErrorMsgShown(false)
-    setLoadingShown(true)
-    signUp(fullname, email, password, signupCallback)
+    console.log('sending sign up request');
+    setErrorMsgShown(false);
+    setLoadingShown(true);
+    signUp(fullname, email, password, signupCallback);
   }
 
   function signupCallback(response){
     if(response.error){
-      setErrorMsg(response.errorMsg)
-      setErrorMsgShown(true)
-      setLoadingShown(false)
-      return
+      setErrorMsg(response.error);
+      setErrorMsgShown(true);
+      setLoadingShown(false);
+      return;
     }
 
     if(response.status === 200){
-      setLoadingShown(false)
-      alert('sign up success, user added to database') //temporary msg
+      setLoadingShown(false);
+      alert('sign up success, user added to database'); //temporary msg
 
       //TODO
       //display the checkmark
       //shortly after redirect to account screen to enter additonal info
     }
-    
-    //TODO account for other http statuses and consider other error scenarios
   }
 
 

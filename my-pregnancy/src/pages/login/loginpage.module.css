@@ -15,7 +15,7 @@
     width: 50%;
 }
 
-.signupBtn {
+.loginBtn {
     width: calc(100% - 40px);
     margin: 0px 20px;
     font-weight: 700;

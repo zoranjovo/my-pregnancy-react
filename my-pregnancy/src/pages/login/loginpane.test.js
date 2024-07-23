@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter, useNavigate } from 'react-router-dom';
 import LoginPane from './loginpane.js';
 
@@ -54,21 +54,21 @@ describe('LoginPane Component', () => {
     expect(mockedNavigate).toHaveBeenCalledWith('/resetpassword');
   });
 
-  test('logs email and password when login button is clicked', () => {
-    const consoleSpy = jest.spyOn(console, 'log');
 
+  test('shows error message for invalid inputs', async () => {
     render(
       <MemoryRouter>
         <LoginPane />
       </MemoryRouter>
     );
 
-    fireEvent.change(screen.getByLabelText('Email address'), { target: { value: 'test@example.com' } });
-    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'password123' } });
+    fireEvent.change(screen.getByLabelText('Email address'), { target: { value: '' } });
+    fireEvent.change(screen.getByLabelText('Password'), { target: { value: '' } });
 
     fireEvent.click(screen.getByText('Sign in'));
-    expect(consoleSpy).toHaveBeenCalledWith('test@example.com', 'password123');
 
-    consoleSpy.mockRestore();
+    await waitFor(() => {
+      expect(screen.getByText('Please enter your email')).toBeInTheDocument();
+    });
   });
 });

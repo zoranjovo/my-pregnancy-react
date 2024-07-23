@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { login } from '../../util/apireq';
 import buttons from '../../css/buttons.module.css';
 import styles from './loginpage.module.css';
 
@@ -9,11 +11,45 @@ function LoginPane(){
     function handleSignUp(){navigate('/signup');}
     function handleForgotPassword(){navigate('/resetpassword')}
 
-    // click login btn
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const [errorMsg, setErrorMsg] = useState('Error')
+    const [errorMsgShown, setErrorMsgShown] = useState(false);
+    const [loadingShown, setLoadingShown] = useState(false);
+
+
+    // click login btn
     function handleLoginClicked(){
-      console.log(email, password)
+      if(!email){ return displayErr('Please enter your email'); }
+      if(!password){ return displayErr('Please enter your password'); }
+      
+      console.log('sending login request');
+      setErrorMsgShown(false);
+      setLoadingShown(true);
+      login(email, password, loginCallback);
+    }
+
+    function loginCallback(response){
+      if(response.error){
+        setErrorMsg(response.error);
+        setErrorMsgShown(true);
+        setLoadingShown(false);
+        return;
+      }
+  
+      if(response.status === 200){
+        setLoadingShown(false);
+        alert('logged in?'); //temporary msg
+        // TODO save jwt to cookie
+      }
+    }
+
+    function displayErr(txt){
+      setLoadingShown(false);
+      setErrorMsg(txt);
+      setErrorMsgShown(true);
     }
 
     return (
@@ -71,14 +107,29 @@ function LoginPane(){
             </div>
           </div>
 
-          <div>
+
+          <div className={`flex items-center justify-center ${errorMsgShown ? '' : 'hidden'}`}>
+              <h3 className="text-red-500">{errorMsg}</h3>
+          </div>
+
+          <div className={`flex items-center justify-center ${loadingShown ? '' : 'hidden'}`}>
+              <l-dot-wave
+                  size="47"
+                  speed="1" 
+                  color="#f06292" 
+                  data-testid="loading-indicator">
+              </l-dot-wave>
+          </div>
+
+          <div className={`${loadingShown ? 'hidden' : ''}`}>
             <button
               onClick={handleLoginClicked}
-              className={`${buttons.stylisedBtn} ${styles.signupBtn}`}
+              className={`${buttons.stylisedBtn} ${styles.loginBtn}`}
             >
               Sign in
             </button>
           </div>
+
         </div>
 
         <p className="mt-10 text-center text-sm text-gray-500">
