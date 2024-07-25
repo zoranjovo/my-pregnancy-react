@@ -21,11 +21,11 @@ function FitnessHome(){
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-      setVideos(vids);
+    setVideos(vids);
   }, []);
 
   const isVideoVisible = (video) => {
-      return video.name.toLowerCase().includes(searchTerm.toLowerCase().trim()) || video.desc.toLowerCase().includes(searchTerm.toLowerCase().trim());
+    return video.name.toLowerCase().includes(searchTerm.toLowerCase().trim()) || video.desc.toLowerCase().includes(searchTerm.toLowerCase().trim());
   };
   const visibleVideos = videos.filter(isVideoVisible);
 

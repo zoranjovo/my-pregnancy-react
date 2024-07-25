@@ -208,10 +208,10 @@ function SignUpPane(){
         <p className="mt-10 text-center text-sm text-gray-500">
           Already have an account?{' '}
           <button
-          onClick={() => navigate('/login')}
-          className={`${styles.pinkyText} ${styles.pinkyTextHover} font-semibold leading-6`}
-          style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', textDecoration: 'underline' }}
-          >
+            onClick={() => navigate('/login')}
+            className={`${styles.pinkyText} ${styles.pinkyTextHover} font-semibold leading-6`}
+            style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', textDecoration: 'underline' }}
+            >
               Log in
           </button>
         </p>

@@ -1,14 +1,14 @@
 import Footer from "../../global-components/footer/footer";
 import Navbar from "../../global-components/navbar2/navbar2.js";
 
-import Journal from "./journal.js";
+import JournalEntry from "./journalentry.js";
 
-function JournalPage(){
+function JournalEntryPage(){
   return (
     <div>
       <div style={{minHeight: 'calc(100vh - 202px)'}}>
         <Navbar></Navbar>
-        <Journal></Journal>
+        <JournalEntry></JournalEntry>
       </div>
       
       <Footer></Footer>
@@ -16,4 +16,4 @@ function JournalPage(){
   );
 }
 
-export default JournalPage;
+export default JournalEntryPage;

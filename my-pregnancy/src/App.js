@@ -18,6 +18,7 @@ import FitnessarticlePage from './pages/fitnessarticle/fitnessarticlepage.js';
 import ForumsPage from './pages/forums/forumspage.js';
 import HomePage from './pages/home/homepage.js';
 import JournalPage from './pages/journal/journalpage.js';
+import JournalEntryPage from './pages/journalentry/journalentrypage.js';
 import LoginPage from './pages/login/loginpage.js';
 import NotFoundPage from './pages/notfound/notfoundpage.js';
 import PostPage from './pages/post/postpage.js';
@@ -48,6 +49,7 @@ function Wrapper() {
       <Route path="/forums" element={<ForumsPage/>}/>
       <Route path="/home" element={<HomePage/>}/>
       <Route path="/journal" element={<JournalPage/>}/>
+      <Route path="/journalentry/:id" element={<JournalEntryPage/>}/>
       <Route path="/login" element={<LoginPage/>}/>
       <Route path="/post" element={<PostPage/>}/>
       <Route path="/privacypolicy" element={<PrivacyPolicyPage/>}/>
