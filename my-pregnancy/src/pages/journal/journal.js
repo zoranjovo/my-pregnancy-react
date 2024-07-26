@@ -84,7 +84,7 @@ function Journal() {
           tileContent={tileContent}
         />
         <div className={styles.entriesContainer}>
-          <div className={styles.entriesTitle}>
+          <div className={`${styles.entriesTitle} ${buttons.stylisedTitle}`}>
             <h2>Entries</h2>
           </div>
           <div className={styles.entriesListContainer}>
