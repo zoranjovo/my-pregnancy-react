@@ -8,6 +8,7 @@
     background-color: #ffffff;
     height: 50px;
     border-radius: 10px;
+    border: 1px solid var(--pink1);
     width: calc(100% - 100px);
     margin-left: 50px;
     margin-top: 20px;
@@ -21,6 +22,7 @@
     background-color: #ffffff;
     height: 50px;
     border-radius: 10px;
+    border: 1px solid var(--pink1);
     width: calc(100% - 100px);
     margin-left: 50px;
     margin-top: 20px;
