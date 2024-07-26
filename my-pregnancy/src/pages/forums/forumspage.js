@@ -1,6 +1,8 @@
 import Footer from "../../global-components/footer/footer";
 import Navbar from "../../global-components/navbar2/navbar2.js"
 
+import ForumHome from "./forumhome.js";
+
 function ForumsPage(){
   return (
     <div>
