@@ -6,7 +6,7 @@ function ForumsPage(){
     <div>
       <div style={{minHeight: 'calc(100vh - 202px)'}}>
         <Navbar></Navbar>
-        <h1>forums</h1>
+        <ForumHome></ForumHome>
       </div>
       
       <Footer></Footer>
