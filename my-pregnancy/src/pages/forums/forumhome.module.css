@@ -1,0 +1,111 @@
+.outerdiv {
+    margin: 20px 40px;
+}
+
+.boardContainer {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--pink1);
+    width:  60%;
+	min-width: 350px;
+    height: 320px;
+	margin: auto;
+}
+
+.boardName {
+    height: 40px;
+}
+
+.boardName > h2 {
+    color: #081D3E;
+    font-weight: 500;
+    font-size: 24px;
+    padding-left: 10px;
+}
+
+.boardPost {
+	padding: 10px;
+	height: 50%;
+	overflow: hidden;
+	text-overflow: ellipsis;	
+}
+
+.boardPost > h2 {
+    color: #081D3E;
+    font-weight: bold;
+	font-size: 18px;
+}
+
+.readMore {
+	color: blue;
+	font-weight: bold;
+	display: block;
+	margin-right: 10px;
+	margin-left: auto;
+}
+
+.smallLine {
+	background-color: var(--pink1);
+	width: 95%;
+	height: 3px;
+	border: 1px solid var(--pink1);
+	margin: auto;
+}
+
+.bigLine {
+	background-color: var(--pink1);
+	width: 100%;
+	height: 5px;
+	border: 1px solid var(--pink1);
+	margin: auto;
+}
+
+.postInfo {
+	width: 100%;
+	height: 100%;
+	padding: 15px 20px 5px;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.postPic {
+	width: 20%;
+	float: left;
+}
+
+.postName {
+	width: 35%;
+	float: left;
+	padding-top: 10px;
+}
+.postName > h2 {
+	color: #081D3E;
+	font-size: 16px;
+}
+
+.postView {
+	width: 25%;
+	float: left;
+	padding-top: 15px;
+}
+
+.postReplies {
+	width: 20%;
+	float: left;
+	padding-top: 15px;
+}
+
+
+.groupNo {
+	width: 50%;
+	float: left;
+	text-align: right;
+	padding-top: 15px;
+}
+
+.groupLast {
+	width: 40%;
+	float: right;
+	padding-top: 15px;
+}
