@@ -13,31 +13,28 @@
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: 1px solid #FFB7DE;
     width: 450px;
     height: 336px;
 }
 
 .entriesTitle {
-    background: linear-gradient(90deg, #ec9ac6 30%, #e9c8e2 90%);
-    border-radius: 10px;
     transition: background-position 0.25s;
     background-size: 200% 200%;
     background-position: right;
     height: 40px;
 }
 .entriesTitle > h2 {
-    color: #ffffff;
+    color: #081D3E;
     font-weight: 500;
     font-size: 24px;
-    padding-left: 10px;
 }
 
 .entry {
     background-color: rgb(247, 247, 247);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: 1px solid #081D3E;
     margin: 10px;
     display: flex;
     margin-bottom: 1rem;
