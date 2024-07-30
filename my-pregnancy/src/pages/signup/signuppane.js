@@ -63,24 +63,32 @@ function SignUpPane(){
     console.log('sending sign up request');
     setErrorMsgShown(false);
     setLoadingShown(true);
-    signUp(firstname, lastname, email, password, signupCallback);
+    try{
+      signUp(firstname, lastname, email, password, signupCallback);
+    } catch(error){
+      setErrorMsg('Signup request failed'); // Handle failure scenario
+      setErrorMsgShown(true);
+      setLoadingShown(false);
+    }
   }
 
   function signupCallback(response){
+    setLoadingShown(false);
+
     if(response.error){
       setErrorMsg(response.error);
       setErrorMsgShown(true);
-      setLoadingShown(false);
       return;
-    }
-
-    if(response.status === 200){
-      setLoadingShown(false);
-      alert('sign up success, user added to database'); //temporary msg
-
+    } else {
+      console.log("User Successfully added to Database");
+      
       //TODO
       //display the checkmark
-      //shortly after redirect to account screen to enter additonal info
+      //document.cookie = `token=${response.data.token}; path=/; max-age=86400`;
+
+      setTimeout(() => {
+        navigate("/account");
+      }, 2000);
     }
   }
 

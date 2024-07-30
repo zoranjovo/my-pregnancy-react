@@ -5,7 +5,7 @@ const apiurl = process.env.REACT_APP_API_URL;
 
 export const signUp = async (firstname, lastname, email, password, callback) => {
   try {
-    const response = axios.post
+    const response = await axios.post
     (`${apiurl}/signup`,
       {
         firstname: firstname,
