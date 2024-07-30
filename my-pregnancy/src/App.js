@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import useScrollToTop from './global-components/scrollToTop.js';
 
 import StartupPage from './pages/startup/startuppage.js';
+import StartupPage2 from './pages/startup2/startuppage2.js';
 
 import AboutPage from './pages/about/aboutpage.js';
 import AccountPage from './pages/account/accountpage.js';
@@ -35,6 +36,7 @@ function Wrapper() {
   return (
     <Routes>
       <Route path="/" element={<StartupPage/>}/>
+      <Route path="/startup2" element={<StartupPage2/>}/>
 
       <Route path="/about" element={<AboutPage/>}/>
       <Route path="/account" element={<AccountPage/>}/>
