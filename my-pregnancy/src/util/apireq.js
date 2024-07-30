@@ -3,11 +3,13 @@ import { getToken } from './auth.js'
 
 const apiurl = process.env.REACT_APP_API_URL;
 
-export const signUp = async (fullname, email, password, callback) => {
+export const signUp = async (firstname, lastname, email, password, callback) => {
   try {
-    const response = await axios.post(`${apiurl}/users`,
+    const response = axios.post
+    (`${apiurl}/signup`,
       {
-        name: fullname,
+        firstname: firstname,
+        lastname: lastname,
         email: email,
         password: password,
       }
@@ -18,18 +20,15 @@ export const signUp = async (fullname, email, password, callback) => {
   }
 }
 
-
 export const login = async (email, password, callback) => {
   try {
-    // TODO put login endpoint here
-    // const response = await axios.post(`${apiurl}/users`,
-    //   {
-    //     email: email,
-    //     password: password,
-    //   }
-    // )
-    // return callback(response);
-    return callback({error: 'this not made yet'})
+    const response = await axios.post(`${apiurl}/login`,
+      {
+        email: email,
+        password: password,
+      }
+    )
+    return callback(response);
   } catch(error) {
     return callback({error: error.message})
   }

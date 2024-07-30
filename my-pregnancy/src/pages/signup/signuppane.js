@@ -16,7 +16,8 @@ function SignUpPane(){
   dotWave.register();
 
   const query = useQuery();
-  const [fullname, setFullname] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -49,10 +50,12 @@ function SignUpPane(){
   }
 
   function signupBtn(){
-    if(!fullname){return displayErr('Please enter your full name');}
+    if(!firstname){return displayErr('Please enter your first name');}
+    if(!lastname){return displayErr('Please enter your last name');}
     if(!email){return displayErr('Please enter your email');}
     if(!isValidEmail(email)){return displayErr('Please enter a valid email');}
     if(!password){return displayErr('Please enter a password');}
+    if(password.length < 8){return displayErr('Password needs to have 8 or more characters');}
     if(!passwordConfirm){return displayErr('Please confirm your password');}
     if(password !== passwordConfirm){return displayErr('Passwords do not match');}
     if(!boxChecked){return displayErr('Please agree to the terms and conditions');}
@@ -60,7 +63,7 @@ function SignUpPane(){
     console.log('sending sign up request');
     setErrorMsgShown(false);
     setLoadingShown(true);
-    signUp(fullname, email, password, signupCallback);
+    signUp(firstname, lastname, email, password, signupCallback);
   }
 
   function signupCallback(response){
@@ -92,15 +95,29 @@ function SignUpPane(){
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <div className="space-y-6">
-          <div>
-            <label htmlFor="fullname" className="block text-sm font-medium leading-6 text-gray-900">
-              Full Name
+        <div>
+            <label htmlFor="firstname" className="block text-sm font-medium leading-6 text-gray-900">
+              First Name
             </label>
             <div className="mt-2">
               <input
-                id="fullname"
-                name="fullname"
-                onChange={(e) => setFullname(e.target.value)}
+                id="firstname"
+                name="firstname"
+                onChange={(e) => setFirstname(e.target.value)}
+                required
+                className={`${styles.txtbox} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+              />
+            </div>
+          </div>
+          <div>
+            <label htmlFor="lastname" className="block text-sm font-medium leading-6 text-gray-900">
+              Last Name
+            </label>
+            <div className="mt-2">
+              <input
+                id="lastname"
+                name="lastname"
+                onChange={(e) => setLastname(e.target.value)}
                 required
                 className={`${styles.txtbox} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               />
