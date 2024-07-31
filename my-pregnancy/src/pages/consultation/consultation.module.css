@@ -1,38 +1,172 @@
 .outerdiv {
-    margin: 20px 40px;
+    margin: 20px 20px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; 
+    box-sizing: border-box;
+    width: 100%; 
+}
+
+.header {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e3a8a; 
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .innerdiv {
-    padding: 0% 10%;
-	width: 100%;
+    display: flex;
+    justify-content: space-evenly; 
+    align-items: flex-start;
+    gap: 20px; 
+    max-width: 1000px; 
+    width: 100%; 
+    margin: 0 auto 20px auto; 
+    padding: 0 20px; 
+}
+
+.leftSide,
+.rightSide {
+    flex: 1;
+    max-width: 500px; 
+    min-width: 280px; 
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 10px; 
+    min-height: 500px;
 }
 
 .leftSide {
-	width: 50%;
-	float: left;
+    display: flex;
+    flex-direction: column;
 }
 
-.leftSide > form > h2 {
-    font-size: 18px;
-	font-weight: medium;
-	color: #081D3E;
+.inputGroup {
+    margin-bottom: 15px;
 }
 
-.leftSide > form > input {
-    padding: 5px;
-	border: 1px solid #888888;
-	border-radius: 10px;
-	width: 200px;
+.inputGroup > label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #081d3e;
+    margin-bottom: 5px;
+    display: block;
 }
 
-.leftSide > form > select {
-    padding: 6px;
-	border: 1px solid #888888;
-	border-radius: 10px;
-	width: 200px;
+.inputGroup > input,
+.inputGroup > select {
+    padding: 8px;
+    border: 1px solid #888888;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.inputGroup > input:focus,
+.inputGroup > select:focus {
+    border-color: #1e3a8a;
+}
+
+.radio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.radio > label {
+    font-size: 14px;
+    font-weight: 400;
+    color: #333333;
+    display: flex;
+    align-items: center;
+}
+
+.radio > label > input {
+    margin-right: 5px;
 }
 
 .rightSide {
-	width: 50%;
-	float: right;
+    text-align: center;
+}
+
+.consultantList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.consultantItem {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    text-align: left; 
+}
+
+.consultantItem:hover {
+    background-color: #e7f0ff;
+}
+
+.consultantItem > h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin-bottom: 5px;
+}
+
+.consultantItem > p {
+    font-size: 14px;
+    color: #555555;
+    margin: 2px 0;
+}
+
+.consultantLabel {
+    font-size: 14px;
+    font-weight: 400;
+    color: #333333;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.consultantLabel > input {
+    margin-right: 5px;
+}
+
+.innerdiv {
+    gap: 150px;
+    padding: 0 10px; 
+    box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+    .innerdiv {
+        max-width: 90%; 
+        gap: 50px; 
+        padding: 0 15px; 
+    }
+}
+
+@media (max-width: 768px) {
+    .innerdiv {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px; 
+    }
+
+    .leftSide,
+    .rightSide {
+        width: 100%;
+        max-width: 600px;
+        margin-bottom: 10px;
+    }
 }

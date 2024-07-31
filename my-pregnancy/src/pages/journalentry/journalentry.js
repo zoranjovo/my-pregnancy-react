@@ -49,7 +49,6 @@ const selfCareActivities = [
   'Took a Break',
   'Slept 7-9 Hours'
 ];
-
   
 function formatDate(dateString) {
   const date = new Date(dateString);
