@@ -1,0 +1,44 @@
+.journalDiv {
+  width: 400px;
+  height: 250px;
+  border: 1px solid var(--pink1);
+  border-radius: 15px;
+  background-color: rgb(255, 247, 251);
+}
+
+.top {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.top > button {
+  font-weight: 400;
+  padding: 8px 30px;
+}
+.top > div {
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  padding: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.bottom {
+  padding: 10px 20px;
+}
+.info > h2 {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--pink1);
+  width: 270px;
+  color: rgb(95, 95, 95);
+  font-size: 14px;
+}
+.info > h2 > span {
+  text-align: right;
+  color: #000000
+}

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { dotWave } from 'ldrs'
+import { dotWave } from 'ldrs';
+import { saveToken } from '../../util/auth';
 
 import { signUp } from '../../util/apireq';
 import buttons from '../../css/buttons.module.css';
@@ -81,10 +82,12 @@ function SignUpPane(){
       return;
     } else {
       console.log("User Successfully added to Database");
+
+      console.log(response)
       
       //TODO
       //display the checkmark
-      //document.cookie = `token=${response.data.token}; path=/; max-age=86400`;
+      saveToken(response.data.token);
 
       setTimeout(() => {
         navigate("/account");

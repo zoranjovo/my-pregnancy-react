@@ -210,7 +210,12 @@ function JournalEntry(){
       </h1>
       <div className={styles.backBtn}>
         <Link to={`/journal`}>
-          <h2>← Discard / Back to Journal</h2>
+          {newEntry ? (
+            <h2>← Discard</h2>
+          ) : (
+            <h2>← Back to Journal</h2>
+          )}
+          
         </Link>
       </div>
       <div className={styles.innerdiv}>

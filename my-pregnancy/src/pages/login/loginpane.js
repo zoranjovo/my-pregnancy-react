@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { saveToken } from '../../util/auth';
 
 import { login } from '../../util/apireq';
 import buttons from '../../css/buttons.module.css';
@@ -41,8 +42,8 @@ function LoginPane(){
   
       if(response.status === 200){
         setLoadingShown(false);
-        alert('logged in?'); //temporary msg
-        // TODO save jwt to cookie
+        saveToken(response.data.token);
+        navigate('/home');
       }
     }
 

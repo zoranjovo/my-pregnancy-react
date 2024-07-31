@@ -1,0 +1,11 @@
+.journalAndForums {
+  padding: 0px 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+}

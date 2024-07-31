@@ -1,5 +1,4 @@
 import Cookies from 'js-cookie';
-import { checkToken } from './apireq';
 
 const TOKEN_KEY = 'mp-auth-token';
 
@@ -19,10 +18,3 @@ export const saveToken = token => {
 export const clearToken = () => {
   Cookies.remove(TOKEN_KEY);
 };
-
-export const loggedOutRedirect = async () => {
-	const token = Cookies.get(TOKEN_KEY);
-    if(!token){return true;} // token does not exist
-	const result = await checkToken(); // check token with api to make sure it is valid
-	return result;
-}

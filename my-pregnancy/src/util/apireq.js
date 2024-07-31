@@ -46,21 +46,22 @@ export const resetPassword = async (email, callback) => {
   }
 }
 
-//TODO make sure there will be a function for just checking if a provided token is valid
-export const checkToken = async () => {
-  const token = getToken()
+
+export const getUser = async () => {
+  const token = getToken();
   if(token){
     try {
-      const response = await axios.get(`${apiurl}/users`, {
-        headers: { token: `${token}` }
+      const response = await axios.get(`${apiurl}/user`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
       });
-      if(response.data.error){
-        return false
-      } else {
-        return true
-      }
+      return response;
     } catch(error) {
       console.error(error);
     }
+  } else {
+    console.log('token is not set')
   }
 };
