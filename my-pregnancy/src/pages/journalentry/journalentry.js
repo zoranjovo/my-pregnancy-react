@@ -200,7 +200,7 @@ function JournalEntry(){
   
   return (
     <div className={styles.outerdiv}>
-      <h1 className="text-2xl font-medium text-blue">
+      <h1 className="text-2xl font-bold text-blue">
         Journal Entry
         {newEntry ? (
           <span className={styles.date}>New Entry</span>
