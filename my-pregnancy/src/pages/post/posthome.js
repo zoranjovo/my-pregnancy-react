@@ -10,8 +10,8 @@ const posts = [
 	viewCount: "1.8k Views",
 	replyNo: 123},
   { id: "1", title: "Lorem ipsum dolor sit amet consectetur adipiscing elit", 
-	content: "Faucibus et molestie ac feugiat sed lectus. In eu mi bibendum neque egestas congue quisque egestas. Ultrices sagittis orci a scelerisque purus semper eget.\
-	Sit amet nulla facilisi morbi tempus iaculis urna. Ac placerat vestibulum lectus mauris ultrices eros in cursus",
+	content: "Faucibus et molestie ac feugiat sed lectus. In eu mi bibendum neque egestas congue quisque egestas. Ultrices sagittis orci a scelerisque purus semper eget. " +
+		"Sit amet nulla facilisi morbi tempus iaculis urna. Ac placerat vestibulum lectus mauris ultrices eros in cursus",
 	poster: "Allie_Verra", 
 	datePosted: "11/11/11", 
 	viewCount: "803 Views",
@@ -28,11 +28,11 @@ function PostPage(){
 		<Link to="/forums">
 			<h2 className="text-2xl text-blue underline inline">Boards</h2>
         </Link>
-		<h2 className="text-2xl text-blue inline"> >> </h2>
+		<h2 className="text-2xl text-blue inline"> &gt;&gt; </h2>
 		<Link to="/discussion">
 			<h2 className="text-2xl text-blue underline inline">General Discussion</h2>
         </Link>
-		<h2 className="text-2xl font-medium text-blue inline"> >> {posts[id].title}</h2>
+		<h2 className="text-2xl font-medium text-blue inline"> &gt;&gt; {posts[id].title}</h2>
 		<br />
 		<br />
 			<div className={styles.postContainer}>

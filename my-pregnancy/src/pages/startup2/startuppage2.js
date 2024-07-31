@@ -1,10 +1,7 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Navbar from '../../global-components/navbar1/navbar1.js';
 import Footer from '../../global-components/footer/footer.js';
-
-import buttons from '../../css/buttons.module.css';
 import styles from './startuppage2.module.css';
 
 function StartupPage2() {
@@ -18,12 +15,6 @@ function StartupPage2() {
       navigate(`/signup`);
     } else {
       navigate(`/signup?email=${encodeURIComponent(email)}`);
-    }
-  }
-
-  function handleKeyPress(event) {
-    if (event.key === 'Enter') {
-      directToSignup();
     }
   }
 
