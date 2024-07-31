@@ -225,7 +225,7 @@ function JournalEntry(){
           <div className={styles.grid}>
             <div className={styles.col}>
               <div className={`${styles.section} ${styles.feelingDiv}`}>
-                <div className={styles.sectionTitle}>
+                <div className={`${buttons.stylisedTitle} ${styles.sectionTitle}`}>
                   <h2>Feeling:</h2>
                   <div className={styles.feelingEmojiDiv}>
                     <span className={selectedEmoji === 0 ? styles.selectedEmoji : ''} onClick={() => changeEmoji(0)}>🤩</span>
@@ -270,7 +270,7 @@ function JournalEntry(){
 
             <div className={styles.col}>
               <div className={`${styles.section} ${styles.gratitudesDiv}`}>
-                <div className={styles.sectionTitle}>
+                <div className={`${buttons.stylisedTitle} ${styles.sectionTitle}`}>
                   <h2>Gratitudes:</h2>
                   <h3>What moment, person or thing are you grateful for today?</h3>
                 </div>
@@ -285,7 +285,7 @@ function JournalEntry(){
                 )}
               </div>
               <div className={`${styles.section} ${styles.onMyMindDiv}`}>
-                <div className={styles.sectionTitle}>
+                <div className={`${buttons.stylisedTitle} ${styles.sectionTitle}`}>
                   <h2>On My Mind:</h2>
                   <h3>What thoughts have been stuck on my mind?</h3>
                 </div>
@@ -303,7 +303,7 @@ function JournalEntry(){
 
             <div className={styles.col}>
               <div className={`${styles.section} ${styles.selfCareDiv}`}>
-                <div className={styles.sectionTitle}>
+                <div className={`${buttons.stylisedTitle} ${styles.sectionTitle}`}>
                   <h2>Self-Care:</h2>
                   <h3>How did I take care of my body and mind today?</h3>
                 </div>
