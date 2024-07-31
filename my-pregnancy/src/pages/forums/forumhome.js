@@ -68,7 +68,7 @@ function ForumHome(){
 		<br />
 		<br />
 		
-		<div className={styles.boardContainer}>
+		<div className={styles.boardContainer1}>
 			<div className={`${styles.boardName} ${buttons.stylisedTitle}`}>
 				<h2>Information Sharing</h2>
 			</div>
@@ -92,7 +92,7 @@ function ForumHome(){
 		<br />
 		<br />
 		
-		<div className={styles.boardContainer}>
+		<div className={styles.boardContainer1}>
 			<div className={`${styles.boardName} ${buttons.stylisedTitle}`}>
 				<h2>Support Groups</h2>
 			</div>
