@@ -41,13 +41,6 @@
     height: 40px;
 }
 
-.boardName > h2 {
-    color: #081D3E;
-    font-weight: 500;
-    font-size: 24px;
-    padding-left: 10px;
-}
-
 .boardPost {
 	padding: 10px;
 	height: 50%;
