@@ -1,0 +1,38 @@
+.outerdiv {
+    margin: 20px 40px;
+}
+
+.innerdiv {
+    padding: 0% 10%;
+	width: 100%;
+}
+
+.leftSide {
+	width: 50%;
+	float: left;
+}
+
+.leftSide > form > h2 {
+    font-size: 18px;
+	font-weight: medium;
+	color: #081D3E;
+}
+
+.leftSide > form > input {
+    padding: 5px;
+	border: 1px solid #888888;
+	border-radius: 10px;
+	width: 200px;
+}
+
+.leftSide > form > select {
+    padding: 6px;
+	border: 1px solid #888888;
+	border-radius: 10px;
+	width: 200px;
+}
+
+.rightSide {
+	width: 50%;
+	float: right;
+}
