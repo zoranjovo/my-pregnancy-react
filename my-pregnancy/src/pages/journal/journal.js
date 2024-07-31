@@ -76,7 +76,7 @@ function Journal() {
 
   return (
     <div className={styles.outerdiv}>
-      <h1 className="text-3xl font-medium text-blue">My Health Journal</h1>
+      <h1 className="text-3xl font-bold text-blue">My Health Journal</h1>
       <div className={styles.innerdiv}>
         <Calendar
           onChange={setSelectedDate}
