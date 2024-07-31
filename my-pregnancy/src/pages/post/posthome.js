@@ -23,7 +23,7 @@ function PostPage(){
   
   return (
     <div className={styles.outerdiv}>
-		<h1 className="text-3xl font-medium text-blue">Welcome to the Forums</h1>
+		<h1 className="text-3xl font-bold text-blue">Welcome to the Forums</h1>
 		<br />
 		<Link to="/forums">
 			<h2 className="text-2xl text-blue underline inline">Boards</h2>
@@ -32,7 +32,7 @@ function PostPage(){
 		<Link to="/discussion">
 			<h2 className="text-2xl text-blue underline inline">General Discussion</h2>
         </Link>
-		<h2 className="text-2xl font-medium text-blue inline"> &gt;&gt; {posts[id].title}</h2>
+		<h2 className="text-2xl font-bold text-blue inline"> &gt;&gt; {posts[id].title}</h2>
 		<br />
 		<br />
 			<div className={styles.postContainer}>
