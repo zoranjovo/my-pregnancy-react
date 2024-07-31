@@ -36,9 +36,9 @@ const groups = [
 function ForumHome(){
   return (
 	<div className={styles.outerdiv}>
-		<h1 className="text-3xl font-medium text-blue">Welcome to the Forums</h1>
+		<h1 className="text-3xl font-bold text-blue">Welcome to the Forums</h1>
 		<br />
-		<h2 className="text-2xl font-medium text-blue">Boards</h2>
+		<h2 className="text-2xl font-bold text-blue">Boards</h2>
 		<br />
 		<div className={styles.boardContainer1}>
 	  		<Link to="/discussion">
