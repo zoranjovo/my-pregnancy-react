@@ -24,11 +24,6 @@
     background-position: right;
     height: 40px;
 }
-.entriesTitle > h2 {
-    color: #081D3E;
-    font-weight: 500;
-    font-size: 24px;
-}
 
 .entry {
     background-color: rgb(247, 247, 247);
