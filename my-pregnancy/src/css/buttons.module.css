@@ -5,6 +5,8 @@
     transition: background-position 0.25s;
     background-size: 200% 200%;
     background-position: right;
+    font-weight: bold;
+    color: #081D3E;
 }
 .stylisedBtn:hover {
     background-position: left;
