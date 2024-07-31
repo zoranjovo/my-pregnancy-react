@@ -46,23 +46,13 @@
 
 .sectionTitle {
   width: 100%;
-  background: linear-gradient(90deg, #ec9ac6 30%, #e9c8e2 90%);
-  border-radius: 10px;
-  transition: background-position 0.25s;
-  background-size: 200% 200%;
-  background-position: right;
   padding-bottom: 8px;
 }
-.sectionTitle > h2 {
-  padding-top: 7px;
-  padding-left: 10px;
-  font-weight: 500;
-}
+
 .sectionTitle > h3 {
   font-size: 16px;
   padding-left: 10px;
 }
-
 
 .feelingDiv {
   width: 200px;
