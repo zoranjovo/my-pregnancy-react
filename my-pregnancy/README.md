@@ -8,5 +8,5 @@
 6. Run `npm install` and wait until its done
 7. Run `npm run build` and wait until its done
 8. Now navigate into the build folder using `cd build`
-9. Type `serve` to serve the generated static files (if you do not have serve run `npm install --global serve`)
+9. Type `serve -s` to serve the generated static files (if you do not have serve run `npm install --global serve`)
 10. It will give you a local url, put it into  your browser and the site will load
