@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './forumhome.module.css';
 import buttons from '../../css/buttons.module.css';
@@ -41,16 +40,20 @@ function ForumHome(){
 		<br />
 		<h2 className="text-2xl font-medium text-blue">Boards</h2>
 		<br />
-		<div className={styles.boardContainer}>
-			<div className={`${styles.boardName} ${buttons.stylisedTitle}`}>
-				<h2>General Discussion</h2>
-			</div>
+		<div className={styles.boardContainer1}>
+	  		<Link to="/discussion">
+				<div className={`${styles.boardName} ${buttons.stylisedTitle}`}>
+					<h2>General Discussion</h2>
+				</div>
+			</Link>
 			<div className={styles.boardPost}>
 				Top Post Today:
-				<h2>{posts[0].title}</h2>
+				<h2><Link to="/post/0">{posts[0].title}</Link></h2>
 				<p>{posts[0].content}</p>
 			</div>
-			<button className={styles.readMore}>Read More</button>
+			<Link to="/post/0">
+				<button className={styles.readMore}>Read More</button>
+			</Link>
 			<div className={styles.smallLine}></div>
 			<div className={styles.postInfo}>
 				<div className={styles.postPic}>pic here</div>
@@ -91,10 +94,10 @@ function ForumHome(){
 		
 		<div className={styles.boardContainer}>
 			<div className={`${styles.boardName} ${buttons.stylisedTitle}`}>
-				<h2>Information Sharing</h2>
+				<h2>Support Groups</h2>
 			</div>
 			<div className={styles.boardPost}>
-				Top Post Today:
+				Recommended Support Group:
 				<h2>{groups[0].title}</h2>
 				<p>{groups[0].content}</p>
 			</div>
