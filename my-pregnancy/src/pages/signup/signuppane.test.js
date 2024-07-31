@@ -6,7 +6,7 @@ import { signUp } from '../../util/apireq';
 
 // Mock the signUp function
 jest.mock('../../util/apireq', () => ({
-  signUp: jest.fn((fullname, email, password, callback) => {
+  signUp: jest.fn((firstname, lastname, email, password, callback) => {
     callback({ status: 200 });
   })
 }));
@@ -24,7 +24,8 @@ describe('SignUpPane Component', () => {
     );
 
     expect(screen.getByText('Create an account')).toBeInTheDocument();
-    expect(screen.getByLabelText('Full Name')).toBeInTheDocument();
+    expect(screen.getByLabelText('First Name')).toBeInTheDocument();
+    expect(screen.getByLabelText('Last Name')).toBeInTheDocument();
     expect(screen.getByLabelText('Email address')).toBeInTheDocument();
     expect(screen.getByLabelText('Password')).toBeInTheDocument();
     expect(screen.getByLabelText('Confirm Password')).toBeInTheDocument();
@@ -40,7 +41,8 @@ describe('SignUpPane Component', () => {
       </MemoryRouter>
     );
 
-    fireEvent.change(screen.getByLabelText('Full Name'), { target: { value: 'John Doe' } });
+    fireEvent.change(screen.getByLabelText('First Name'), { target: { value: 'John' } });
+    fireEvent.change(screen.getByLabelText('Last Name'), { target: { value: 'Doe' } });
     fireEvent.change(screen.getByLabelText('Email address'), { target: { value: 'john@example.com' } });
     fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'password123' } });
     fireEvent.change(screen.getByLabelText('Confirm Password'), { target: { value: 'password123' } });
@@ -49,7 +51,7 @@ describe('SignUpPane Component', () => {
     fireEvent.click(screen.getByText('Sign up'));
 
     await waitFor(() => {
-      expect(signUp).toHaveBeenCalledWith('John Doe', 'john@example.com', 'password123', expect.any(Function));
+      expect(signUp).toHaveBeenCalledWith('John', 'Doe', 'john@example.com', 'password123', expect.any(Function));
     });
   });
 
@@ -60,7 +62,8 @@ describe('SignUpPane Component', () => {
       </MemoryRouter>
     );
 
-    fireEvent.change(screen.getByLabelText('Full Name'), { target: { value: '' } });
+    fireEvent.change(screen.getByLabelText('First Name'), { target: { value: '' } });
+    fireEvent.change(screen.getByLabelText('Last Name'), { target: { value: '' } });
     fireEvent.change(screen.getByLabelText('Email address'), { target: { value: '' } });
     fireEvent.change(screen.getByLabelText('Password'), { target: { value: '' } });
     fireEvent.change(screen.getByLabelText('Confirm Password'), { target: { value: '' } });
@@ -68,7 +71,7 @@ describe('SignUpPane Component', () => {
     fireEvent.click(screen.getByText('Sign up'));
 
     await waitFor(() => {
-      expect(screen.getByText('Please enter your full name')).toBeInTheDocument();
+      expect(screen.getByText('Please enter your first name')).toBeInTheDocument();
     });
   });
 

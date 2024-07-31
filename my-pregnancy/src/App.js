@@ -35,8 +35,8 @@ function Wrapper() {
 
   return (
     <Routes>
-      <Route path="/" element={<StartupPage/>}/>
-      <Route path="/startup2" element={<StartupPage2/>}/>
+      <Route path="/startup2" element={<StartupPage/>}/>
+      <Route path="/" element={<StartupPage2/>}/>
 
       <Route path="/about" element={<AboutPage/>}/>
       <Route path="/account" element={<AccountPage/>}/>

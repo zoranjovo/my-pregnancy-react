@@ -12,13 +12,18 @@ describe('API Functions', () => {
       const callback = jest.fn();
       axios.post.mockResolvedValue({ data: { success: true } });
 
-      await signUp('John Doe', 'john@example.com', 'password123', callback);
+      await signUp('John', 'Doe', 'john@example.com', 'password123', callback);
 
       expect(callback).toHaveBeenCalledWith({ data: { success: true } });
-      expect(axios.post).toHaveBeenCalledWith(`${apiurl}/users`, {
-        name: 'John Doe',
+      expect(axios.post).toHaveBeenCalledWith(`${apiurl}/signup`, {
+        firstname: 'John',
+        lastname: 'Doe',
         email: 'john@example.com',
         password: 'password123'
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
     });
 

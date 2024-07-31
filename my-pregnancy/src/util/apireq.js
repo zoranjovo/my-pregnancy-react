@@ -5,18 +5,22 @@ const apiurl = process.env.REACT_APP_API_URL;
 
 export const signUp = async (firstname, lastname, email, password, callback) => {
   try {
-    const response = await axios.post
-    (`${apiurl}/signup`,
-      {
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        password: password,
+    const response = await axios.post(`${apiurl}/signup`, {
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      password: password,
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
       }
-    )
+    });
     return callback(response);
   } catch(error) {
-    return callback({error: error.message})
+    if(error.response.data.error){
+      return callback({error: error.response.data.error});
+    }
+    return callback(error);
   }
 }
 
@@ -26,11 +30,19 @@ export const login = async (email, password, callback) => {
       {
         email: email,
         password: password,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
-    )
+    );
     return callback(response);
   } catch(error) {
-    return callback({error: error.message})
+    if(error.response.data.error){
+      return callback({error: error.response.data.error});
+    }
+    return callback(error);
   }
 }
 
@@ -42,7 +54,7 @@ export const resetPassword = async (email, callback) => {
     });
     return callback(response);
   } catch(error) {
-    return callback({error: error.message})
+    return callback(error)
   }
 }
 
@@ -59,9 +71,14 @@ export const getUser = async () => {
       });
       return response;
     } catch(error) {
-      console.error(error);
+      if(error.message){
+        return {error: error.message};
+      }
+      if(error.response.data.error){
+        return {error: error.response.data.error};
+      }
     }
   } else {
-    console.log('token is not set')
+    return {error: "Token is not set"};
   }
 };

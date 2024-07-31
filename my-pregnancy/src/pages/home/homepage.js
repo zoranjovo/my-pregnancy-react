@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { getUser } from "../../util/apireq.js";
+import { useNavigate } from "react-router-dom";
+import { clearToken } from "../../util/auth.js";
 
 import { dotWave } from "ldrs";
 
@@ -14,7 +16,6 @@ import Recommended from "./components/recommended/recommended.js";
 import styles from "./home.module.css";
 
 
-
 const profile = {
   name: "Bianca",
   currentDay: "25",
@@ -24,23 +25,36 @@ const profile = {
 }
 
 function HomePage(){
+  const navigate = useNavigate();
   dotWave.register();
 
   const [user, setUser] = useState({});
   const [userFound, setUserFound] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     async function fetchUser() {
       try {
         const userData = await getUser();
-        console.log(userData.data)
+        if(!userData){
+          throw new Error("Network Error");
+        }
+        if(userData.error){
+          throw new Error(userData.error);
+        }
         setUser(userData.data);
         setUserFound(true);
       } catch (error) {
-        console.error("Failed to fetch user data:", error);
+        setErrorMsg(error.message);
+        if(error.message === "Invalid or expired JWT" || error.message === "Token is not set"){
+          clearToken();
+          navigate('/login');
+        }
+        console.log(error.message);
       }
     }
     fetchUser();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -58,16 +72,19 @@ function HomePage(){
           </div>
         ) : (
           <div className={styles.loadingContainer}>
-            <l-dot-wave
-              size="47"
-              speed="1" 
-              color="#f06292" 
-              data-testid="loading-indicator">
-            </l-dot-wave>
+            {errorMsg === "" ? (
+              <l-dot-wave
+                size="47"
+                speed="1" 
+                color="#f06292" 
+                data-testid="loading-indicator">
+              </l-dot-wave>
+            ) : (
+              <h1>{errorMsg}</h1>
+            )}
+            
           </div>
-          
         )}
-        
       </div>
       
       <Footer></Footer>
