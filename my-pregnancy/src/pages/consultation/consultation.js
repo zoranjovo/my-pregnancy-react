@@ -84,8 +84,9 @@ function Consultation() {
             <div className={styles.inputGroup}>
               <label>Preferred Medium of Communication</label>
               <div className={styles.radio}>
-                <label>
+                <label htmlFor="videoCall">
                   <input
+                    id="videoCall"
                     type="radio"
                     name="medium"
                     value="Video Call"
@@ -94,8 +95,9 @@ function Consultation() {
                   />
                   Video Call
                 </label>
-                <label>
+                <label htmlFor="text">
                   <input
+                    id="text"
                     type="radio"
                     name="medium"
                     value="Text"
@@ -104,8 +106,9 @@ function Consultation() {
                   />
                   Text
                 </label>
-                <label>
+                <label htmlFor="noPreference">
                   <input
+                    id="noPreference"
                     type="radio"
                     name="medium"
                     value="No Preference"

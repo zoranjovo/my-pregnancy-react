@@ -187,6 +187,7 @@ function JournalEntry(){
   // handle saving
   const handleSave = () => {
     // TODO save logic - the alert messages will probably change
+    // TODO replace all alerts with other form of notification because interfers with testing and is ugly
 
     if(selectedEmoji < 0){return alert('Please select an overall mood emoji')}
     if(waterIntake < 1){return alert('Please enter if you have drank enough water today')}
@@ -232,7 +233,7 @@ function JournalEntry(){
                 <div className={`${buttons.stylisedTitle} ${styles.sectionTitle}`}>
                   <h2>Feeling:</h2>
                   <div className={styles.feelingEmojiDiv}>
-                    <span className={selectedEmoji === 0 ? styles.selectedEmoji : ''} onClick={() => changeEmoji(0)}>🤩</span>
+                    <span className={selectedEmoji === 0 ? styles.selectedEmoji : ''} onClick={() => changeEmoji(0)} data-testid="emoji">🤩</span>
                     <span className={selectedEmoji === 1 ? styles.selectedEmoji : ''} onClick={() => changeEmoji(1)}>😀</span>
                     <span className={selectedEmoji === 2 ? styles.selectedEmoji : ''} onClick={() => changeEmoji(2)}>😯</span>
                     <span className={selectedEmoji === 3 ? styles.selectedEmoji : ''} onClick={() => changeEmoji(3)}>😢</span>
@@ -347,6 +348,7 @@ function JournalEntry(){
                   <div className={styles.ratingContainer}>
                     {[...Array(10)].map((_, index) => (
                       <span
+                        data-testid={`water-drop-${index}`}
                         key={index}
                         className={`${styles.ratingItem} ${index < hoveredWaterIntake ? styles.hovered : ''} ${index < waterIntake ? styles.selected : ''}`}
                         onMouseEnter={() => handleMouseEnterWater(index)}
@@ -365,6 +367,7 @@ function JournalEntry(){
                   <div className={styles.ratingContainer}>
                     {[...Array(10)].map((_, index) => (
                       <span
+                        data-testid={`day-star-${index}`}
                         key={index}
                         className={`${styles.ratingItem} ${index < hoveredDayRating ? styles.hovered : ''} ${index < dayRating ? styles.selected : ''}`}
                         onMouseEnter={() => handleMouseEnterDay(index)}
