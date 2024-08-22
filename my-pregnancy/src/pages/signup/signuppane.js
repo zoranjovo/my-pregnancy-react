@@ -23,6 +23,14 @@ function SignUpPane(){
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [boxChecked, setBoxChecked] = useState(false);
+  
+  const [role, setRole] = useState('');
+  const [specialization, setSpecialization] = useState('');
+  const [yearsExperience, setYearsExperience] = useState('');
+  const [aphraVerification, setAphraVerification] = useState('');
+  
+  const [weight, setWeight] = useState('');
+  const [pregnancyMonth, setPregnancyMonth] = useState('');
 
   const [errorMsg, setErrorMsg] = useState('Error')
   const [errorMsgShown, setErrorMsgShown] = useState(false);
@@ -62,6 +70,16 @@ function SignUpPane(){
     if(!passwordConfirm){return displayErr('Please confirm your password');}
     if(password !== passwordConfirm){return displayErr('Passwords do not match');}
     if(!boxChecked){return displayErr('Please agree to the terms and conditions');}
+
+    // Validate role-specific fields
+    if (role === 'doctor') {
+      if (!aphraVerification) return displayErr('Please enter your APHRA verification');
+      if (!specialization) return displayErr('Please enter your specialization');
+      if (!yearsExperience) return displayErr('Please enter your years of experience');
+    } else if (role === 'pregnant') {
+      if (!weight) return displayErr('Please enter your weight');
+      if (!pregnancyMonth) return displayErr('Please enter your pregnancy month');
+    }
     
     console.log('sending sign up request');
     setErrorMsgShown(false);
@@ -114,6 +132,102 @@ function SignUpPane(){
       ) : (
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="space-y-6">
+            {/* Role Selection */}
+            <div>
+              <label htmlFor="role" className="block text-sm font-medium leading-6 text-gray-900">
+                Select Role
+              </label>
+              <select
+                id="role"
+                name="role"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className={`${styles.txtbox} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+              >
+                <option value="">Select a role</option>
+                <option value="pregnant">Pregnant Woman</option>
+                <option value="doctor">Doctor</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            {/* Doctor Specific Fields */}
+            {role === 'doctor' && (
+              <>
+                <div>
+                  <label htmlFor="aphraVerification" className="block text-sm font-medium leading-6 text-gray-900">
+                    APHRA Verification
+                  </label>
+                  <input
+                    id="aphraVerification"
+                    name="aphraVerification"
+                    onChange={(e) => setAphraVerification(e.target.value)}
+                    required
+                    className={`${styles.txtbox} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="specialization" className="block text-sm font-medium leading-6 text-gray-900">
+                    Specialization
+                  </label>
+                  <input
+                    id="specialization"
+                    name="specialization"
+                    onChange={(e) => setSpecialization(e.target.value)}
+                    required
+                    className={`${styles.txtbox} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="yearsExperience" className="block text-sm font-medium leading-6 text-gray-900">
+                    Years of Experience
+                  </label>
+                  <input
+                    id="yearsExperience"
+                    name="yearsExperience"
+                    type="number"
+                    onChange={(e) => setYearsExperience(e.target.value)}
+                    required
+                    className={`${styles.txtbox} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+                  />
+                </div>
+              </>
+            )}
+
+            {/* Pregnant Woman Specific Fields */}
+            {role === 'pregnant' && (
+              <>
+                <div>
+                  <label htmlFor="weight" className="block text-sm font-medium leading-6 text-gray-900">
+                    Weight (kg)
+                  </label>
+                  <input
+                    id="weight"
+                    name="weight"
+                    type="number"
+                    onChange={(e) => setWeight(e.target.value)}
+                    required
+                    className={`${styles.txtbox} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="pregnancyMonth" className="block text-sm font-medium leading-6 text-gray-900">
+                    Pregnancy Month
+                  </label>
+                  <input
+                    id="pregnancyMonth"
+                    name="pregnancyMonth"
+                    type="number"
+                    onChange={(e) => setPregnancyMonth(e.target.value)}
+                    required
+                    className={`${styles.txtbox} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+                  />
+                </div>
+              </>
+            )}
+
+            {/* Common Fields */}
+      
           <div>
               <label htmlFor="firstname" className="block text-sm font-medium leading-6 text-gray-900">
                 First Name
