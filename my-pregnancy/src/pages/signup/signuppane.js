@@ -101,14 +101,10 @@ function SignUpPane(){
       setErrorMsgShown(true);
       return;
     } else {
-      console.log("User Successfully added to Database");
-    
-      saveToken(response.data.token);
+      console.log(response)
       setCheckmarkShown(true);
-
       setTimeout(() => {
-        navigate("/home");
-        //navigate("/account");
+        navigate("/login");
       }, 3000);
     }
   }
@@ -127,7 +123,7 @@ function SignUpPane(){
           <div>
             <img src='/assets/checkmark.png' alt='checkmark symbol'></img>
           </div>
-          <h2>Success! Redirecting to account page...</h2>
+          <h2>Success! Please log in to your new acocount...</h2>
         </div>
       ) : (
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">

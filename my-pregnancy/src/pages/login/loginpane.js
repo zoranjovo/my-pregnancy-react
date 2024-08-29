@@ -33,11 +33,12 @@ function LoginPane(){
     }
 
     function loginCallback(response){
-      if(response.error){
-        setErrorMsg(response.error);
-        setErrorMsgShown(true);
-        setLoadingShown(false);
-        return;
+      if(response.status === 401){
+        if(response.data.error){
+          setErrorMsg(response.data.error);
+          setErrorMsgShown(true);
+          setLoadingShown(false);
+        }
       }
   
       if(response.status === 200){

@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import styles from './journalentry.module.css';
 import buttons from '../../css/buttons.module.css'
+import { createJournalEntry } from '../../util/apireq';
 
 const entries = [
   { id: "0", date: 1721509484, gratitude: "Went for a morning walk and enjoyed the fresh air", onMyMind: "Thinking about if it will be a boy or a girl", mood: 1, selectedMoods: ['Happy', 'Bored', 'Hungry'], selfCare: ['Ate Breakfast', 'Exercised', 'Talked with a Friend', 'sharted'], waterIntake: 4, dayRating: 8 },
@@ -193,8 +194,13 @@ function JournalEntry(){
     if(waterIntake < 1){return alert('Please enter if you have drank enough water today')}
     if(dayRating < 1){return alert('Please rate your day plss')}
 
-    alert("pretend it saved successfully");
+    createJournalEntry(gratitudesText, onMyMindText, selectedMoods, selectedSelfCare, waterIntake, dayRating, handleSaveCallback)
+
     navigate('/journal');
+  }
+
+  function handleSaveCallback(response) {
+    console.log(response)
   }
 
   
