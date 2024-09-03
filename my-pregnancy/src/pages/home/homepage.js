@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { getUser } from "../../util/apireq.js";
-//import { useNavigate } from "react-router-dom";
-//import { clearToken } from "../../util/auth.js";
-
 import { dotWave } from "ldrs";
+import { serverErrorNotif } from '../../global-components/notify';
 
 import Footer from "../../global-components/footer/footer.js";
 import Navbar from "../../global-components/navbar2/navbar2.js"
@@ -17,7 +15,6 @@ import styles from "./home.module.css";
 
 
 function HomePage(){
-  //const navigate = useNavigate();
   dotWave.register();
 
   const [user, setUser] = useState({});
@@ -28,7 +25,7 @@ function HomePage(){
   useEffect(() => {
     async function fetchUser() {
       const response = await getUser();
-      console.log(response);
+      if(response.message === "Network Error"){ return serverErrorNotif(); }
       if(response.status === 200){
         setUser(response.data);
         setRole(response.data.role);
@@ -81,7 +78,6 @@ function HomePage(){
           </div>
         )}
       </div>
-      
       <Footer></Footer>
     </div>
   );

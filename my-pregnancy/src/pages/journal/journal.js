@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { serverErrorNotif } from '../../global-components/notify';
+
 import styles from './journal.module.css';
 import buttons from '../../css/buttons.module.css';
 
@@ -8,7 +10,6 @@ import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
 import { format } from 'date-fns';
 import { getAllJournalEntries } from '../../util/apireq';
-
 
 // Function to convert Unix timestamp to 'yyyy-MM-dd' format
 const formatDate = (timestamp) => {
@@ -39,7 +40,7 @@ function Journal() {
   useEffect(() => {
     async function fetchEntries() {
       const response = await getAllJournalEntries();
-      console.log(response);
+      if(response.message === "Network Error"){ return serverErrorNotif(); }
       if(response.status === 200){
         setEntries(response.data)
         return;
@@ -100,7 +101,6 @@ function Journal() {
         </Link>
         
       </div>
-      
     </div>
   );
 }

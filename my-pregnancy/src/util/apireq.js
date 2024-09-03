@@ -20,7 +20,7 @@ export const registerReq = async (role, firstname, lastname, email, password, ad
     return response;
   } catch(error) {
     console.log(error);
-    return error.response;
+    return error;
   }
 }
 
@@ -40,7 +40,7 @@ export const login = async (email, password) => {
     return response;
   } catch(error) {
     console.log(error);
-    return error.response;
+    return error;
   }
 };
 
@@ -69,7 +69,7 @@ export const getUser = async () => {
     return response;
   } catch(error) {
     console.log(error);
-    return error.response;
+    return error;
   }
 };
 
@@ -92,8 +92,8 @@ export const createJournalEntry = async (gratitude, onMyMind, selectedMoods, sel
     });
     return response;
   } catch (error) {
-    console.error('Failed to create journal entry:', error.response);
-    return error.response
+    console.error('Failed to create journal entry:', error);
+    return error;
   }
 }
 
@@ -109,8 +109,8 @@ export const getAllJournalEntries = async () => {
     });
     return response;
   } catch (error) {
-    console.error('Failed to create journal entry:', error.response);
-    return error.response
+    console.error('Failed to create journal entry:', error);
+    return error;
   }
 }
 
@@ -123,7 +123,7 @@ export const getAllFitnesVideos = async () => {
     });
     return response;
   } catch (error) {
-    console.error('Failed to create fetch all fitness videos:', error.response);
-    return error.response
+    console.error('Failed to create fetch all fitness videos:', error);
+    return error;
   }
 }

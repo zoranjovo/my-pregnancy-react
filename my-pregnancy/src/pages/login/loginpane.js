@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { saveToken } from '../../util/auth';
+import { serverErrorNotif, customSuccessNotif } from '../../global-components/notify';
 
 import { login } from '../../util/apireq';
 import buttons from '../../css/buttons.module.css';
@@ -29,10 +30,11 @@ function LoginPane(){
     setErrorMsgShown(false);
     setLoadingShown(true);
     const response = await login(email, password);
-    console.log(response);
+    if(response.message === "Network Error"){ return serverErrorNotif(); }
     if(response.status === 200){
       setLoadingShown(false);
       saveToken(response.data.token);
+      customSuccessNotif("Successfully logged in");
       return navigate('/home');
     }
 

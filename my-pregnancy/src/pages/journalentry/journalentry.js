@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import styles from './journalentry.module.css';
 import buttons from '../../css/buttons.module.css'
 import { createJournalEntry, getAllJournalEntries } from '../../util/apireq';
+import { serverErrorNotif, customWarningNotif, customSuccessNotif } from '../../global-components/notify';
 
 const moods = [
   'Happy',
@@ -61,7 +62,7 @@ function JournalEntry(){
     } else {
       async function fetchEntries() {
         const response = await getAllJournalEntries();
-        console.log(response);
+        if(response.message === "Network Error"){ serverErrorNotif(); }
         if(response.status === 200){
           const foundEntry = response.data.find(entry => entry._id === id);
           if (!foundEntry) {
@@ -107,11 +108,7 @@ function JournalEntry(){
 
 
   // alow change emoji only if it is a new entry
-  const changeEmoji = (num) => {
-    if (newEntry) {
-      setSelectedEmoji(num);
-    }
-  };
+  const changeEmoji = (num) => { if(newEntry){ setSelectedEmoji(num); } };
 
 
   // mood change logic
@@ -179,12 +176,13 @@ function JournalEntry(){
     // TODO save logic - the alert messages will probably change
     // TODO replace all alerts with other form of notification because interfers with testing and is ugly
 
-    if(selectedEmoji < 0){return alert('Please select an overall mood emoji')}
-    if(waterIntake < 1){return alert('Please enter if you have drank enough water today')}
-    if(dayRating < 1){return alert('Please rate your day plss')}
+    if(selectedEmoji < 0){return customWarningNotif('Please select an overall mood emoji')}
+    if(waterIntake < 1){return customWarningNotif('Please enter if you have drank enough water today')}
+    if(dayRating < 1){return customWarningNotif('Please rate your day')}
 
     const response = await createJournalEntry(gratitudesText, onMyMindText, selectedMoods, selectedSelfCare, waterIntake, dayRating)
     if(response.status === 200){
+      customSuccessNotif('Succesfully created entry');
       return navigate('/journal');
     }
     console.log(response);

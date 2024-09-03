@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import './css/variables.css';
 import './css/global.css';
 import './tailwind.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

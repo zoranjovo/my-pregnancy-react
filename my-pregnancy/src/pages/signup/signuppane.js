@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { dotWave } from 'ldrs';
+import { customWarningNotif, serverErrorNotif } from '../../global-components/notify';
+
 // import { saveToken } from '../../util/auth';
 
 import { registerReq } from '../../util/apireq';
@@ -55,6 +57,7 @@ function SignUpPane(){
   }
 
   function displayErr(txt){
+    customWarningNotif(txt);
     setLoadingShown(false);
     setErrorMsg(txt);
     setErrorMsgShown(true);
@@ -96,6 +99,7 @@ function SignUpPane(){
     setLoadingShown(true);
     try{
       const response = await registerReq(role, firstname, lastname, email, password, additionalInfo);
+      if(response.message === "Network Error"){ return serverErrorNotif(); }
       if(response.status === 200){
         setLoadingShown(false);
         console.log(response)
@@ -377,8 +381,6 @@ function SignUpPane(){
           </p>
         </div>
       )}
-
-      
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import FitnessVideo from './fitnessvideo.js';
 import styles from './fitnesshome.module.css';
 import { getAllFitnesVideos } from '../../util/apireq';
+import { serverErrorNotif } from '../../global-components/notify.js';
 
 function FitnessHome(){
   const [videos, setVideos] = useState([]);
@@ -11,6 +12,7 @@ function FitnessHome(){
   useEffect(() => {
     async function fetchEntries() {
       const response = await getAllFitnesVideos();
+      if(response.message === "Network Error"){ return serverErrorNotif(); }
       if(response.status === 200){
         setVideos(response.data)
         return;

@@ -1,7 +1,6 @@
 //TODO once api set up make it redirect to login if no/invalid token is stored
 
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { getUser } from '../../util/apireq.js';
 
 import Footer from "../../global-components/footer/footer";
@@ -35,6 +34,7 @@ function AccountPage(){
       <div style={{minHeight: 'calc(100vh - 202px)'}}>
         <Navbar></Navbar>
         <h1>account</h1>
+        <p>{user}{role}{errorMsg}</p>
       </div>
       
       <Footer></Footer>
