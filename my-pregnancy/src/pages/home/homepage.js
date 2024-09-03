@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getUser } from "../../util/apireq.js";
-import { useNavigate } from "react-router-dom";
-import { clearToken } from "../../util/auth.js";
+//import { useNavigate } from "react-router-dom";
+//import { clearToken } from "../../util/auth.js";
 
 import { dotWave } from "ldrs";
 
@@ -16,45 +16,31 @@ import Recommended from "./components/recommended/recommended.js";
 import styles from "./home.module.css";
 
 
-const profile = {
-  name: "Bianca",
-  currentDay: "25",
-  nextCycle: "6",
-  weight: "67",
-  currentStage: "Lutheal Phase"
-}
-
 function HomePage(){
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   dotWave.register();
 
   const [user, setUser] = useState({});
+  const [role, setRole] = useState("");
   const [userFound, setUserFound] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     async function fetchUser() {
-      try {
-        const userData = await getUser();
-        if(!userData){
-          throw new Error("Network Error");
-        }
-        if(userData.error){
-          throw new Error(userData.error);
-        }
-        setUser(userData.data);
+      const response = await getUser();
+      console.log(response);
+      if(response.status === 200){
+        setUser(response.data);
+        setRole(response.data.role);
         setUserFound(true);
-      } catch (error) {
-        setErrorMsg(error.message);
-        if(error.message === "Invalid or expired JWT" || error.message === "Token is not set"){
-          clearToken();
-          navigate('/login');
-        }
-        console.log(error.message);
+        return;
+      } else if(response.status === 404){
+        setErrorMsg("Account not found");
+      } else if(response.status === 500){
+        setErrorMsg("Server error");
       }
     }
     fetchUser();
-    // eslint-disable-next-line
   }, []);
 
   return (
@@ -64,11 +50,21 @@ function HomePage(){
         {userFound ? (
           <div>
             <Welcome name={user.firstname}></Welcome>
-            <div className={styles.journalAndForums}>
-              <Journal currentDay={profile.currentDay} nextCycle={profile.nextCycle} weight={profile.weight} currentStage={profile.currentStage}/>
-              <Forums/>
-            </div>
-            <Recommended/>
+            {role === "pregnant" ? (
+              <div>
+                <div className={styles.journalAndForums}>
+                  <Journal currentDay={user.pregnancyMonth} nextCycle={user.pregnancyMonth} weight={user.weight} currentStage={user.pregnancyMonth}/>
+                  <Forums/>
+                </div>
+                <Recommended/>
+              </div>
+              
+            ) : (
+              <div>
+                <p>no ui for doctor yet</p>
+              </div>
+            )}
+            
           </div>
         ) : (
           <div className={styles.loadingContainer}>
@@ -82,7 +78,6 @@ function HomePage(){
             ) : (
               <h1>{errorMsg}</h1>
             )}
-            
           </div>
         )}
       </div>

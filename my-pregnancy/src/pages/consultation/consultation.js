@@ -20,7 +20,7 @@ function Consultation() {
     
 	// TODO: Logic here
 	
-	e.preventDefault();
+	  e.preventDefault();
     console.log({
       preferredTime,
       preferredDate,
@@ -125,7 +125,11 @@ function Consultation() {
           <h2>Select a Consultant</h2>
           <ul className={styles.consultantList}>
             {consultants.map((consultant) => (
-              <li key={consultant.id} className={styles.consultantItem}>
+              <li 
+                key={consultant.id} 
+                className={`${styles.consultantItem} ${selectedConsultant === consultant.id ? styles.selectedConsultant : ''}`}
+                onClick={() => setSelectedConsultant(consultant.id)}
+              >
                 <h3>{consultant.name}</h3>
                 <p>Specialty: {consultant.specialty}</p>
                 <p>Gender: {consultant.gender}</p>

@@ -112,7 +112,8 @@
     text-align: left; 
 }
 
-.consultantItem:hover {
+.consultantItem:hover,
+.selectedConsultant {
     background-color: #e7f0ff;
 }
 
