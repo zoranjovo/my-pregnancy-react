@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { dotWave } from 'ldrs';
-import { saveToken } from '../../util/auth';
+import { customWarningNotif, serverErrorNotif } from '../../global-components/notify';
 
-import { signUp } from '../../util/apireq';
+
+import { registerReq } from '../../util/apireq';
 import buttons from '../../css/buttons.module.css';
 import styles from './signuppage.module.css';
 
@@ -55,57 +56,73 @@ function SignUpPane(){
   }
 
   function displayErr(txt){
+    customWarningNotif(txt);
     setLoadingShown(false);
     setErrorMsg(txt);
     setErrorMsgShown(true);
   }
 
-  function signupBtn(){
-    if(!firstname){return displayErr('Please enter your first name');}
-    if(!lastname){return displayErr('Please enter your last name');}
-    if(!email){return displayErr('Please enter your email');}
-    if(!isValidEmail(email)){return displayErr('Please enter a valid email');}
-    if(!password){return displayErr('Please enter a password');}
-    if(password.length < 8){return displayErr('Password needs to have 8 or more characters');}
-    if(!passwordConfirm){return displayErr('Please confirm your password');}
-    if(password !== passwordConfirm){return displayErr('Passwords do not match');}
-    if(!boxChecked){return displayErr('Please agree to the terms and conditions');}
+  const signupBtn = async() => {
+    if(!role){ return displayErr('Please select a role'); }
+    if(!firstname){ return displayErr('Please enter your first name'); }
+    if(!lastname){ return displayErr('Please enter your last name'); }
+    if(!email){ return displayErr('Please enter your email'); }
+    if(!isValidEmail(email)){ return displayErr('Please enter a valid email'); }
+    if(!password){ return displayErr('Please enter a password'); }
+    if(password.length < 8){ return displayErr('Password needs to have 8 or more characters'); }
+    if(!passwordConfirm){ return displayErr('Please confirm your password'); }
+    if(password !== passwordConfirm){ return displayErr('Passwords do not match'); }
+    if(!boxChecked){ return displayErr('Please agree to the terms and conditions'); }
 
-    // Validate role-specific fields
+    let additionalInfo = {}
     if (role === 'doctor') {
       if (!aphraVerification) return displayErr('Please enter your APHRA verification');
       if (!specialization) return displayErr('Please enter your specialization');
       if (!yearsExperience) return displayErr('Please enter your years of experience');
+      additionalInfo = {
+        aphraVerification: aphraVerification,
+        specialization: specialization,
+        yearsExperience: yearsExperience,
+      }
     } else if (role === 'pregnant') {
       if (!weight) return displayErr('Please enter your weight');
       if (!pregnancyMonth) return displayErr('Please enter your pregnancy month');
+      additionalInfo = {
+        weight: weight,
+        pregnancyMonth: pregnancyMonth,
+      }
     }
     
     console.log('sending sign up request');
     setErrorMsgShown(false);
     setLoadingShown(true);
     try{
-      signUp(firstname, lastname, email, password, signupCallback);
+      const response = await registerReq(role, firstname, lastname, email, password, additionalInfo);
+      if(response.message === "Network Error"){ return serverErrorNotif(); }
+      if(response.status === 200){
+        setLoadingShown(false);
+        console.log(response)
+        setCheckmarkShown(true);
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
+        return
+      } else if(response.status === 409){
+        setErrorMsg("Email already in use");
+        setErrorMsgShown(true);
+        setLoadingShown(false);
+        return;
+      } else if(response.status === 500){
+        console.log(response)
+        setErrorMsg("Server error");
+        setErrorMsgShown(true);
+        setLoadingShown(false);
+        return;
+      }
     } catch(error){
-      setErrorMsg('Signup request failed'); // Handle failure scenario
+      setErrorMsg('Signup request failed');
       setErrorMsgShown(true);
       setLoadingShown(false);
-    }
-  }
-
-  function signupCallback(response){
-    setLoadingShown(false);
-
-    if(response.error){
-      setErrorMsg(response.error);
-      setErrorMsgShown(true);
-      return;
-    } else {
-      console.log(response)
-      setCheckmarkShown(true);
-      setTimeout(() => {
-        navigate("/login");
-      }, 3000);
     }
   }
 
@@ -363,8 +380,6 @@ function SignUpPane(){
           </p>
         </div>
       )}
-
-      
     </div>
   )
 }

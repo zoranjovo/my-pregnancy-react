@@ -3,27 +3,28 @@ import { getToken } from './auth.js'
 
 const apiurl = process.env.REACT_APP_API_URL;
 
-export const signUp = async (firstname, lastname, email, password, callback) => {
+export const registerReq = async (role, firstname, lastname, email, password, additionalInfo) => {
   try {
     const response = await axios.post(`${apiurl}/register`, new URLSearchParams({
-      username: `${firstname} ${lastname}`,
+      role: role,
+      firstname: firstname,
+      lastname: lastname,
       email: email,
       password: password,
+      additional: JSON.stringify(additionalInfo)
     }), {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     });
-    return callback(response);
+    return response;
   } catch(error) {
-    if(error.response.data.error){
-      return callback({error: error.response.data.error});
-    }
-    return callback(error);
+    console.log(error);
+    return error;
   }
 }
 
-export const login = async (email, password, callback) => {
+export const login = async (email, password) => {
   try {
     const response = await axios.post(`${apiurl}/login`,
       new URLSearchParams({
@@ -36,16 +37,10 @@ export const login = async (email, password, callback) => {
         }
       }
     );
-    console.log(response)
-    return callback(response);
-  } catch (error) {
-    if(error.response.status === 401){
-      return callback(error.response)
-    }
-    // if(error.response && error.response.data && error.response.data.error) {
-    //   return callback({ error: error.response.data.error });
-    // }
-    // return callback(error);
+    return response;
+  } catch(error) {
+    console.log(error);
+    return error;
   }
 };
 
@@ -64,50 +59,71 @@ export const resetPassword = async (email, callback) => {
 
 export const getUser = async () => {
   const token = getToken();
-  if(token){
-    try {
-      const response = await axios.get(`${apiurl}/user`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
-      return response;
-    } catch(error) {
-      if(error.message){
-        return {error: error.message};
+  try {
+    const response = await axios.get(`${apiurl}/getuser`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
       }
-      if(error.response.data.error){
-        return {error: error.response.data.error};
-      }
-    }
-  } else {
-    return {error: "Token is not set"};
+    });
+    return response;
+  } catch(error) {
+    console.log(error);
+    return error;
   }
 };
 
 
-export const createJournalEntry = async (gratitude, onMyMind, selectedMoods, selfCare, waterIntake, dayRating, callback) => {
+export const createJournalEntry = async (gratitude, onMyMind, selectedMoods, selfCare, waterIntake, dayRating) => {
+  const token = getToken();
   try {
-    const response = await axios.post(`${apiurl}/api/entity/20020/object`, new URLSearchParams({
-      daily_rating: dayRating,
-      entry_date: Date.now(),
-      feeling: selectedMoods,
-      gratitudes: gratitude,
-      selfcare: selfCare,
-      thoughts: onMyMind,
-      user_id: "test5@test.com"
-    }), {
+    const response = await axios.post(`${apiurl}/journal/newentry`, {
+      gratitude: gratitude,
+      onMyMind: onMyMind,
+      selectedMoods: selectedMoods,
+      selfCare: selfCare,
+      waterIntake: waterIntake,
+      dayRating: dayRating
+    }, {
       headers: {
         'Content-Type': 'application/json',
-        // 'Cookie': `token=${getToken()}`
+        'Authorization': `Bearer ${token}`,
       }
     });
-    return callback(response);
-  } catch(error) {
-    if(error.response.data.error){
-      return callback({error: error.response.data.error});
-    }
-    return callback(error);
+    return response;
+  } catch (error) {
+    console.error('Failed to create journal entry:', error);
+    return error;
+  }
+}
+
+
+export const getAllJournalEntries = async () => {
+  const token = getToken();
+  try {
+    const response = await axios.get(`${apiurl}/journal/allentries`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to create journal entry:', error);
+    return error;
+  }
+}
+
+export const getAllFitnesVideos = async () => {
+  try {
+    const response = await axios.get(`${apiurl}/fitness/allvideos`, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to create fetch all fitness videos:', error);
+    return error;
   }
 }

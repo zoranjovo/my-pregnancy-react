@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import useScrollToTop from './global-components/scrollToTop.js';
 
@@ -69,6 +70,7 @@ function App() {
   return (
     <Router>
       <Wrapper/>
+      <ToastContainer />
     </Router>
   );
 }
