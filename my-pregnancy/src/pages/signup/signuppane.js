@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { dotWave } from 'ldrs';
 import { customWarningNotif, serverErrorNotif } from '../../global-components/notify';
 
-// import { saveToken } from '../../util/auth';
 
 import { registerReq } from '../../util/apireq';
 import buttons from '../../css/buttons.module.css';
