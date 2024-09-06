@@ -173,9 +173,6 @@ function JournalEntry(){
 
   // handle saving
   const handleSave = async () => {
-    // TODO save logic - the alert messages will probably change
-    // TODO replace all alerts with other form of notification because interfers with testing and is ugly
-
     if(selectedEmoji < 0){return customWarningNotif('Please select an overall mood emoji')}
     if(waterIntake < 1){return customWarningNotif('Please enter if you have drank enough water today')}
     if(dayRating < 1){return customWarningNotif('Please rate your day')}

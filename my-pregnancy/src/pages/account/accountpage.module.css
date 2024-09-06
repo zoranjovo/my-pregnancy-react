@@ -1,3 +1,19 @@
 .accountpage {
   margin: 20px 40px;
 }
+
+.inputDiv {
+  margin: 20px;
+}
+.inputDiv > label {
+  margin: 5px;
+}
+.inputDiv > input {
+  padding: 5px;
+  border: 1px solid rgb(193, 193, 193);
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px rgb(171, 171, 171);
+}
+.noChange {
+  cursor: not-allowed;
+}

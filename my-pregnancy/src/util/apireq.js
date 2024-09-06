@@ -73,6 +73,23 @@ export const getUser = async () => {
   }
 };
 
+export const updateUser = async (formData) => {
+  const token = getToken();
+  try {
+    const response = await axios.post(`${apiurl}/updateuser`, {
+      data: JSON.stringify(formData)
+    }, { headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    return response;
+  } catch(error) {
+    console.log(error);
+    return error;
+  }
+};
+
 
 export const createJournalEntry = async (gratitude, onMyMind, selectedMoods, selfCare, waterIntake, dayRating) => {
   const token = getToken();
