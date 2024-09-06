@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { getUser } from "../../util/apireq.js";
 import { dotWave } from "ldrs";
-import { serverErrorNotif } from '../../global-components/notify';
+import { serverErrorNotif, customWarningNotif } from '../../global-components/notify';
+import { clearToken } from "../../util/auth.js";
 
 import Footer from "../../global-components/footer/footer.js";
 import Navbar from "../../global-components/navbar2/navbar2.js"
@@ -31,9 +32,11 @@ function HomePage(){
         setRole(response.data.role);
         setUserFound(true);
         return;
-      } else if(response.status === 404){
+      } else if(response.response.status === 404){
         setErrorMsg("Account not found");
-      } else if(response.status === 500){
+        clearToken();
+        return customWarningNotif("Please sign in again");
+      } else if(response.response.status === 500){
         setErrorMsg("Server error");
       }
     }

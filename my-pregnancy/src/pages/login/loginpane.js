@@ -30,6 +30,7 @@ function LoginPane(){
     setErrorMsgShown(false);
     setLoadingShown(true);
     const response = await login(email, password);
+    
     if(response.message === "Network Error"){ return serverErrorNotif(); }
     if(response.status === 200){
       setLoadingShown(false);
@@ -37,8 +38,13 @@ function LoginPane(){
       customSuccessNotif("Successfully logged in");
       return navigate('/home');
     }
+    if(response.response.status === 401 || response.response.status === 404){
+      setErrorMsg("Invalid Credentials");
+      setErrorMsgShown(true);
+      setLoadingShown(false);
+    }
 
-    if(response.status === 500 || response.status === 404 || response.status === 401){
+    if(response.response.status === 500){
       setErrorMsg(response.data);
       setErrorMsgShown(true);
       setLoadingShown(false);
