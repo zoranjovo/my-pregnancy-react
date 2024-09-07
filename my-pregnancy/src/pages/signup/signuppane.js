@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { dotWave } from 'ldrs';
 import { customWarningNotif, serverErrorNotif } from '../../global-components/notify';
+import { saveToken } from '../../util/auth';
 
 
 import { registerReq } from '../../util/apireq';
@@ -26,12 +27,6 @@ function SignUpPane(){
   const [boxChecked, setBoxChecked] = useState(false);
   
   const [role, setRole] = useState('');
-  const [specialization, setSpecialization] = useState('');
-  const [yearsExperience, setYearsExperience] = useState('');
-  const [aphraVerification, setAphraVerification] = useState('');
-  
-  const [weight, setWeight] = useState('');
-  const [pregnancyMonth, setPregnancyMonth] = useState('');
 
   const [errorMsg, setErrorMsg] = useState('Error')
   const [errorMsgShown, setErrorMsgShown] = useState(false);
@@ -63,6 +58,7 @@ function SignUpPane(){
   }
 
   const signupBtn = async() => {
+    // validations
     if(!role){ return displayErr('Please select a role'); }
     if(!firstname){ return displayErr('Please enter your first name'); }
     if(!lastname){ return displayErr('Please enter your last name'); }
@@ -73,56 +69,25 @@ function SignUpPane(){
     if(!passwordConfirm){ return displayErr('Please confirm your password'); }
     if(password !== passwordConfirm){ return displayErr('Passwords do not match'); }
     if(!boxChecked){ return displayErr('Please agree to the terms and conditions'); }
-
-    let additionalInfo = {}
-    if (role === 'doctor') {
-      if (!aphraVerification) return displayErr('Please enter your APHRA verification');
-      if (!specialization) return displayErr('Please enter your specialization');
-      if (!yearsExperience) return displayErr('Please enter your years of experience');
-      additionalInfo = {
-        aphraVerification: aphraVerification,
-        specialization: specialization,
-        yearsExperience: yearsExperience,
-      }
-    } else if (role === 'pregnant') {
-      if (!weight) return displayErr('Please enter your weight');
-      if (!pregnancyMonth) return displayErr('Please enter your pregnancy month');
-      additionalInfo = {
-        weight: weight,
-        pregnancyMonth: pregnancyMonth,
-      }
-    }
     
     console.log('sending sign up request');
     setErrorMsgShown(false);
     setLoadingShown(true);
-    try{
-      const response = await registerReq(role, firstname, lastname, email, password, additionalInfo);
-      if(response.message === "Network Error"){ return serverErrorNotif(); }
-      if(response.status === 200){
-        setLoadingShown(false);
-        console.log(response)
-        setCheckmarkShown(true);
-        setTimeout(() => {
-          navigate("/login");
-        }, 3000);
-        return
-      } else if(response.status === 409){
-        setErrorMsg("Email already in use");
-        setErrorMsgShown(true);
-        setLoadingShown(false);
-        return;
-      } else if(response.status === 500){
-        console.log(response)
-        setErrorMsg("Server error");
-        setErrorMsgShown(true);
-        setLoadingShown(false);
-        return;
-      }
-    } catch(error){
-      setErrorMsg('Signup request failed');
-      setErrorMsgShown(true);
+    const response = await registerReq(role, firstname, lastname, email, password);
+    if(response.message === "Network Error"){ return serverErrorNotif(); }
+    if(response.status === 200){
       setLoadingShown(false);
+      setCheckmarkShown(true);
+      saveToken(response.data.token);
+      setTimeout(() => {
+        navigate("/home");
+      }, 3000);
+      return
+    } else if(response.response.status === 409){
+      return displayErr("Email already in use");
+      
+    } else if(response.response.status === 500){
+      return displayErr("Email already in use");
     }
   }
 
@@ -140,7 +105,7 @@ function SignUpPane(){
           <div>
             <img src='/assets/checkmark.png' alt='checkmark symbol'></img>
           </div>
-          <h2>Success! Please log in to your new acocount...</h2>
+          <h2>Success! Redirecting to home page...</h2>
         </div>
       ) : (
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -160,86 +125,8 @@ function SignUpPane(){
                 <option value="">Select a role</option>
                 <option value="pregnant">Pregnant Woman</option>
                 <option value="doctor">Doctor</option>
-                <option value="other">Other</option>
               </select>
             </div>
-
-            {/* Doctor Specific Fields */}
-            {role === 'doctor' && (
-              <>
-                <div>
-                  <label htmlFor="aphraVerification" className="block text-sm font-medium leading-6 text-gray-900">
-                    APHRA Verification
-                  </label>
-                  <input
-                    id="aphraVerification"
-                    name="aphraVerification"
-                    onChange={(e) => setAphraVerification(e.target.value)}
-                    required
-                    className={`${styles.txtbox} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="specialization" className="block text-sm font-medium leading-6 text-gray-900">
-                    Specialization
-                  </label>
-                  <input
-                    id="specialization"
-                    name="specialization"
-                    onChange={(e) => setSpecialization(e.target.value)}
-                    required
-                    className={`${styles.txtbox} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="yearsExperience" className="block text-sm font-medium leading-6 text-gray-900">
-                    Years of Experience
-                  </label>
-                  <input
-                    id="yearsExperience"
-                    name="yearsExperience"
-                    type="number"
-                    onChange={(e) => setYearsExperience(e.target.value)}
-                    required
-                    className={`${styles.txtbox} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
-                  />
-                </div>
-              </>
-            )}
-
-            {/* Pregnant Woman Specific Fields */}
-            {role === 'pregnant' && (
-              <>
-                <div>
-                  <label htmlFor="weight" className="block text-sm font-medium leading-6 text-gray-900">
-                    Weight (kg)
-                  </label>
-                  <input
-                    id="weight"
-                    name="weight"
-                    type="number"
-                    onChange={(e) => setWeight(e.target.value)}
-                    required
-                    className={`${styles.txtbox} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="pregnancyMonth" className="block text-sm font-medium leading-6 text-gray-900">
-                    Pregnancy Month
-                  </label>
-                  <input
-                    id="pregnancyMonth"
-                    name="pregnancyMonth"
-                    type="number"
-                    onChange={(e) => setPregnancyMonth(e.target.value)}
-                    required
-                    className={`${styles.txtbox} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
-                  />
-                </div>
-              </>
-            )}
-
-            {/* Common Fields */}
       
           <div>
               <label htmlFor="firstname" className="block text-sm font-medium leading-6 text-gray-900">

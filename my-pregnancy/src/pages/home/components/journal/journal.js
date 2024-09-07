@@ -1,13 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 
 import styles from './journal.module.css';
-import buttons from '../../../../css/buttons.module.css'
+import buttons from '../../../../css/buttons.module.css';
+import boxes from '../../../../css/boxes.module.css';
 
 function Journal({currentDay, nextCycle, weight, currentStage}){
   const navigate = useNavigate()
 
   return (
-    <div className={styles.journalDiv}>
+    <div className={boxes.standard}>
       <div className={styles.top}>
         <button className={buttons.stylisedBtn} onClick={() => navigate('/journalentry/new')}>Report Health Journal</button>
         <div onClick={() => navigate('/journal')}>

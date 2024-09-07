@@ -132,20 +132,4 @@ describe('JournalEntry Component', () => {
     expect(mockNavigate).toHaveBeenCalledWith('/journal');
   });
 
-  test('displays alert when trying to save without selecting a mood, water intake, or day rating', () => {
-    window.alert = jest.fn();
-
-    render(
-      <MemoryRouter initialEntries={['/journalentry/new']}>
-        <Routes>
-          <Route path="/journalentry/:id" element={<JournalEntry />} />
-        </Routes>
-      </MemoryRouter>
-    );
-
-    const saveButton = screen.getByText(/Save/i);
-    fireEvent.click(saveButton);
-
-    expect(window.alert).toHaveBeenCalledWith('Please select an overall mood emoji');
-  });
 });

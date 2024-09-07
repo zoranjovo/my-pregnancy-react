@@ -2,18 +2,207 @@
   margin: 20px 40px;
 }
 
+.split {
+  display: flex;
+  gap: 10px;
+}
+
+.profileDivContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+}
+
+.profileDiv > img {
+  width: 100px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 999px;
+  border: 2px solid var(--pink2);
+}
+.profileDivContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid #f4d3d9;
+  background-color: #fff;
+  width: 300px;
+}
+
+.profileDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileDiv img {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.profileInfo h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.profileInfo p {
+  margin: 5px 0;
+  color: #666;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.role {
+  color: #f06292;
+  font-weight: bold;
+}
+
+.profileDetails {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.profileDetails p {
+  margin: 5px 0;
+}
+
+
+
+.inputsDiv {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.inputGroup {
+  display: flex;
+}
 .inputDiv {
   margin: 20px;
 }
+
 .inputDiv > label {
-  margin: 5px;
+  font-size: 14px;
+  margin: 5px 5px 0px 0px;
+  display: block;
 }
 .inputDiv > input {
   padding: 5px;
   border: 1px solid rgb(193, 193, 193);
   border-radius: 5px;
   box-shadow: 1px 1px 2px rgb(171, 171, 171);
+  display: block;
+  width: 100%;
+}
+input[type="text"],
+input[type="date"],
+input[type="number"],
+input[type="email"] {
+  width: 300px;
 }
 .noChange {
   cursor: not-allowed;
+}
+.buttonsDiv {
+  display: flex;
+  gap: 20px;
+}
+
+
+@media (max-width: 1200px) {
+  .accountpage {
+    margin: 10px 20px;
+  }
+
+  .split {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .profileDivContainer {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .profileDiv img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .profileInfo h2 {
+    font-size: 1.2rem;
+  }
+
+  .profileInfo p {
+    font-size: 0.9rem;
+  }
+
+  .profileDetails {
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
+
+  .profileDetails p {
+    margin: 3px 0;
+  }
+
+  .inputsDiv {
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .inputGroup {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .inputDiv {
+    margin: 10px 0;
+    width: 100%;
+  }
+
+  .inputDiv > input {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="number"],
+  input[type="email"] {
+    width: 90%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 800px) {
+  .accountpage {
+    margin: 10px 0px;
+  }
+  input[type="text"],
+  input[type="date"],
+  input[type="number"],
+  input[type="email"] {
+    width: 100%;
+    max-width: 100%;
+  }
+  .buttonsDiv {
+    gap: 5px;
+  }
 }

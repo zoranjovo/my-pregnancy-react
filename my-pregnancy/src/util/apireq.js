@@ -3,15 +3,14 @@ import { getToken } from './auth.js'
 
 const apiurl = process.env.REACT_APP_API_URL;
 
-export const registerReq = async (role, firstname, lastname, email, password, additionalInfo) => {
+export const registerReq = async (role, firstname, lastname, email, password) => {
   try {
     const response = await axios.post(`${apiurl}/register`, new URLSearchParams({
       role: role,
       firstname: firstname,
       lastname: lastname,
       email: email,
-      password: password,
-      additional: JSON.stringify(additionalInfo)
+      password: password
     }), {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'

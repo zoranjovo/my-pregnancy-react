@@ -32,7 +32,7 @@ function HomePage(){
         setRole(response.data.role);
         setUserFound(true);
         return;
-      } else if(response.response.status === 404){
+      } else if(response.response.status === 404 || response.response.status === 401){
         setErrorMsg("Account not found");
         clearToken();
         return customWarningNotif("Please sign in again");
@@ -59,9 +59,14 @@ function HomePage(){
                 <Recommended/>
               </div>
               
-            ) : (
+            ) : role === 'doctor' ? (
               <div>
                 <p>no ui for doctor yet</p>
+              </div>
+            ) : (
+              // if the user has a role that isnt supposed to be given idk
+              <div>
+                <p>?????</p>
               </div>
             )}
             
