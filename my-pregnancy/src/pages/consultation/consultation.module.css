@@ -101,6 +101,8 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
+    overflow-y: scroll;
+    max-height: 440px;
 }
 
 .consultantItem {
@@ -147,6 +149,11 @@
     gap: 150px;
     padding: 0 10px; 
     box-sizing: border-box;
+}
+
+.submitContainer {
+    display: flex;
+    justify-content: center;
 }
 
 @media (max-width: 1024px) {

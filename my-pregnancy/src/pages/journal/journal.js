@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { serverErrorNotif } from '../../global-components/notify';
+import { serverErrorNotif, customWarningNotif } from '../../global-components/notify';
 
 import styles from './journal.module.css';
 import buttons from '../../css/buttons.module.css';
@@ -44,10 +44,10 @@ function Journal() {
       if(response.status === 200){
         setEntries(response.data)
         return;
-      } else if(response.status === 404){
-
+      } else if(response.response.status === 404 || response.response.status === 401){
+        return customWarningNotif("Please sign in again");
       } else if(response.status === 500){
-
+        return customWarningNotif("Server error");
       }
     }
     fetchEntries();

@@ -139,7 +139,43 @@ export const getAllFitnesVideos = async () => {
     });
     return response;
   } catch (error) {
-    console.error('Failed to create fetch all fitness videos:', error);
+    console.error('Failed to fetch all fitness videos:', error);
+    return error;
+  }
+}
+
+
+export const getAllDoctors = async () => {
+  try {
+    const response = await axios.get(`${apiurl}/consultation/alldoctors`, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to fetch all doctors:', error);
+    return error;
+  }
+}
+
+export const createConsultationRequest = async (date, reason, communication, consultant) => {
+  const token = getToken();
+  try {
+    const response = await axios.post(`${apiurl}/consultation/newrequest`, {
+      date: date,
+      reason,
+      communication,
+      consultant,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to create consultation request:', error);
     return error;
   }
 }

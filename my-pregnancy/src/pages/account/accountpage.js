@@ -27,6 +27,7 @@ function AccountPage(){
     aphraVerification: "",
     specialization: "",
     yearsExperience: "",
+    gender: "",
     weight: "",
     pregnancyMonth: "",
     conceptionDate: "",
@@ -50,6 +51,7 @@ function AccountPage(){
           aphraVerification: response.data.aphraVerification || "",
           specialization: response.data.specialization || "",
           yearsExperience: response.data.yearsExperience || "",
+          gender: response.data.gender || "",
           weight: response.data.weight || "",
           pregnancyMonth: response.data.pregnancyMonth || "",
           conceptionDate: response.data.conceptionDate ? new Date(response.data.conceptionDate).toISOString().split('T')[0] : "",
@@ -98,6 +100,7 @@ function AccountPage(){
       updatedData.aphraVerification = formData.aphraVerification || "";
       updatedData.specialization = formData.specialization || "";
       updatedData.yearsExperience = formData.yearsExperience || "";
+      updatedData.gender = formData.gender || "";
     }
   
     // Make the API request to update user details
@@ -122,7 +125,7 @@ function AccountPage(){
   }
 
   const calculateTimeAlong = (conceptionDate) => {
-    if (!conceptionDate) return 'N/A';
+    if(!conceptionDate) return 'N/A';
     const currentDate = new Date();
     const conception = new Date(conceptionDate);
     const timeDifference = currentDate - conception;
@@ -247,6 +250,21 @@ function AccountPage(){
                         />
                       </div>
                     </div>
+                    {role === "doctor" && (
+                      <div className={styles.inputDiv}>
+                        <label htmlFor='gender'>Gender</label>
+                        <select
+                          name='gender'
+                          id='gender'
+                          onChange={handleInputChange}
+                          value={formData.gender}
+                        >
+                          <option value='' disabled>Select Gender</option>
+                          <option value='male'>Male</option>
+                          <option value='female'>Female</option>
+                        </select>
+                      </div>
+                    )}
                     
                     
                     {role === "pregnant" ? (
