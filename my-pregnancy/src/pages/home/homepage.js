@@ -49,7 +49,7 @@ function HomePage(){
         <Navbar/>
         {userFound ? (
           <div>
-            <Welcome name={user.firstname}></Welcome>
+            <Welcome user={user}></Welcome>
             {role === "pregnant" ? (
               <div>
                 <div className={styles.journalAndForums}>

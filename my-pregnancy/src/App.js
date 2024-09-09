@@ -10,7 +10,8 @@ import StartupPage2 from './pages/startup2/startuppage2.js';
 import AboutPage from './pages/about/aboutpage.js';
 import AccountPage from './pages/account/accountpage.js';
 import ChecklistPage from './pages/checklist/checklistpage.js';
-import ConsultationPage from './pages/consultation/consultationpage.js';
+import ConsultationBookPage from './pages/consultation/book/consultationbookpage.js';
+import ConsultationManagePage from './pages/consultation/manage/consultationmanagepage.js';
 import ContactPage from './pages/contact/contactpage.js';
 import DiscussionPage from './pages/discussion/discussionpage.js';
 import EditaccountPage from './pages/editaccount/editaccountpage.js';
@@ -42,7 +43,8 @@ function Wrapper() {
       <Route path="/about" element={<AboutPage/>}/>
       <Route path="/account" element={<AccountPage/>}/>
       <Route path="/checklist" element={<ChecklistPage/>}/>
-      <Route path="/consultation" element={<ConsultationPage/>}/>
+      <Route path="/consultation/book" element={<ConsultationBookPage/>}/>
+      <Route path="/consultation/manage" element={<ConsultationManagePage/>}/>
       <Route path="/contact" element={<ContactPage/>}/>
       <Route path="/discussion" element={<DiscussionPage/>}/>
       <Route path="/editaccount" element={<EditaccountPage/>}/>

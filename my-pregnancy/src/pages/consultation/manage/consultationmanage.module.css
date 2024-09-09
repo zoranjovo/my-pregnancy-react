@@ -1,0 +1,52 @@
+.header {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e3a8a; 
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+.consultaionsContainer {
+    width: 400px;
+    max-height: 1000px;
+    overflow-y: scroll;
+    padding: 10px;
+}
+.consultationItem {
+    border: 2px solid var(--pink1);
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.consultationItem > h1 {
+    font-size: 22px;
+    font-weight: 400;
+}
+.consultationItem > h2 {
+    border-bottom: 2px solid var(--pink2);
+    width: 50%;
+}
+.consultationItem > h2 > span {
+    font-size: 18px;
+    font-weight: 500;
+}
+.btns {
+    display: flex;
+    padding: 5px;
+    gap: 5px;
+}
+.btns > p {
+    color: var(--pink3);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.bookBtnContainer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}

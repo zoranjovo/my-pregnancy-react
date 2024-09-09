@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import styles from './consultation.module.css';
-import buttons from '../../css/buttons.module.css';
-import { serverErrorNotif, customSuccessNotif, customWarningNotif } from '../../global-components/notify';
-import { getUser, getAllDoctors, createConsultationRequest } from '../../util/apireq';
+import buttons from '../../../css/buttons.module.css';
+import { serverErrorNotif, customSuccessNotif, customWarningNotif } from '../../../global-components/notify';
+import { getUser, getAllDoctors, createConsultationRequest } from '../../../util/apireq';
 import { dotWave } from 'ldrs';
 
 
-function Consultation() {
+function ConsultationBook() {
   dotWave.register();
   const [user, setUser] = useState({});
   const [doctors, setDoctors] = useState([]);
@@ -72,6 +72,10 @@ function Consultation() {
       return;
     } else if(response.response.status === 404 || response.response.status === 401){
       customWarningNotif("Account not found, please sign in again");
+    } else if(response.response.status === 400){
+      console.log(response.response.data.error);
+      customWarningNotif(response.response.data.error);
+      setSendingBookingRequest(0);
     } else if(response.response.status === 500){
       customWarningNotif("Server error");
     }
@@ -220,9 +224,9 @@ function Consultation() {
               ) : sendingBookingRequest === 1 ? (
                 <l-dot-wave size="47" speed="1" color="#f06292" data-testid="loading-indicator"></l-dot-wave>
               ) : (
-                <p>Booking Request Successful. Please monitor your request.</p>
+                <p>Consultation request successful. Please monitor your request for any updates.</p>
               )}
-              
+
             </div>
           </div>
         ) : user.role === "doctor" ? (
@@ -239,4 +243,4 @@ function Consultation() {
   );
 }
 
-export default Consultation;
+export default ConsultationBook;

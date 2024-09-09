@@ -203,7 +203,6 @@ function JournalEntry(){
           ) : (
             <h2>← Back to Journal</h2>
           )}
-          
         </Link>
       </div>
       <div className={styles.innerdiv}>

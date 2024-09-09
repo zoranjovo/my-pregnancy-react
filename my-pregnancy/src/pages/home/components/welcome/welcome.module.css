@@ -43,6 +43,14 @@
 .phoneContainer > h2 > span {
   font-weight: 600;
 }
+.warningMessage {
+  color: var(--pink3);
+  font-size: 20px;
+}
+.completeAccLink {
+  text-decoration: underline;
+  cursor: pointer;
+}
 
 
 @media (max-width: 540px) {

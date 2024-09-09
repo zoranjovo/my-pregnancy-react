@@ -179,3 +179,19 @@ export const createConsultationRequest = async (date, reason, communication, con
     return error;
   }
 }
+
+export const getExistingConsultations = async () => {
+  const token = getToken();
+  try {
+    const response = await axios.get(`${apiurl}/consultation/getexisting`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to get existing consultations:', error);
+    return error;
+  }
+}
