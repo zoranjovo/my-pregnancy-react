@@ -1,0 +1,114 @@
+.recommendedDiv {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.videosHeader {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.videosHeader > h1 {
+  font-size: 24px;
+}
+
+.formContainer {
+  max-width: 600px; /* Container width */
+  margin-left: 2em;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.addVideoForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputField {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.textareaField {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: none;
+  height: 60px;
+}
+
+.addButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background: linear-gradient(90deg, #f08bade4, #fbbbd6); 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.addButton:hover {
+  background-color: #e91e63;
+}
+
+.videosList {
+  display: flex; /* Changed to flex to align items in a row */
+  flex-wrap: wrap; /* Allows videos to wrap to the next line if the row is full */
+  gap: 20px; /* Space between the video items */
+  margin-top: 20px;
+}
+
+/* Specific styling for the "No videos added yet!" message */
+.videosList p {
+  margin-left: 2em;
+  color: #777;
+}
+
+.videoItem {
+  flex: 1 1 calc(33.333% - 20px); /* Adjusts to fit three items per row */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+.videoItem h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.videoItem p {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+}
+
+.deleteButton {
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #fff;
+  background: linear-gradient(90deg, #f08bade4, #fbbbd6); 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-top: 1em;
+}
+
+.deleteButton:hover {
+  background-color: #e57373;
+}
