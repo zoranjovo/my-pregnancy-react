@@ -1,0 +1,125 @@
+.navbar-fake {
+    height: 90px;
+}
+
+.navbarbig {
+    display: flex;
+    padding: 0px 20px;
+    background-color: #ffffff;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid var(--pink1);
+    width: calc(100% - 100px);
+    margin-left: 50px;
+    margin-top: 20px;
+    box-shadow: 0px 5px 5px rgb(0, 0, 0, 0.3);
+    position: fixed;
+    z-index: 99;
+}
+.navbarsmall {
+    display: flex;
+    padding: 0px 20px;
+    background-color: #ffffff;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid var(--pink1);
+    width: calc(100% - 100px);
+    margin-left: 50px;
+    margin-top: 20px;
+    box-shadow: 0px 5px 5px rgb(0, 0, 0, 0.3);
+    position: fixed;
+    display: none;
+    z-index: 99;
+}
+.navbarsmallexpand {
+    width: 100%;
+    height: 225;
+    margin-top: 6px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    box-shadow: 0px 5px 5px rgb(0, 0, 0, 0.3);
+    opacity: 100%;
+    pointer-events: all;
+}
+.navbarsmallexpand.open {
+    opacity: 0%;
+    pointer-events: none;
+}
+
+.navbar-link {
+    display: inline-block;
+}
+
+.navbar-button {
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 8px 6px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+    transition-duration: 0.1s;
+    width: auto;
+    margin: 3px 15px;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+.navbar-button:hover {
+    background-color: var(--pink1);
+}
+
+.navbar-button-2 {
+    cursor: pointer;
+    transition-duration: 0.1s;
+    width: 100%;
+    padding: 10px 20px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.267);
+    height: 45px;
+    border-radius: 4px;
+}
+.navbar-button-2:hover {
+    background-color: var(--pink1);
+}
+
+.acc {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+
+
+@media (max-width: 1000px) {
+    .navbar-link {
+        display: inline-block;
+    }
+    .acc {
+        margin-right: 0px;
+    }
+    .navbar-button {
+        padding: 3px 5px;
+        margin: 3px 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 850px) {
+    .navbarbig {
+        display: none;
+    }
+    .navbarsmall {
+        display: unset;
+    }
+}
+
+@media (max-width: 430px) {
+    .navbar-button {
+        padding: 7px 4px;
+        margin: 4px 8px;
+        font-size: 14px;
+    }
+    .navbarsmall {
+        width: calc(100% - 50px);
+        margin-left: 25px;
+        padding: 0px 10px;
+    }
+}
+
