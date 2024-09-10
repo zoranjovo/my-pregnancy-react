@@ -1,0 +1,54 @@
+.notificationsContainer {
+    background-color: #fff8fb;
+    border: 1px solid #fb98b9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .notificationsContainer h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #000;
+  }
+  
+  .notificationItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f1efef;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .notificationItem p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+  
+  .closeButton {
+    background: none;
+    border: none;
+    color: #f06292;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 1px;
+  }
+  
+  .clearButton {
+    background: linear-gradient(90deg, #f08bade4, #fbbbd6); 
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  .clearButton:hover {
+    background-color: #e91e63;
+  }
+  
