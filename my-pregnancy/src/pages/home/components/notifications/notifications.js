@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './notifications.module.css';
+import boxes from '../../../../css/boxes.module.css';
 
 const Notifications = () => {
   return (
-    <div className={styles.notificationsContainer}>
+    <div className={`${boxes.standard} ${styles.notificationsContainer}`}>
       <h3>Notifications</h3>
       <div className={styles.notificationItem}>
         <p>New consultation request for 17:30-18:00, 11/11</p>

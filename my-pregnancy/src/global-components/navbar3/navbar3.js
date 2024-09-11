@@ -17,7 +17,7 @@ function Navbar(){
           <h1 className={styles['navbar-button']}>Dashboard</h1>
         </Link>
         <Link to="/upcomingappointments" className={styles['navbar-link']}>
-          <h1 className={styles['navbar-button']}>Upcoming Appointments</h1>
+          <h1 className={styles['navbar-button']}>Appointments</h1>
         </Link>
         <Link to="/patientlist" className={styles['navbar-link']}>
           <h1 className={styles['navbar-button']}>Patient List</h1>
@@ -46,7 +46,7 @@ function Navbar(){
         <Hamburger opened={hamburgerOpen} onClick={toggleHamburger}></Hamburger>
         <div className={`${styles.navbarsmallexpand}  ${hamburgerOpen ? '' : styles.open}`}>
           <Link to="/upcomingappointments" className={styles['navbar-link-2']}>
-            <h1 className={styles['navbar-button-2']}>Upcoming Appointments</h1>
+            <h1 className={styles['navbar-button-2']}>Appointments</h1>
           </Link>
           <Link to="/patientlist" className={styles['navbar-link-2']}>
             <h1 className={styles['navbar-button-2']}>Patient List</h1>

@@ -19,8 +19,7 @@ import FAQPage from './pages/faq/faqpage.js';
 import FitnessPage from './pages/fitness/fitnesspage.js';
 import FitnessarticlePage from './pages/fitnessarticle/fitnessarticlepage.js';
 import ForumsPage from './pages/forums/forumspage.js';
-import HomePage from './pages/home/homepage.js';
-import HomePage2 from './pages/home2/homepage2.js';
+import HomePageHandler from './pages/home/HomeHandler.js';
 import JournalPage from './pages/journal/journalpage.js';
 import JournalEntryPage from './pages/journalentry/journalentrypage.js';
 import LoginPage from './pages/login/loginpage.js';
@@ -53,8 +52,7 @@ function Wrapper() {
       <Route path="/fitness" element={<FitnessPage/>}/>
       <Route path="/fitnessarticle/:id" element={<FitnessarticlePage/>}/>
       <Route path="/forums" element={<ForumsPage/>}/>
-      <Route path="/home" element={<HomePage/>}/>
-      <Route path="/home2" element={<HomePage2/>}/>
+      <Route path="/home" element={<HomePageHandler/>}/>
       <Route path="/journal" element={<JournalPage/>}/>
       <Route path="/journalentry/:id" element={<JournalEntryPage/>}/>
       <Route path="/login" element={<LoginPage/>}/>
