@@ -32,6 +32,7 @@ function ConsultationBook() {
 
   const fetchDoctors = async () => {
     const response = await getAllDoctors();
+    console.log(response)
     setDoctors(response.data);
   }
 

@@ -230,6 +230,7 @@ function AccountPage(){
                       <div className={styles.inputDiv}>
                         <label htmlFor='dob'>Date of Birth</label>
                         <input
+                          className={styles.inputPart}
                           type='date'
                           name='dob'
                           id='dob'

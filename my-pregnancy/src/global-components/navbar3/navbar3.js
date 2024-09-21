@@ -13,14 +13,11 @@ function Navbar(){
   return (
     <div className={styles['navbar-fake']}>
       <nav className={`${styles.navbarbig}`}>
-        <Link to="/dochome" className={styles['navbar-link']}>
+        <Link to="/home" className={styles['navbar-link']}>
           <h1 className={styles['navbar-button']}>Dashboard</h1>
         </Link>
-        <Link to="/upcomingappointments" className={styles['navbar-link']}>
-          <h1 className={styles['navbar-button']}>Appointments</h1>
-        </Link>
-        <Link to="/patientlist" className={styles['navbar-link']}>
-          <h1 className={styles['navbar-button']}>Patient List</h1>
+        <Link to="/consultations" className={styles['navbar-link']}>
+          <h1 className={styles['navbar-button']}>Consultations</h1>
         </Link>
         <Link to="/resources" className={styles['navbar-link']}>
           <h1 className={styles['navbar-button']}>Resources</h1>
@@ -37,7 +34,7 @@ function Navbar(){
       </nav>
 
       <nav className={`${styles.navbarsmall}`}>
-        <Link to="/dochome" className={styles['navbar-link']}>
+        <Link to="/home" className={styles['navbar-link']}>
           <h1 className={styles['navbar-button']}>Dashboard</h1>
         </Link>
         <Link to="/account" className={`${styles['navbar-link']} ${styles['acc']}`}>
@@ -45,11 +42,8 @@ function Navbar(){
         </Link>
         <Hamburger opened={hamburgerOpen} onClick={toggleHamburger}></Hamburger>
         <div className={`${styles.navbarsmallexpand}  ${hamburgerOpen ? '' : styles.open}`}>
-          <Link to="/upcomingappointments" className={styles['navbar-link-2']}>
-            <h1 className={styles['navbar-button-2']}>Appointments</h1>
-          </Link>
-          <Link to="/patientlist" className={styles['navbar-link-2']}>
-            <h1 className={styles['navbar-button-2']}>Patient List</h1>
+          <Link to="/consultations" className={styles['navbar-link2']}>
+            <h1 className={styles['navbar-button-2']}>Consultations</h1>
           </Link>
           <Link to="/resources" className={styles['navbar-link-2']}>
             <h1 className={styles['navbar-button-2']}>Resources</h1>

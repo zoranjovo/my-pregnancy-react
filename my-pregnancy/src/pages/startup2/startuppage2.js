@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import emailjs from 'emailjs-com'; // Import EmailJS SDK
+// import emailjs from 'emailjs-com'; // Import EmailJS SDK
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../global-components/footer/footer.js';
 import styles from './startuppage2.module.css';
@@ -11,36 +11,35 @@ function StartupPage2() {
 
   // Function to send email via EmailJS and navigate to the signup page
   function directToSignup(e) {
-    e.preventDefault(); // Prevent the page from refreshing
-
     const email = emailRef1.current.value;
-
     if (!email || email === '') {
       setMessage({ text: 'Please enter a valid email address.', type: 'error' });
-      return;
+      //return;
     }
 
-    // EmailJS integration
-    const templateParams = {
-      user_email: email, // This is the subscriber's email address
-    };
+    // // EmailJS integration
+    // const templateParams = {
+    //   user_email: email, // This is the subscriber's email address
+    // };
 
-    emailjs
-      .send('service_rpu4pbs', 'template_2g0josh', templateParams, '5E3pd_BYtHpHpHHrc')
-      .then(
-        (response) => {
-          console.log('SUCCESS!', response.status, response.text);
-          setMessage({ text: 'Successfully subscribed!', type: 'success' });
-        },
-        (error) => {
-          console.log('FAILED...', error);
-          setMessage({ text: 'Subscription failed. Please try again.', type: 'error' });
-        }
-      );
-
+    // emailjs
+    //   .send('service_rpu4pbs', 'template_2g0josh', templateParams, '5E3pd_BYtHpHpHHrc')
+    //   .then(
+    //     (response) => {
+    //       console.log('SUCCESS!', response.status, response.text);
+    //       setMessage({ text: 'Successfully subscribed!', type: 'success' });
+    //     },
+    //     (error) => {
+    //       console.log('FAILED...', error);
+    //       setMessage({ text: 'Subscription failed. Please try again.', type: 'error' });
+    //     }
+    //   );
+    
     // Navigate to the signup page after successful submission
-    if (email) {
+    if(email) {
       navigate(`/signup?email=${encodeURIComponent(email)}`);
+    } else {
+      navigate(`/signup`);
     }
   }
 

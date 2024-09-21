@@ -89,6 +89,7 @@
 }
 .inputDiv {
   margin: 20px;
+  width: 300px;
 }
 
 .inputDiv > label {
@@ -103,12 +104,6 @@
   box-shadow: 1px 1px 2px rgb(171, 171, 171);
   display: block;
   width: 100%;
-}
-input[type="text"],
-input[type="date"],
-input[type="number"],
-input[type="email"] {
-  width: 300px;
 }
 
 select {

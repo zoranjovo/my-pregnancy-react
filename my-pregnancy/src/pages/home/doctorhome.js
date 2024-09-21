@@ -6,7 +6,7 @@ import { clearToken } from "../../util/auth.js";
 import { dotWave } from "ldrs";
 
 import Footer from "../../global-components/footer/footer.js";
-import Navbar from "../../global-components/navbar3/navbar3.js"
+import Navbar from "../../global-components/navbar2/navbar2.js";
 
 import Welcome from "./components/welcome/welcome.js";
 import Notifications from "./components/notifications/notifications.js";
