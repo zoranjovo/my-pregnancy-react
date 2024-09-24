@@ -32,7 +32,6 @@ function ConsultationBook() {
 
   const fetchDoctors = async () => {
     const response = await getAllDoctors();
-    console.log(response)
     setDoctors(response.data);
   }
 
@@ -59,8 +58,8 @@ function ConsultationBook() {
     const currentTime = new Date();
     const timeDifference = combinedDateTime - currentTime; // Difference in milliseconds
 
-    if (timeDifference < 600000) { // 600,000 milliseconds = 10 minutes
-      return customWarningNotif("Please select a time at least 10 minutes from now.");
+    if (timeDifference < 300000) { // 300,000 milliseconds = 5 minutes
+      return customWarningNotif("Please select a time at least 5 minutes from now.");
     }
     
     // display loading
@@ -182,32 +181,40 @@ function ConsultationBook() {
                 <h2>Select a Consultant</h2>
                 {doctors.length > 0 ? (
                   <ul className={styles.consultantList}>
-                    {doctors
-                      .filter((consultant) => {
-                        if (doctorGender === '') return true;
-                        return consultant.gender.toLowerCase() === doctorGender.toLowerCase();
-                      })
-                      .map((consultant) => (
-                      <li 
-                        key={consultant._id} 
-                        className={`${styles.consultantItem} ${selectedConsultant === consultant._id ? styles.selectedConsultant : ''}`}
-                        onClick={() => setSelectedConsultant(consultant._id)}
-                      >
-                        <h3>{`Dr. ${consultant.firstname} ${consultant.lastname}`}</h3>
-                        <p>Specialty: {consultant.specialization}</p>
-                        <p>Gender: {cap(consultant.gender)}</p>
-                        <label className={styles.consultantLabel}>
-                          <input
-                            type="radio"
-                            name="consultant"
-                            value={consultant._id}
-                            checked={selectedConsultant === consultant._id}
-                            onChange={() => setSelectedConsultant(consultant._id)}
-                          />
-                          Select
-                        </label>
-                      </li>
-                    ))}
+                  {doctors
+                    .filter((consultant) => {
+                      if (doctorGender === '') return true;
+                      return consultant.gender.toLowerCase() === doctorGender.toLowerCase();
+                    }).length === 0 ? (
+                      <li className={styles.noConsultants}>No doctors available</li>
+                    ) : (
+                      doctors
+                        .filter((consultant) => {
+                          if (doctorGender === '') return true;
+                          return consultant.gender.toLowerCase() === doctorGender.toLowerCase();
+                        })
+                        .map((consultant) => (
+                          <li 
+                            key={consultant._id} 
+                            className={`${styles.consultantItem} ${selectedConsultant === consultant._id ? styles.selectedConsultant : ''}`}
+                            onClick={() => setSelectedConsultant(consultant._id)}
+                          >
+                            <h3>{`Dr. ${consultant.firstname} ${consultant.lastname}`}</h3>
+                            <p>Specialty: {consultant.specialization}</p>
+                            <p>Gender: {cap(consultant.gender)}</p>
+                            <label className={styles.consultantLabel}>
+                              <input
+                                type="radio"
+                                name="consultant"
+                                value={consultant._id}
+                                checked={selectedConsultant === consultant._id}
+                                onChange={() => setSelectedConsultant(consultant._id)}
+                              />
+                              Select
+                            </label>
+                          </li>
+                        ))
+                    )}
                   </ul>
                 ) : (
                   <div className={`flex items-center justify-center`} style={{ marginTop: '100px' }}>

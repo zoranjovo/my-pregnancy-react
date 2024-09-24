@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getUser } from "../../util/apireq.js";
-import { dotWave } from "ldrs";
 import { serverErrorNotif, customWarningNotif } from '../../global-components/notify';
 import { clearToken } from "../../util/auth.js";
 

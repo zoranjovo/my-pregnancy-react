@@ -156,6 +156,10 @@
     justify-content: center;
 }
 
+.noConsultants {
+    margin-top: 20px;
+}
+
 @media (max-width: 1024px) {
     .innerdiv {
         max-width: 90%; 

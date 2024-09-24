@@ -50,3 +50,8 @@
     display: flex;
     justify-content: center;
 }
+
+.joinLink {
+    color: blue;
+    text-decoration: underline;
+}

@@ -195,3 +195,22 @@ export const getExistingConsultations = async () => {
     return error;
   }
 }
+
+export const updateConsultationState = async (id, newstatus) => {
+  const token = getToken();
+  try {
+    const response = await axios.post(`${apiurl}/consultation/updatestate`, {
+      consultationid: id,
+      newstatus: newstatus,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to get existing consultations:', error);
+    return error;
+  }
+}
