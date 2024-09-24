@@ -13,3 +13,6 @@
 
 # How to develop upon
 In step 7 instead of doing `npm run build` do `npm run start` and the site will automatically open and any code changes will automatically display, you will probably need to refresh the site at times.
+
+# Note
+if you get errors saying stuff is not found, try run `npm install` again
