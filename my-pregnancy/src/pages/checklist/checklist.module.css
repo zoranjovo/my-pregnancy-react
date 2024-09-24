@@ -1,0 +1,131 @@
+.outerdiv {
+  padding: 20px;
+}
+
+.header {
+  font-size: 36px;
+  font-weight: bold;
+  color: #0F2C63;
+  margin-bottom: 40px;
+}
+
+.innerdiv {
+  display: grid;
+  justify-content: center; 
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px; 
+  margin: 0 auto; 
+}
+
+.checklistBubble {
+  background-color: #ffe6f1;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--pink1);
+  padding: 20px;
+  height: auto;
+  min-height: 180px;
+  transition: all 0.3s ease;
+}
+
+.boardName {
+  font-weight: bold;
+  color: #0F2C63;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.headerSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerSection button{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.contentSection {
+  padding-top: 10px;
+}
+
+.contentSection ul {
+  list-style-type: none;
+  padding-left: 0;
+  color: #0F2C63;
+}
+
+.contentSection ul li {
+  margin-bottom: 5px;
+}
+
+.editButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.editButton:hover {
+  background-color: #0056b3;
+}
+
+.expandButton {
+  font-size: 16px;
+  color: #ff66b3;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.expandButton:hover {
+  color: #e60073;
+}
+
+ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 1001;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
