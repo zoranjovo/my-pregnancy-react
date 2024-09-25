@@ -26,7 +26,7 @@
   border: 1px solid var(--pink1);
   padding: 20px;
   height: auto;
-  min-height: 180px;
+  min-height: 130px;
   transition: all 0.3s ease;
 }
 
@@ -39,12 +39,13 @@
 
 .headerSection {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .headerSection button{
-  padding-left: 10px;
+  padding-left: 20px;
   padding-right: 10px;
 }
 
@@ -54,7 +55,7 @@
 
 .contentSection ul {
   list-style-type: none;
-  padding-left: 0;
+  padding-left: 20px;
   color: #0F2C63;
 }
 
@@ -63,18 +64,13 @@
 }
 
 .editButton {
-  background-color: #007bff;
+  background-color: #f590c2;
   color: white;
   border: none;
   padding: 8px 15px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
-  margin-top: 10px;
-}
-
-.editButton:hover {
-  background-color: #0056b3;
 }
 
 .expandButton {
@@ -109,7 +105,7 @@ ul {
 }
 
 .modalContent {
-  background-color: #fff;
+  background-color: #ffe6f3;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
@@ -128,4 +124,83 @@ ul {
   border: none;
   font-size: 24px;
   cursor: pointer;
+}
+
+.modalContent h2 {
+  font-size: 24px;
+  text-align: center;
+  font-weight: bold;
+  color: #0f2c63;
+}
+
+.addItemSection {  
+  margin: 0;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.addItemSection input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.addItemSection button {
+  padding: 8px 15px;
+  border-radius: 5px;
+  background-color: #f590c2;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.createButton {
+  margin: 20px 0;
+  padding: 10px 20px;
+  background-color: #f590c2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modalContent input[type='text'] {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.modalContent ul {
+  list-style-type: none;
+  padding-left: 20px;
+  color: #0F2C63;
+}
+
+.modalContent ul li {
+  margin-top: 10px;
+}
+
+.headerButtons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.deleteButton {
+  font-size: 16px;
+  color: #ff6666;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.deleteButton:hover {
+  color: #e60000;
 }
