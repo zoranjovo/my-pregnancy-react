@@ -15,13 +15,17 @@
 }
 
 .profileDiv > img {
-  width: 100px;
-  height: 100px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 999px;
   border: 2px solid var(--pink2);
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  margin-bottom: 10px;
 }
+
 .profileDivContainer {
   display: flex;
   flex-direction: column;
@@ -37,14 +41,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.profileDiv img {
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  margin-bottom: 10px;
 }
 
 .profileInfo h2 {
@@ -124,6 +120,127 @@
 
 .sideBySide {
   display: flex;
+}
+
+.pfpPane {
+  position: fixed;
+  top: calc(50% - 100px);
+  left: calc(50% - 200px);
+  height: 200px;
+  width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--pink2);
+  display: flex;
+  opacity: 0%;
+  transform: translateY(0px);
+  transition: 0.3s;
+}
+
+@keyframes slideFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px); /* Start 20px down */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* End at the original position */
+  }
+}
+
+@keyframes slideFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0); /* Start at the original position */
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px); /* Move 20px down */
+  }
+}
+
+/* When the pane is open */
+.pfpPaneOpen {
+  animation: slideFadeIn 0.3s ease forwards; /* Apply fade-in animation */
+}
+
+/* When the pane is closed */
+.pfpPaneClose {
+  animation: slideFadeOut 0.3s ease forwards; /* Apply fade-out animation */
+}
+
+/* Optional: Ensure the pane has a basic layout */
+.pfpPane {
+  transition: all 0.3s ease; /* For smooth height adjustments, if necessary */
+}
+
+.pfpPreview {
+  margin-top: 18px;
+  height: 150px;
+  width: 150px;
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+.pfpManage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* This will vertically align the children */
+  gap: 10px;
+  padding: 20px;
+  height: 100%; /* Ensure the container has full height if necessary */
+  width: 300px;
+}
+
+.fileInput {
+  display: none; /* Hide default file input */
+}
+
+.uploadButton {
+  background-color: #4CAF50; /* Green background */
+  color: white;
+  padding: 12px 24px; /* Padding for a larger, easy-to-click button */
+  font-size: 16px; /* Font size for readability */
+  border: none;
+  border-radius: 8px; /* Rounded button corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.uploadButton:hover {
+  background-color: #45a049; /* Slightly darker green on hover */
+}
+
+.uploadButton:active {
+  background-color: #3e8e41; /* Even darker when clicked */
+}
+
+.closeButton {
+  position: absolute;
+  right: 10px;
+  top: 4px;
+  font-size: 30px;
+}
+
+.closeButton:hover {
+  color: #000; /* Darker color on hover */
+}
+
+.fileInputLabel {
+  background-color: #007bff; /* Blue background for file upload button */
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.fileInputLabel:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.fileInputLabel:active {
+  background-color: #00408d; /* Even darker on click */
 }
 
 
@@ -222,6 +339,10 @@
     width: 100%;
   }
   .buttonsDiv {
+    display: contents;
     gap: 5px;
+  }
+  .buttonsDiv > button {
+    margin: 10px;
   }
 }

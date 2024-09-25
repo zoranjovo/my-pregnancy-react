@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { getUser, updateUser } from '../../util/apireq.js';
+import { getUser, updateUser, updateUserPhoto } from '../../util/apireq.js';
 import { serverErrorNotif, customWarningNotif, customSuccessNotif } from '../../global-components/notify.js';
 import { useNavigate } from 'react-router-dom';
 
 import Footer from "../../global-components/footer/footer";
 import Navbar from "../../global-components/navbar2/navbar2.js";
+
+import PfpManage from './PfpManage.js';
 
 import styles from './accountpage.module.css';
 import buttons from '../../css/buttons.module.css';
@@ -18,6 +20,36 @@ function AccountPage(){
   
   const [user, setUser] = useState({});
   const [role, setRole] = useState("");
+  const [PFP, setPFP] = useState("");
+  const [PFPTemp, setPFPTemp] = useState("");
+  const [PFPPaneOpen, setPFPPaneOpen] = useState(false);
+  const [selectedPFPFile, setSelectedPFPFile] = useState(null);
+
+  const handlePFPFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedPFPFile(file);
+      const previewURL = URL.createObjectURL(file);
+      setPFPTemp(previewURL); // Show file preview
+    }
+  };
+
+  const uploadPFP = async () => {
+    const response = await updateUserPhoto(selectedPFPFile);
+    console.log(response)
+    if(response.message === "Network Error"){ return serverErrorNotif(); }
+      if(response.status === 200){
+        customSuccessNotif("Successfully updated profile photo")
+        return;
+      } else if(response.response.status === 404 || response.response.status === 401){
+        customWarningNotif("Account not found, please sign in again");
+      } else if(response.response.status === 500){
+        customWarningNotif("Server error");
+      } else {
+        customWarningNotif("Error");
+      }
+  }
+
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -42,6 +74,11 @@ function AccountPage(){
       if(response.status === 200){
         setUser(response.data);
         setRole(response.data.role);
+        console.log(response.data)
+        if(response.data.profilePhotoUrl){
+          setPFP(response.data.profilePhotoUrl);
+          setPFPTemp(response.data.profilePhotoUrl)
+        }
         setFormData({
           firstname: response.data.firstname || "",
           lastname: response.data.lastname || "",
@@ -147,7 +184,12 @@ function AccountPage(){
                   <h1 className="text-3xl font-bold text-blue">Account</h1>
                   <div className={`${styles.profileDivContainer} ${boxes.standard}`}>
                     <div className={`${styles.profileDiv}`}>
-                      <img src='/assets/blank-profile-picture.webp' alt='profile'></img>
+                      {PFP === null ? (
+                        <img src='/assets/blank-profile-picture.webp' alt='profile'></img>
+                      ) : (
+                        <img src={PFP} alt='profile'></img>
+                      )}
+                      
                       <div className={styles.profileInfo}>
                         <h2>{`${formData.firstname} ${formData.lastname}`}</h2>
                         <p>{formData.address || 'Address not available'}</p>
@@ -384,6 +426,7 @@ function AccountPage(){
                     <div className={styles.buttonsDiv}>
                       <button className={buttons.stylisedBtn} onClick={saveChanges}>Save Changes</button>
                       <button className={buttons.stylisedBtn}>Change Password</button>
+                      <button className={buttons.stylisedBtn} onClick={() => setPFPPaneOpen(true)}>Upload Profile Photo</button>
                       <button className={buttons.stylisedBtn} onClick={logOut}>Log Out</button>
                     </div>
                   </div>
@@ -398,6 +441,37 @@ function AccountPage(){
                     color="#f06292" 
                     data-testid="loading-indicator">
                 </l-dot-wave>
+              </div>
+            )}
+            {PFPPaneOpen && (
+              <div
+                className={`${boxes.standard} ${styles.pfpPane} ${
+                  PFPPaneOpen ? styles.pfpPaneOpen : styles.pfpPaneClose
+                }`}
+              >
+                <div className={`${styles.profileDiv} ${styles.pfpPreview}`}>
+                  {PFPTemp === null ? (
+                    <img src='/assets/blank-profile-picture.webp' alt='profile' />
+                  ) : (
+                    <img src={PFPTemp} alt='profile' />
+                  )}
+                </div>
+                <div className={styles.pfpManage}>
+                  <label htmlFor="fileInput" className={styles.fileInputLabel}>
+                    Choose Photo
+                  </label>
+                  <input
+                    id="fileInput"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handlePFPFileChange(e)}
+                    className={styles.fileInput}
+                  />
+                  <button onClick={uploadPFP} className={styles.uploadButton}>
+                    Upload Photo
+                  </button>
+                </div>
+                <button className={styles.closeButton} onClick={() => setPFPPaneOpen(false)}>X</button>
               </div>
             )}
           </div>

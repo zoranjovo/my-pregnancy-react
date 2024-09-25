@@ -89,6 +89,23 @@ export const updateUser = async (formData) => {
   }
 };
 
+export const updateUserPhoto = async (file) => {
+  const formData = new FormData();
+  formData.append('profilePhoto', file);
+  const token = getToken();
+  try {
+    const response = await axios.post(`${apiurl}/updateuserphoto`, formData, {
+    headers: {
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    return response;
+  } catch(error) {
+    console.log(error);
+    return error;
+  }
+};
+
 
 export const createJournalEntry = async (gratitude, onMyMind, selectedMoods, selfCare, waterIntake, dayRating) => {
   const token = getToken();
