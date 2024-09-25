@@ -106,13 +106,13 @@
   width: 100%;
 }
 
-select {
+.genderSelector {
+  width: 300px;
   padding: 10px;
   border: 1px solid rgb(193, 193, 193);
   border-radius: 5px;
   box-shadow: 1px 1px 2px rgb(171, 171, 171);
   display: block;
-  width: calc(50% - 20px);
 }
 .noChange {
   cursor: not-allowed;
@@ -120,6 +120,10 @@ select {
 .buttonsDiv {
   display: flex;
   gap: 20px;
+}
+
+.sideBySide {
+  display: flex;
 }
 
 
@@ -186,13 +190,23 @@ select {
     margin-right: auto;
   }
 
-  input[type="text"],
-  input[type="date"],
-  input[type="number"],
-  input[type="email"],
-  select {
+  .inputDiv > input {
     width: 90%;
     max-width: 100%;
+  }
+
+  .genderSelector {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .sideBySide {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .sideBySide > div {
+    width: 100%;
   }
 }
 
@@ -200,13 +214,12 @@ select {
   .accountpage {
     margin: 10px 0px;
   }
-  input[type="text"],
-  input[type="date"],
-  input[type="number"],
-  input[type="email"],
-  select {
+  .inputDiv > input {
     width: 100%;
     max-width: 100%;
+  }
+  .genderSelector {
+    width: 100%;
   }
   .buttonsDiv {
     gap: 5px;

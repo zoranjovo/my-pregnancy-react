@@ -1,19 +1,39 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 // import emailjs from 'emailjs-com'; // Import EmailJS SDK
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../global-components/footer/footer.js';
 import styles from './startuppage2.module.css';
+import { customWarningNotif, serverErrorNotif } from '../../global-components/notify.js';
+import { getUser } from '../../util/apireq.js';
+import { clearToken } from '../../util/auth.js';
+import { Link } from 'react-router-dom';
 
-function StartupPage2() {
+function StartupPage2({userCache, setUserCache}){
   const navigate = useNavigate();
   const emailRef1 = useRef(null); // Reference for the email input
-  const [message, setMessage] = useState(null); // Message state to show feedback to the user
+
+  useEffect(() => {
+    async function fetchUser() {
+      const response = await getUser();
+      if(response.message === "Network Error"){ return serverErrorNotif(); }
+      if(response.status === 200){
+        setUserCache(response.data);
+        return;
+      } else if(response.response.status === 404 || response.response.status === 401){
+        clearToken();
+        return customWarningNotif("Please sign in again");
+      } else if(response.response.status === 500){
+        customWarningNotif("Server error");
+      }
+    }
+    fetchUser();
+  });
 
   // Function to send email via EmailJS and navigate to the signup page
   function directToSignup(e) {
     const email = emailRef1.current.value;
     if (!email || email === '') {
-      setMessage({ text: 'Please enter a valid email address.', type: 'error' });
+      customWarningNotif('Please enter a valid email address');
       //return;
     }
 
@@ -50,7 +70,17 @@ function StartupPage2() {
         <div className={styles.headerText}>
           <h1>“From Bump to Baby with”<br />My Pregnancy...</h1>
           <p>Start your journey with us today!</p>
-          <button className={styles.joinButton} onClick={directToSignup}>Join Now!</button>
+          { userCache !== null ? (
+            <Link to='/home'>
+              <button className={styles.joinButton}>Dashboard</button>
+            </Link>
+            
+          ) : (
+            <Link to='/signup'>
+              <button className={styles.joinButton}>Join Now!</button>
+            </Link>
+          )}
+          
         </div>
       </header>
       <section className={styles.approach}>
@@ -109,7 +139,6 @@ function StartupPage2() {
             <input type="email" placeholder="Enter your email address" ref={emailRef1} />
             <button type="button" onClick={directToSignup}>Subscribe</button>
           </form>
-          {message && <p className={`${styles.subscribeMessage} ${styles[message.type]}`}>{message.text}</p>}
         </div>
       </div>
       <Footer />

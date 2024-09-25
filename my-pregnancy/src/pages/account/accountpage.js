@@ -48,10 +48,11 @@ function AccountPage(){
           phone: response.data.phone || "",
           dob: response.data.dob ? new Date(response.data.dob).toISOString().split('T')[0] : "", // Format date as YYYY-MM-DD
           address: response.data.address || "",
+          gender: response.data.gender || "",
           aphraVerification: response.data.aphraVerification || "",
           specialization: response.data.specialization || "",
           yearsExperience: response.data.yearsExperience || "",
-          gender: response.data.gender || "",
+          meetingURL: response.data.meetingURL || "",
           weight: response.data.weight || "",
           pregnancyMonth: response.data.pregnancyMonth || "",
           conceptionDate: response.data.conceptionDate ? new Date(response.data.conceptionDate).toISOString().split('T')[0] : "",
@@ -97,10 +98,11 @@ function AccountPage(){
   
     // Role-specific data for "doctor"
     if (role === "doctor") {
+      updatedData.gender = formData.gender || "";
       updatedData.aphraVerification = formData.aphraVerification || "";
       updatedData.specialization = formData.specialization || "";
       updatedData.yearsExperience = formData.yearsExperience || "";
-      updatedData.gender = formData.gender || "";
+      updatedData.meetingURL = formData.meetingURL || "";
     }
   
     // Make the API request to update user details
@@ -255,6 +257,7 @@ function AccountPage(){
                       <div className={styles.inputDiv}>
                         <label htmlFor='gender'>Gender</label>
                         <select
+                          className={styles.genderSelector}
                           name='gender'
                           id='gender'
                           onChange={handleInputChange}
@@ -323,37 +326,56 @@ function AccountPage(){
                         
                       </div>
                     ) : role === "doctor" ? (
-                      <div>
-                        <h2 className="text-2xl font-bold text-blue">Qualification Details</h2>
-                        <div className={styles.inputDiv}>
-                          <label htmlFor='aphraVerification'>Aphra Verification</label>
-                          <input
-                            type='number'
-                            name='aphraVerification'
-                            id='aphraVerification'
-                            onChange={handleInputChange}
-                            value={formData.aphraVerification}
-                          />
+                      <div className={styles.sideBySide}>
+                        <div>
+                          <h2 className="text-2xl font-bold text-blue">Qualification Details</h2>
+                          <div className={styles.inputDiv}>
+                            <label htmlFor='aphraVerification'>Aphra Verification</label>
+                            <input
+                              type='number'
+                              name='aphraVerification'
+                              id='aphraVerification'
+                              placeholder='Aphra Verification'
+                              onChange={handleInputChange}
+                              value={formData.aphraVerification}
+                            />
+                          </div>
+                          <div className={styles.inputDiv}>
+                            <label htmlFor='specialization'>Specialization</label>
+                            <input
+                              type='text'
+                              name='specialization'
+                              id='specialization'
+                              placeholder='Specilization'
+                              onChange={handleInputChange}
+                              value={formData.specialization}
+                            />
+                          </div>
+                          <div className={styles.inputDiv}>
+                            <label htmlFor='yearsExperience'>Years Experience</label>
+                            <input
+                              type='number'
+                              name='yearsExperience'
+                              id='yearsExperience'
+                              placeholder='Years Experience'
+                              onChange={handleInputChange}
+                              value={formData.yearsExperience}
+                            />
+                          </div>
                         </div>
-                        <div className={styles.inputDiv}>
-                          <label htmlFor='specialization'>Specialization</label>
-                          <input
-                            type='text'
-                            name='specialization'
-                            id='specialization'
-                            onChange={handleInputChange}
-                            value={formData.specialization}
-                          />
-                        </div>
-                        <div className={styles.inputDiv}>
-                          <label htmlFor='yearsExperience'>Years Experience</label>
-                          <input
-                            type='number'
-                            name='yearsExperience'
-                            id='yearsExperience'
-                            onChange={handleInputChange}
-                            value={formData.yearsExperience}
-                          />
+                        <div>
+                        <h2 className="text-2xl font-bold text-blue">Consultation Details</h2>
+                          <div className={styles.inputDiv}>
+                            <label htmlFor='meetingURL'>Online Meeting URL</label>
+                            <input
+                              type='url'
+                              name='meetingURL'
+                              id='meetingURL'
+                              placeholder='https://zoom.us/...'
+                              onChange={handleInputChange}
+                              value={formData.meetingURL}
+                            />
+                          </div>
                         </div>
                       </div>
                     ) : (

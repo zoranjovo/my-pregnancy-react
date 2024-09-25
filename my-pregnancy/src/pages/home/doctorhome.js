@@ -1,8 +1,3 @@
-import { useEffect, useState } from "react";
-import { getUser } from "../../util/apireq.js";
-import { useNavigate } from "react-router-dom";
-import { clearToken } from "../../util/auth.js";
-
 import { dotWave } from "ldrs";
 
 import Footer from "../../global-components/footer/footer.js";
@@ -16,12 +11,7 @@ import Recommended from "./components/recommended/doctorrecommended.js";
 import styles from "./home2.module.css";
 
 function DoctorHomePage({user}){
-  const navigate = useNavigate();
   dotWave.register();
-
-  // const [user, setUser] = useState({});
-  // const [userFound, setUserFound] = useState(false);
-  // const [errorMsg, setErrorMsg] = useState("");
 
   return (
     <div>

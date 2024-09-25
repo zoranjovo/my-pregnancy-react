@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
@@ -14,7 +14,6 @@ import ConsultationBookPage from './pages/consultation/book/consultationbookpage
 import ConsultationManagePage from './pages/consultation/manage/consultationmanagepage.js';
 import ContactPage from './pages/contact/contactpage.js';
 import DiscussionPage from './pages/discussion/discussionpage.js';
-import EditaccountPage from './pages/editaccount/editaccountpage.js';
 import FAQPage from './pages/faq/faqpage.js';
 import FitnessPage from './pages/fitness/fitnesspage.js';
 import FitnessarticlePage from './pages/fitnessarticle/fitnessarticlepage.js';
@@ -34,11 +33,12 @@ import SignUpPage from './pages/signup/signuppage.js';
 
 function Wrapper() {
   useScrollToTop();
+  const [userCache, setUserCache] = useState(null);
 
   return (
     <Routes>
       <Route path="/startup2" element={<StartupPage/>}/>
-      <Route path="/" element={<StartupPage2/>}/>
+      <Route path="/" element={<StartupPage2 userCache={userCache} setUserCache={setUserCache}/>}/>
 
       <Route path="/about" element={<AboutPage/>}/>
       <Route path="/account" element={<AccountPage/>}/>
@@ -47,7 +47,6 @@ function Wrapper() {
       <Route path="/consultation/manage" element={<ConsultationManagePage/>}/>
       <Route path="/contact" element={<ContactPage/>}/>
       <Route path="/discussion" element={<DiscussionPage/>}/>
-      <Route path="/editaccount" element={<EditaccountPage/>}/>
       <Route path="/faq" element={<FAQPage/>}/>
       <Route path="/fitness" element={<FitnessPage/>}/>
       <Route path="/fitnessarticle/:id" element={<FitnessarticlePage/>}/>
