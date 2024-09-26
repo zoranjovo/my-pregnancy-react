@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
-import { getUser, updateUser, updateUserPhoto } from '../../util/apireq.js';
+import { getUser, updateUser, updateUserPhoto, deleteUserPhoto } from '../../util/apireq.js';
 import { serverErrorNotif, customWarningNotif, customSuccessNotif } from '../../global-components/notify.js';
 import { useNavigate } from 'react-router-dom';
 
 import Footer from "../../global-components/footer/footer";
 import Navbar from "../../global-components/navbar2/navbar2.js";
-
-import PfpManage from './PfpManage.js';
 
 import styles from './accountpage.module.css';
 import buttons from '../../css/buttons.module.css';
@@ -36,18 +34,43 @@ function AccountPage(){
 
   const uploadPFP = async () => {
     const response = await updateUserPhoto(selectedPFPFile);
-    console.log(response)
     if(response.message === "Network Error"){ return serverErrorNotif(); }
-      if(response.status === 200){
-        customSuccessNotif("Successfully updated profile photo")
-        return;
-      } else if(response.response.status === 404 || response.response.status === 401){
-        customWarningNotif("Account not found, please sign in again");
-      } else if(response.response.status === 500){
-        customWarningNotif("Server error");
-      } else {
-        customWarningNotif("Error");
-      }
+    if(response.status === 200){
+      customSuccessNotif("Successfully updated profile photo");
+      setPFP(PFPTemp);
+      let tempUsr = user
+      tempUsr.pfpExists = true;
+      setUser(tempUsr);
+      return;
+    } else if(response.response.status === 404 || response.response.status === 401){
+      customWarningNotif("Account not found, please sign in again");
+    } else if(response.response.status === 500){
+      customWarningNotif("Server error");
+    } else if(response.response.status === 400){
+      customWarningNotif("Please only upload a png or jpg image");
+    } else {
+      customWarningNotif("Error");
+    }
+  }
+
+  const deletePFP = async () => {
+    const response = await deleteUserPhoto();
+    if(response.message === "Network Error"){ return serverErrorNotif(); }
+    if(response.status === 200){
+      customSuccessNotif("Successfully deleted profile photo");
+      setPFPTemp("");
+      setPFP("");
+      let tempUsr = user
+      tempUsr.pfpExists = false;
+      setUser(tempUsr);
+      return;
+    } else if(response.response.status === 404 || response.response.status === 401){
+      customWarningNotif("Account not found, please sign in again");
+    } else if(response.response.status === 500){
+      customWarningNotif("Server error");
+    } else {
+      customWarningNotif("Error");
+    }
   }
 
   const [formData, setFormData] = useState({
@@ -74,7 +97,6 @@ function AccountPage(){
       if(response.status === 200){
         setUser(response.data);
         setRole(response.data.role);
-        console.log(response.data)
         if(response.data.profilePhotoUrl){
           setPFP(response.data.profilePhotoUrl);
           setPFPTemp(response.data.profilePhotoUrl)
@@ -184,7 +206,7 @@ function AccountPage(){
                   <h1 className="text-3xl font-bold text-blue">Account</h1>
                   <div className={`${styles.profileDivContainer} ${boxes.standard}`}>
                     <div className={`${styles.profileDiv}`}>
-                      {PFP === null ? (
+                      {!user.pfpExists ? (
                         <img src='/assets/blank-profile-picture.webp' alt='profile'></img>
                       ) : (
                         <img src={PFP} alt='profile'></img>
@@ -450,7 +472,7 @@ function AccountPage(){
                 }`}
               >
                 <div className={`${styles.profileDiv} ${styles.pfpPreview}`}>
-                  {PFPTemp === null ? (
+                  {!user.pfpExists && PFPTemp === "" ? (
                     <img src='/assets/blank-profile-picture.webp' alt='profile' />
                   ) : (
                     <img src={PFPTemp} alt='profile' />
@@ -469,6 +491,9 @@ function AccountPage(){
                   />
                   <button onClick={uploadPFP} className={styles.uploadButton}>
                     Upload Photo
+                  </button>
+                  <button onClick={deletePFP} className={styles.deleteButton}>
+                    Delete Photo
                   </button>
                 </div>
                 <button className={styles.closeButton} onClick={() => setPFPPaneOpen(false)}>X</button>

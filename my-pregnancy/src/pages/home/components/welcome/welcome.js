@@ -2,7 +2,7 @@ import styles from './welcome.module.css';
 import { Link } from 'react-router-dom';
 
 function Welcome({user}){
-  const isProfileIncomplete = !user.specialization || !user.yearsExperience || !user.aphraVerification;
+  const isProfileIncomplete = !user.specialization || !user.yearsExperience || !user.aphraVerification || !user.gender;
 
   return (
     <div className={styles.welcomeDiv}>

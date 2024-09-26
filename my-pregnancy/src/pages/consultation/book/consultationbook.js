@@ -10,6 +10,7 @@ function ConsultationBook() {
   dotWave.register();
   const [user, setUser] = useState({});
   const [doctors, setDoctors] = useState([]);
+  const [pfpURL, setpfpURL] = useState("");
 
   // fetch user info
   useEffect(() => {
@@ -32,7 +33,8 @@ function ConsultationBook() {
 
   const fetchDoctors = async () => {
     const response = await getAllDoctors();
-    setDoctors(response.data);
+    setDoctors(response.data.doctors);
+    setpfpURL(response.data.imagesURL);
   }
 
   const [preferredTime, setPreferredTime] = useState('');
@@ -178,7 +180,7 @@ function ConsultationBook() {
                 </form>
               </div>
               <div className={styles.rightSide}>
-                <h2>Select a Consultant</h2>
+                <h2>Select a Doctor</h2>
                 {doctors.length > 0 ? (
                   <ul className={styles.consultantList}>
                   {doctors
@@ -199,19 +201,38 @@ function ConsultationBook() {
                             className={`${styles.consultantItem} ${selectedConsultant === consultant._id ? styles.selectedConsultant : ''}`}
                             onClick={() => setSelectedConsultant(consultant._id)}
                           >
-                            <h3>{`Dr. ${consultant.firstname} ${consultant.lastname}`}</h3>
-                            <p>Specialty: {consultant.specialization}</p>
-                            <p>Gender: {cap(consultant.gender)}</p>
-                            <label className={styles.consultantLabel}>
-                              <input
-                                type="radio"
-                                name="consultant"
-                                value={consultant._id}
-                                checked={selectedConsultant === consultant._id}
-                                onChange={() => setSelectedConsultant(consultant._id)}
-                              />
-                              Select
-                            </label>
+                            <div className={styles.imgContainer}>
+                              {consultant.pfpExists ? (
+                                <img 
+                                  src={`${pfpURL}${consultant._id}?t=${new Date().getTime()}`}
+                                  alt="Profile" 
+                                  onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = '/assets/blank-profile-picture.webp';
+                                  }}
+                                />
+                              ) : (
+                                <img src={'/assets/blank-profile-picture.webp'} alt="Profile"/>
+                              )}
+                            </div>
+
+                            <div>
+                              <h3>{`Dr. ${consultant.firstname} ${consultant.lastname}`}</h3>
+                              <p>Specialty: {consultant.specialization}</p>
+                              <p>Gender: {cap(consultant.gender)}</p>
+                              <label className={styles.consultantLabel}>
+                                <input
+                                  type="radio"
+                                  name="consultant"
+                                  value={consultant._id}
+                                  checked={selectedConsultant === consultant._id}
+                                  onChange={() => setSelectedConsultant(consultant._id)}
+                                />
+                                Select
+                              </label>
+                            </div>
+                            
+                            
                           </li>
                         ))
                     )}

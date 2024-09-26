@@ -73,7 +73,12 @@ function ConsultationManagePage(){
     }
   }
 
-  const sortedEntries = entries.sort((a, b) => b.date - a.date);
+  const filteredEntries = role === "pregnant"
+    ? entries.filter(consultation => !consultation.pregnantCleared) // Filter out pregnantCleared
+    : role === "doctor"
+    ? entries.filter(consultation => !consultation.doctorCleared) // Filter out doctorCleared
+    : entries;
+  const sortedEntries = filteredEntries.sort((a, b) => b.date - a.date);
 
   return (
     <div>
@@ -85,7 +90,7 @@ function ConsultationManagePage(){
             <div className={`${boxes.standard} ${styles.consultaionsContainer}`}>
               
               {role === "pregnant" ? (
-                entries.length === 0 ? (
+                sortedEntries.length === 0 ? (
                   <p>No results</p>
                 ) : (
                   sortedEntries.map((consultation, index) => {
@@ -122,6 +127,10 @@ function ConsultationManagePage(){
                           <div className={styles.btns}>
                             <p onClick={() => updateState(consultation._id, "cancelled")}>Cancel</p>
                           </div>
+                        ) : consultation.status === "completed" || consultation.status === "cancelled" || consultation.status === "rejected" ? (
+                          <div className={styles.btns}>
+                            <p onClick={() => updateState(consultation._id, "clear")}>Clear</p>
+                          </div>
                         ) : (
                           <div></div>
                         )}
@@ -130,7 +139,7 @@ function ConsultationManagePage(){
                   })
                 )
               ) : role === "doctor" ? (
-                entries.length === 0 ? (
+                sortedEntries.length === 0 ? (
                   <p>No results</p>
                 ) : (
                   sortedEntries.map((consultation, index) => {
@@ -168,12 +177,15 @@ function ConsultationManagePage(){
                           </div>
                         ) : consultation.status === "accepted" ? (
                           <div className={styles.btns}>
-                            {/* Check if the consultation time has passed */}
                             {consultationTime < currentTime ? (
                               <p onClick={() => updateState(consultation._id, "completed")}>Complete</p>
                             ) : (
                               <p onClick={() => updateState(consultation._id, "cancelled")}>Cancel</p>
                             )}
+                          </div>
+                        ) : consultation.status === "completed" || consultation.status === "cancelled" || consultation.status === "rejected" ? (
+                          <div className={styles.btns}>
+                            <p onClick={() => updateState(consultation._id, "clear")}>Clear</p>
                           </div>
                         ) : (
                           <div></div>

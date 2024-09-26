@@ -204,25 +204,13 @@
   border-radius: 8px; /* Rounded button corners */
   cursor: pointer;
   transition: background-color 0.3s ease; /* Smooth hover transition */
+  width: 150px;
 }
-
 .uploadButton:hover {
-  background-color: #45a049; /* Slightly darker green on hover */
+  background-color: #328536; /* Slightly darker green on hover */
 }
-
 .uploadButton:active {
-  background-color: #3e8e41; /* Even darker when clicked */
-}
-
-.closeButton {
-  position: absolute;
-  right: 10px;
-  top: 4px;
-  font-size: 30px;
-}
-
-.closeButton:hover {
-  color: #000; /* Darker color on hover */
+  background-color: #2d6d2f; /* Even darker when clicked */
 }
 
 .fileInputLabel {
@@ -233,16 +221,41 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 150px;
 }
-
 .fileInputLabel:hover {
   background-color: #0056b3; /* Darker blue on hover */
 }
-
 .fileInputLabel:active {
   background-color: #00408d; /* Even darker on click */
 }
 
+.deleteButton {
+  background-color: #e0081a; /* Blue background for file upload button */
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 150px;
+}
+.deleteButton:hover {
+  background-color: #a80202; /* Darker blue on hover */
+}
+.deleteButton:active {
+  background-color: #7c0202; /* Even darker on click */
+}
+
+.closeButton {
+  position: absolute;
+  right: 10px;
+  top: 4px;
+  font-size: 30px;
+}
+.closeButton:hover {
+  color: #000; /* Darker color on hover */
+}
 
 @media (max-width: 1200px) {
   .accountpage {
@@ -325,6 +338,18 @@
   .sideBySide > div {
     width: 100%;
   }
+
+  .pfpPreview {
+    margin-top: 18px;
+    height: 150px;
+    width: 150px;
+    flex-shrink: 0;
+    margin-right: 8px;
+  }
+  .pfpPreview > img {
+    height: 120px;
+    width: 120px;
+  }
 }
 
 @media (max-width: 800px) {
@@ -344,5 +369,30 @@
   }
   .buttonsDiv > button {
     margin: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .pfpPreview > img {
+    height: 100px;
+    width: 100px;
+    margin-top: 10px;
+  }
+  .pfpPreview {
+    width: 100px;
+  }
+  .pfpPane {
+    left: calc(50% - 150px);
+    width: 300px;
+  }
+  .pfpManage {
+    width: 150px;
+    padding-top: 45px;
+  }
+  .closeButton {
+    position: absolute;
+    right: 6px;
+    top: 0px;
+    font-size: 24px;
   }
 }
