@@ -204,7 +204,7 @@ function ConsultationBook() {
                             <div className={styles.imgContainer}>
                               {consultant.pfpExists ? (
                                 <img 
-                                  src={`${pfpURL}${consultant._id}?t=${new Date().getTime()}`}
+                                  src={`${pfpURL}${consultant._id}?t=${Math.floor(Date.now() / 30000)}`}
                                   alt="Profile" 
                                   onError={(e) => {
                                     e.target.onerror = null;

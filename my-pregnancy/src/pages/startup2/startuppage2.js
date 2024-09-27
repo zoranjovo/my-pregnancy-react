@@ -21,7 +21,7 @@ function StartupPage2({userCache, setUserCache}){
         return;
       } else if(response.response.status === 404 || response.response.status === 401){
         clearToken();
-        return customWarningNotif("Please sign in again");
+        return;
       } else if(response.response.status === 500){
         customWarningNotif("Server error");
       }

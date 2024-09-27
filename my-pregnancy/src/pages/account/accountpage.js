@@ -95,11 +95,12 @@ function AccountPage(){
       const response = await getUser();
       if(response.message === "Network Error"){ return serverErrorNotif(); }
       if(response.status === 200){
+        console.log(response.data)
         setUser(response.data);
         setRole(response.data.role);
-        if(response.data.profilePhotoUrl){
-          setPFP(response.data.profilePhotoUrl);
-          setPFPTemp(response.data.profilePhotoUrl)
+        if(response.data.pfpExists){
+          setPFP(`${response.data.imagesURL}${response.data._id}?t=${new Date().getTime()}`);
+          setPFPTemp(`${response.data.imagesURL}${response.data._id}?t=${new Date().getTime()}`);
         }
         setFormData({
           firstname: response.data.firstname || "",
@@ -209,7 +210,14 @@ function AccountPage(){
                       {!user.pfpExists ? (
                         <img src='/assets/blank-profile-picture.webp' alt='profile'></img>
                       ) : (
-                        <img src={PFP} alt='profile'></img>
+                        <img 
+                          src={`${user.imagesURL}${user._id}?t=${new Date().getTime()}`}
+                          alt="Profile" 
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = '/assets/blank-profile-picture.webp';
+                          }}
+                        />
                       )}
                       
                       <div className={styles.profileInfo}>

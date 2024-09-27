@@ -1,115 +1,55 @@
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import styles from './forumhome.module.css';
-import buttons from '../../css/buttons.module.css';
-
-const posts = [
-  { id: "0", title: "My experience in last 2 months", 
-	content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-		"Purus ut faucibus pulvinar elementum integer enim neque. Nulla pharetra diam sit amet nisl. Risus feugiat in ante metus dictum. " +
-		"Non pulvinar neque laoreet suspendisse interdum consectetur libero. Congue eu consequat ac felis donec consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-		"Aliquet enim tortor at auctor urna nunc id cursus. Phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet enim. Pellentesque pulvinar pellentesque habitant morbi. " +
-		"Nec ultrices dui sapien eget. Ultrices neque ornare aenean euismod elementum. Ullamcorper a lacus vestibulum sed arcu non. Tortor aliquam nulla facilisi cras fermentum odio eu feugiat. " +
-		"Lorem donec massa sapien faucibus. Placerat orci nulla pellentesque dignissim enim. Pharetra magna ac placerat vestibulum. Id donec ultrices tincidunt arcu non. " +
-		"Ultrices sagittis orci a scelerisque purus semper eget. Sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque. Sagittis id consectetur purus ut faucibus pulvinar elementum. " +
-		"Nunc mattis enim ut tellus elementum sagittis vitae et. In nulla posuere sollicitudin aliquam ultrices. At varius vel pharetra vel turpis nunc eget. Suspendisse ultrices gravida dictum fusce ut placerat orci. " +
-		"Tristique nulla aliquet enim tortor. Sit amet commodo nulla facilisi nullam vehicula ipsum a. Eu volutpat odio facilisis mauris sit amet. Ornare arcu dui vivamus arcu felis bibendum ut tristique et.", 
-	poster: "Allie_Verra", 
-	datePosted: "11/11/11", 
-	viewCount: "1.8k Views",
-	replyNo: 123},
-  { id: "1", title: "Lorem ipsum dolor sit amet consectetur adipiscing elit", 
-	content: "Faucibus et molestie ac feugiat sed lectus. In eu mi bibendum neque egestas congue quisque egestas. Ultrices sagittis orci a scelerisque purus semper eget. " +
-		"Sit amet nulla facilisi morbi tempus iaculis urna. Ac placerat vestibulum lectus mauris ultrices eros in cursus",
-	poster: "Allie_Verra", 
-	datePosted: "11/11/11", 
-	viewCount: "803 Views",
-	replyNo: 63},
-];
-
-const groups = [
-  { id: "0", title: "Gravida neque convallis a cras semper auctor",
-	content: "Ut enim blandit volutpat maecenas volutpat blandit aliquam. Leo duis ut diam quam null",
-	members: 50,
-	lastMessage: "12/11 7:38am"},
-]
+import { getForumsHome } from '../../util/apireq';
+import { serverErrorNotif, customWarningNotif } from '../../global-components/notify';
+import ForumHomeCategory from './forumhomecategory.js';
+import { dotWave } from 'ldrs';
 
 function ForumHome(){
+  dotWave.register();
+  const [posts, setPosts] = useState(null);
+
+  useEffect(() => {
+    async function fetchEntries() {
+      const response = await getForumsHome();
+      if(response.message === "Network Error"){ return serverErrorNotif(); }
+      if(response.status === 200){
+        return setPosts(response.data);
+      } else {
+		return customWarningNotif("Server Error");
+      }
+    }
+    fetchEntries();
+  }, []);
+
+
   return (
-	<div className={styles.outerdiv}>
-		<h1 className="text-3xl font-bold text-blue">Welcome to the Forums</h1>
-		<br />
-		<h2 className="text-2xl font-bold text-blue">Boards</h2>
-		<br />
-		<div className={styles.boardContainer1}>
-	  		<Link to="/discussion">
-				<div className={`${styles.boardName} ${buttons.stylisedTitle}`}>
-					<h2>General Discussion</h2>
-				</div>
-			</Link>
-			<div className={styles.boardPost}>
-				Top Post Today:
-				<h2><Link to="/post/0">{posts[0].title}</Link></h2>
-				<p>{posts[0].content}</p>
-			</div>
-			<Link to="/post/0">
-				<button className={styles.readMore}>Read More</button>
-			</Link>
-			<div className={styles.smallLine}></div>
-			<div className={styles.postInfo}>
-				<div className={styles.postPic}>pic here</div>
-				<div className={styles.postName}><h2>{posts[0].poster}</h2><p>{posts[0].datePosted}</p></div>
-				<div className={styles.postView}>{posts[0].viewCount}</div>
-				<div className={styles.postReplies}>{posts[0].replyNo} replies</div>
-			</div>
-		</div>
-		<br />
-		<br />
-		<div className={styles.bigLine}></div>
-		<br />
-		<br />
-		
-		<div className={styles.boardContainer1}>
-			<div className={`${styles.boardName} ${buttons.stylisedTitle}`}>
-				<h2>Information Sharing</h2>
-			</div>
-			<div className={styles.boardPost}>
-				Top Post Today:
-				<h2>{posts[1].title}</h2>
-				<p>{posts[1].content}</p>
-			</div>
-			<button className={styles.readMore}>Read More</button>
-			<div className={styles.smallLine}></div>
-			<div className={styles.postInfo}>
-				<div className={styles.postPic}>pic here</div>
-				<div className={styles.postName}><h2>{posts[1].poster}</h2><p>{posts[1].datePosted}</p></div>
-				<div className={styles.postView}>{posts[1].viewCount}</div>
-				<div className={styles.postReplies}>{posts[1].replyNo} replies</div>
-			</div>
-		</div>
-		<br />
-		<br />
-		<div className={styles.bigLine}></div>
-		<br />
-		<br />
-		
-		<div className={styles.boardContainer1}>
-			<div className={`${styles.boardName} ${buttons.stylisedTitle}`}>
-				<h2>Support Groups</h2>
-			</div>
-			<div className={styles.boardPost}>
-				Recommended Support Group:
-				<h2>{groups[0].title}</h2>
-				<p>{groups[0].content}</p>
-			</div>
-			<button className={styles.readMore}>Read More</button>
-			<div className={styles.smallLine}></div>
-			<div className={styles.postInfo}>
-				<div className={styles.groupNo}>{groups[0].members} Members</div>
-				<div className={styles.groupLast}>Last Message: {groups[0].lastMessage}</div>
-			</div>
-		</div>
-		<br />
-		<br />
+    <div className={styles.outerdiv}>
+      <h1 className="text-3xl font-bold text-blue">Welcome to the Forums</h1>
+      <br />
+      <h2 className="text-2xl font-bold text-blue">Boards</h2>
+      <br />
+      {!posts ? (
+        <div className={`flex items-center justify-center`} style={{marginTop: "100px"}}>
+          <l-dot-wave size="47" speed="1" color="#f06292" data-testid="loading-indicator"/>
+        </div>
+      ) : (
+        <div>
+          <ForumHomeCategory post={posts.general} name={"General Discussion"} link={"general"} imagesURL={posts.imagesURL}/>
+          <br/>
+          <br/>
+          <div className={styles.bigLine}></div>
+          <br/>
+          <ForumHomeCategory post={posts.info} name={"Information Sharing"} link={"info"} imagesURL={posts.imagesURL}/>
+          <br/>
+          <br/>
+          <div className={styles.bigLine}></div>
+          <br/>
+          <ForumHomeCategory post={posts.support} name={"Support Groups"} link={"support"} imagesURL={posts.imagesURL}/>
+        </div> 
+      )}
+    <br/>
+    <br/>
 	</div>
   );
 }

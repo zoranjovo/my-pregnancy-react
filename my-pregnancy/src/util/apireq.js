@@ -242,7 +242,39 @@ export const updateConsultationState = async (id, newstatus) => {
     });
     return response;
   } catch (error) {
-    console.error('Failed to get existing consultations:', error);
+    console.error('Failed to update consultation state:', error);
     return error;
   }
 }
+
+
+export const getForumsHome = async () => {
+  try {
+    const response = await axios.get(`${apiurl}/forums/gethome`, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to fetch forums home:', error);
+    return error;
+  }
+}
+
+export const getForumsInCategory = async (category) => {
+  try {
+    const response = await axios.get(`${apiurl}/forums/getcategory`, {
+      params: {
+        category: category,
+      },
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to fetch forums category:', error);
+    return error;
+  }
+};

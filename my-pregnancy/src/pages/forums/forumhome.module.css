@@ -7,7 +7,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--pink1);
-    width:  60%;
+    width:  800px;
     min-width: 350px;
     height: 320px;
     margin: auto;
@@ -30,7 +30,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--pink1);
-    width:  70%;
+    width: 70%;
     min-width: 350px;
     margin: auto;
     margin-bottom: 50px;
@@ -80,10 +80,13 @@
 
 .postInfo {
 	width: 100%;
-	height: 100%;
 	padding: 15px 5% 5px;
 	font-weight: bold;
 	font-size: 14px;
+	display: flex;
+  justify-content: space-between;
+  border: 1px solid red;
+  
 }
 
 .postPic {
@@ -94,7 +97,8 @@
 .postName {
 	width: calc(55% - 50px);
 	float: left;
-	padding-top: 10px;
+	padding-top: 0px;
+  margin-right: 5px;
 }
 .postName > h2 {
 	color: #081D3E;
@@ -174,4 +178,37 @@
 .reply {
 	float: right;
 	margin-right: 30px;
+}
+
+.imgContainer > img {
+    border-radius: 999px;
+    border: 2px solid var(--pink2);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+.imgContainer {
+	flex-shrink: 0;
+	margin-right: 10px;
+}
+.viewsAndReplies {
+  display: flex;
+  flex-wrap: wrap;
+  width: 120px;
+  margin-right: -50px;
+  margin-left: auto;
+}
+.viewsAndReplies > p {
+  margin: 5px;
+  padding: 0;
+  width: 100px;
+}
+
+
+@media (max-width: 900px) {
+	.boardContainer1 {
+    width: 100%;
+  }
 }
