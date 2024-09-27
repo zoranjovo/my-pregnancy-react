@@ -278,3 +278,20 @@ export const getForumsInCategory = async (category) => {
     return error;
   }
 };
+
+export const getPost = async (id) => {
+  try {
+    const response = await axios.get(`${apiurl}/forums/getpost`, {
+      params: {
+        postId: id,
+      },
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to fetch forums category:', error);
+    return error;
+  }
+};

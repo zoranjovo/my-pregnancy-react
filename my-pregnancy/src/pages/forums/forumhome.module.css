@@ -18,24 +18,13 @@
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--pink1);
-    width:  60%;
-    min-width: 350px;
+    width:  800px;
     height: 260px;
     margin: auto;
     margin-bottom: 50px;
 }
 
-.postContainer {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--pink1);
-    width: 70%;
-    min-width: 350px;
-    margin: auto;
-    margin-bottom: 50px;
-    overflow: hidden;
-}
+
 
 .boardName {
     height: 40px;
@@ -85,8 +74,6 @@
 	font-size: 14px;
 	display: flex;
   justify-content: space-between;
-  border: 1px solid red;
-  
 }
 
 .postPic {
@@ -134,7 +121,7 @@
 .top {
 	color: var(--pink3);
 	text-decoration: underline;
-	font-weight: bold;
+	font-weight: 300;
 	display: inline;
 	margin-left: 5%;
 	margin-right: 5%;
@@ -143,7 +130,7 @@
 .new {
 	color: var(--pink3);
 	text-decoration: underline;
-	font-weight: normal;
+	font-weight: 300;
 	display: inline;
 	margin-left: 5%;
 	margin-right: 5%;
@@ -161,18 +148,6 @@
 	float: right;
 	padding: 4%;
 	border-left: 3px solid var(--pink1);
-}
-
-.postRight > h2 {
-	color: #081D3E;
-	font-size: 18px;
-	font-weight: bold;
-}
-
-.postLeft > h2 {
-	color: #081D3E;
-	font-size: 18px;
-	font-weight: bold;
 }
 
 .reply {
@@ -206,9 +181,56 @@
   width: 100px;
 }
 
+.activeSort {
+  font-weight: 700;
+  color: var(--pink3);
+  cursor: pointer;
+}
+
+.postContainer > h2 {
+	color: #081D3E;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.postContainer {
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	border: 1px solid var(--pink1);
+	width: 800px;
+	min-width: 350px;
+	margin: auto;
+	margin-bottom: 50px;
+	overflow: hidden;
+	padding: 10px;
+}
+
+.postTitle {
+	text-decoration: underline;
+}
 
 @media (max-width: 900px) {
 	.boardContainer1 {
     width: 100%;
   }
+	.boardContainer2 {
+    width: 100%;
+	}
+	.postContainer {
+		width: 100%;
+	}
 }
+
+@media (max-width: 550px) {
+	.outerdiv {
+		margin: 20px 10px;
+	}
+	.nav > a > h2 {
+		font-size: 18px;
+	}
+	.nav > h2 {
+		font-size: 18px;
+	}
+}
+

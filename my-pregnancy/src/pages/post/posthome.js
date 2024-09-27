@@ -1,50 +1,111 @@
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import styles from '../forums/forumhome.module.css';
 import buttons from '../../css/buttons.module.css';
+import repliesStyle from './replies.module.css';
+import { getPost } from '../../util/apireq';
+import { dotWave } from 'ldrs';
+import { serverErrorNotif, customWarningNotif } from '../../global-components/notify';
+import ProfileView from '../forums/profileView.js';
 
-const posts = [
-  { id: "0", title: "My experience in last 2 months", 
-	content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Purus ut faucibus pulvinar elementum integer enim neque. Nulla pharetra diam sit amet nisl. Risus feugiat in ante metus dictum. Non pulvinar neque laoreet suspendisse interdum consectetur libero. Congue eu consequat ac felis donec consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquet enim tortor at auctor urna nunc id cursus. Phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet enim.\nPellentesque pulvinar pellentesque habitant morbi. Nec ultrices dui sapien eget. Ultrices neque ornare aenean euismod elementum. Ullamcorper a lacus vestibulum sed arcu non. Tortor aliquam nulla facilisi cras fermentum odio eu feugiat. Lorem donec massa sapien faucibus. Placerat orci nulla pellentesque dignissim enim. Pharetra magna ac placerat vestibulum. Id donec ultrices tincidunt arcu non. Ultrices sagittis orci a scelerisque purus semper eget. Sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque. Sagittis id consectetur purus ut faucibus pulvinar elementum. Nunc mattis enim ut tellus elementum sagittis vitae et. In nulla posuere sollicitudin aliquam ultrices. At varius vel pharetra vel turpis nunc eget. Suspendisse ultrices gravida dictum fusce ut placerat orci.	Tristique nulla aliquet enim tortor. Sit amet commodo nulla facilisi nullam vehicula ipsum a. Eu volutpat odio facilisis mauris sit amet. Ornare arcu dui vivamus arcu felis bibendum ut tristique et.", 
-	poster: "Allie_Verra", 
-	datePosted: "11/11/11", 
-	viewCount: "1.8k Views",
-	replyNo: 123},
-  { id: "1", title: "Lorem ipsum dolor sit amet consectetur adipiscing elit", 
-	content: "Faucibus et molestie ac feugiat sed lectus. In eu mi bibendum neque egestas congue quisque egestas. Ultrices sagittis orci a scelerisque purus semper eget. " +
-		"Sit amet nulla facilisi morbi tempus iaculis urna. Ac placerat vestibulum lectus mauris ultrices eros in cursus",
-	poster: "Allie_Verra", 
-	datePosted: "11/11/11", 
-	viewCount: "803 Views",
-	replyNo: 63},
-];
+function mapCategoryName(category) {
+  const categoryMap = {
+    general: "General Discussion",
+    info: "Information Sharing",
+    support: "Support Groups",
+  };
+  return categoryMap[category] || "Unknown Category";
+}
+
 
 function PostPage(){
   const { id } = useParams();
+	dotWave.register();
+
+	const [post, setPost] = useState(null);
+	const [replies, setReplies] = useState([]);
+	const [imagesURL, setImagesURL] = useState("");
+
+	useEffect(() => {
+    async function fetchEntries() {
+      const response = await getPost(id);
+      if(response.message === "Network Error"){ return serverErrorNotif(); }
+      if(response.status === 200){
+        setPost(response.data.post);
+        setReplies(response.data.replies);
+        console.log(response.data.replies)
+        setImagesURL(response.data.imagesURL);
+        return;
+      } else {
+        customWarningNotif("Server Error");
+      }
+    }
+    fetchEntries();
+  }, [id]);
   
   return (
     <div className={styles.outerdiv}>
 		<h1 className="text-3xl font-bold text-blue">Welcome to the Forums</h1>
 		<br />
-		<Link to="/forums">
-			<h2 className="text-2xl text-blue underline inline">Boards</h2>
-        </Link>
-		<h2 className="text-2xl text-blue inline"> &gt;&gt; </h2>
-		<Link to="/discussion">
-			<h2 className="text-2xl text-blue underline inline">General Discussion</h2>
-        </Link>
-		<h2 className="text-2xl font-bold text-blue inline"> &gt;&gt; {posts[id].title}</h2>
-		<br />
-		<br />
-			<div className={styles.postContainer}>
-				<div className={styles.postLeft}>pic here<h2>{posts[id].poster}</h2></div>
-				<div className={styles.postRight}><h2>{posts[id].title}</h2>
-					<br />
-					<p>{posts[id].content}</p>
-					<br />
-					<button className={`${buttons.stylisedBtn} ${styles.reply}`}>Reply</button>
+
+		{!post ? (
+      <div className={`flex items-center justify-center`} style={{marginTop: "100px"}}>
+        <l-dot-wave
+          size="47"
+          speed="1" 
+          color="#f06292" 
+          data-testid="loading-indicator">
+        </l-dot-wave>
+      </div>
+    ) : (
+			<div>
+				<Link to="/forums">
+					<h2 className="text-2xl text-blue underline inline">Boards</h2>
+				</Link>
+				<h2 className="text-2xl text-blue inline"> &gt;&gt; </h2>
+				<Link to={`/discussion/${post.category}`}>
+					<h2 className="text-2xl text-blue underline inline">{mapCategoryName(post.category)}</h2>
+				</Link>
+				<h2 className="text-2xl font-bold text-blue inline"> &gt;&gt; {post.title}</h2>
+				<br/>
+				<br/>
+				<div className={styles.postContainer}>
+          <h2><Link to={`/post/${post._id}`}>{post.title}</Link></h2>
+          <p>{post.post}</p>
+          <ProfileView post={post} imagesURL={imagesURL}/>
 				</div>
-				
+        <div className={repliesStyle.container}>
+          <div className={repliesStyle.headerItem}>
+            <h2>Replies</h2>
+            <button className={buttons.stylisedBtn}>Add Reply</button>
+          </div>
+          {replies.map((reply, index) => (
+            <div className={repliesStyle.item} key={index}>
+              
+              <div className={repliesStyle.profile}>
+                <div className={repliesStyle.imgContainer}>
+                  {post.user.pfpExists ? (
+                    <img 
+                      src={`${imagesURL}${reply.userID}?t=${Math.floor(Date.now() / 30000)}`}
+                      alt="Profile" 
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = '/assets/blank-profile-picture.webp';
+                      }}
+                    />
+                  ) : (
+                    <img src={'/assets/blank-profile-picture.webp'} alt="ProfileNoPic"/>
+                  )}
+                </div>
+                <p>{reply.user.fullname}</p>
+              </div>
+              <p>{reply.message}</p>
+              
+            </div>
+          ))}
+        </div>
 			</div>
+		)}
 
 	</div>
   );

@@ -1,0 +1,73 @@
+.container {
+  
+}
+
+.headerItem {
+  background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	border: 1px solid var(--pink1);
+	width: 800px;
+	min-width: 350px;
+	margin: auto;
+	margin-bottom: 30px;
+	overflow: hidden;
+	padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.headerItem > h2{
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 7px;
+}
+
+.item {
+  background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	border: 1px solid var(--pink1);
+	width: 800px;
+	min-width: 350px;
+	margin: auto;
+	overflow: hidden;
+  margin-bottom: 10px;
+	padding: 10px;
+	padding-bottom: 0;
+	display: flex;
+}
+
+.imgContainer > img {
+	border-radius: 999px;
+	border: 2px solid var(--pink2);
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+}
+.imgContainer {
+	flex-shrink: 0;
+}
+
+.profile {
+	margin-bottom: 0;
+	margin-right: 20px;
+	flex-shrink: 0;
+}
+.profile > p {
+	margin: 3px;
+	max-width: 100px;
+}
+
+
+@media (max-width: 900px) {
+	.item {
+    width: 100%;
+  }
+	.headerItem {
+    width: 100%;
+	}
+	.postContainer {
+		width: 100%;
+	}
+}
