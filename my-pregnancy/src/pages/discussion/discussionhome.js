@@ -93,7 +93,7 @@ function DiscussionHome(){
       posts.map((post, index) => (
         <div className={styles.boardContainer2} key={post._id}>
           <div className={styles.boardPost}>
-            <h2><Link to={`/post/${post._id}`} key={index}>{post.title}</Link></h2>
+            <h2 className={styles.postTitle}><Link to={`/post/${post._id}`} key={index}>{post.title}</Link></h2>
             <p>{post.post}</p>
           </div>
           <Link to={`/post/${post._id}`} key={index}>

@@ -3,10 +3,11 @@ import { useParams, Link } from 'react-router-dom';
 import styles from '../forums/forumhome.module.css';
 import buttons from '../../css/buttons.module.css';
 import repliesStyle from './replies.module.css';
-import { getPost } from '../../util/apireq';
+import { getPost, addReply } from '../../util/apireq';
 import { dotWave } from 'ldrs';
-import { serverErrorNotif, customWarningNotif } from '../../global-components/notify';
+import { serverErrorNotif, customWarningNotif, customSuccessNotif } from '../../global-components/notify';
 import ProfileView from '../forums/profileView.js';
+import { formatPostDate } from '../../util/dates.js'
 
 function mapCategoryName(category) {
   const categoryMap = {
@@ -25,23 +26,46 @@ function PostPage(){
 	const [post, setPost] = useState(null);
 	const [replies, setReplies] = useState([]);
 	const [imagesURL, setImagesURL] = useState("");
+  const [replyBox, setReplyBox] = useState("");
+  const [lastSent, setLastSent] = useState("");
 
 	useEffect(() => {
-    async function fetchEntries() {
-      const response = await getPost(id);
-      if(response.message === "Network Error"){ return serverErrorNotif(); }
-      if(response.status === 200){
-        setPost(response.data.post);
-        setReplies(response.data.replies);
-        console.log(response.data.replies)
-        setImagesURL(response.data.imagesURL);
-        return;
-      } else {
-        customWarningNotif("Server Error");
-      }
-    }
+    console.log('fetching')
     fetchEntries();
+    // eslint-disable-next-line
   }, [id]);
+
+  async function fetchEntries() {
+    const response = await getPost(id);
+    if(response.message === "Network Error"){ return serverErrorNotif(); }
+    if(response.status === 200){
+      setPost(response.data.post);
+      const sortedReplies = [...response.data.replies].sort((a, b) => new Date(b.date) - new Date(a.date));
+      setReplies(sortedReplies);
+      setImagesURL(response.data.imagesURL);
+      return;
+    } else {
+      customWarningNotif("Server Error");
+    }
+  }
+
+
+  const reply = async () => {
+    if(replyBox === ""){ return customWarningNotif("Please enter a reply"); }
+    if(replyBox === lastSent){ return customWarningNotif("Please do not spam"); }
+    const response = await addReply(post._id, replyBox);
+    if(response.message === "Network Error"){ return serverErrorNotif(); }
+    if(response.status === 200){
+      customSuccessNotif("Added Reply");
+      setLastSent(replyBox);
+      fetchEntries();
+      return;
+    } else if(response.response.status === 400){
+      return customWarningNotif(response.response.data.error);
+    } else {
+      return customWarningNotif("Server Error");
+    }
+  }
   
   return (
     <div className={styles.outerdiv}>
@@ -77,11 +101,21 @@ function PostPage(){
         <div className={repliesStyle.container}>
           <div className={repliesStyle.headerItem}>
             <h2>Replies</h2>
-            <button className={buttons.stylisedBtn}>Add Reply</button>
+            <textarea
+              type='text'
+              className={repliesStyle.input}
+              placeholder='Reply...'
+              value={replyBox}
+              onChange={e => setReplyBox(e.target.value)}
+            ></textarea>
+            <button
+              className={buttons.stylisedBtn}
+              onClick={reply}
+            >Add Reply</button>
           </div>
+
           {replies.map((reply, index) => (
             <div className={repliesStyle.item} key={index}>
-              
               <div className={repliesStyle.profile}>
                 <div className={repliesStyle.imgContainer}>
                   {post.user.pfpExists ? (
@@ -94,15 +128,21 @@ function PostPage(){
                       }}
                     />
                   ) : (
-                    <img src={'/assets/blank-profile-picture.webp'} alt="ProfileNoPic"/>
+                    <img src={'/assets/blank-profile-picture.webp'} alt="ProfileNoPic" />
                   )}
                 </div>
                 <p>{reply.user.fullname}</p>
               </div>
-              <p>{reply.message}</p>
               
+              <div className={repliesStyle.messageContainer}>
+                <p>{reply.message}</p>
+                <div className={repliesStyle.dateContainer}>
+                  <p>{formatPostDate(reply.date)}</p>
+                </div>
+              </div>
             </div>
           ))}
+
         </div>
 			</div>
 		)}

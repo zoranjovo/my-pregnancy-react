@@ -295,3 +295,23 @@ export const getPost = async (id) => {
     return error;
   }
 };
+
+export const addReply = async (id, replyText) => {
+  const token = getToken();
+  try {
+    const response = await axios.post(`${apiurl}/forums/reply`, {
+      postId: id,
+      replyText: replyText,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    console.log(response)
+    return response;
+  } catch (error) {
+    console.error('Failed to add post reply:', error);
+    return error;
+  }
+}

@@ -1,7 +1,3 @@
-.container {
-  
-}
-
 .headerItem {
   background-color: white;
 	border-radius: 10px;
@@ -24,39 +20,73 @@
 
 .item {
   background-color: white;
-	border-radius: 10px;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	border: 1px solid var(--pink1);
-	width: 800px;
-	min-width: 350px;
-	margin: auto;
-	overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--pink1);
+  width: 800px;
+  min-width: 350px;
+  margin: auto;
   margin-bottom: 10px;
-	padding: 10px;
-	padding-bottom: 0;
-	display: flex;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between; /* Align profile and message apart */
+  align-items: flex-start; /* Align items to the top */
+  flex-direction: row; /* Keep the profile on the left and content on the right */
 }
 
 .imgContainer > img {
-	border-radius: 999px;
-	border: 2px solid var(--pink2);
-	border-radius: 50%;
-	width: 60px;
-	height: 60px;
-	object-fit: cover;
+  border-radius: 999px;
+  border: 2px solid var(--pink2);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
 }
+
 .imgContainer {
-	flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 .profile {
-	margin-bottom: 0;
-	margin-right: 20px;
-	flex-shrink: 0;
+  margin-bottom: 0;
+  margin-right: 20px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column; /* Stack the profile picture and name */
+  align-items: center; /* Center align profile and name */
 }
+
 .profile > p {
-	margin: 3px;
-	max-width: 100px;
+  margin: 3px;
+  max-width: 100px;
+  text-align: center; /* Center align the text */
+}
+
+.messageContainer {
+  flex-grow: 1; /* Let the message take up available space */
+}
+
+.messageContainer > p {
+  margin: 0;
+}
+
+.dateContainer {
+  text-align: left; /* Align the date to the right */
+  width: 100%;
+  padding-top: 10px; /* Add some space between the message and date */
+  font-size: 12px;
+  color: gray; /* Make the date text lighter */
+}
+
+.input {
+	border: 1px solid var(--pink1);
+	border-radius: 10px;
+	padding: 5px 10px;
+	flex-grow: 1;
+	margin: 0px 10px;
+	height: 50px;
+	min-height: 50px;
+	max-height: 150px;
 }
 
 
@@ -69,5 +99,8 @@
 	}
 	.postContainer {
 		width: 100%;
+	}
+	.input {
+		margin: 0px 5px;
 	}
 }

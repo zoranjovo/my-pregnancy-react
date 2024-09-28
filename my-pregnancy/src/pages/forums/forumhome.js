@@ -16,7 +16,7 @@ function ForumHome(){
       if(response.status === 200){
         return setPosts(response.data);
       } else {
-		return customWarningNotif("Server Error");
+		    return customWarningNotif("Server Error");
       }
     }
     fetchEntries();
