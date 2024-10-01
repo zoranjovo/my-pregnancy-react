@@ -30,7 +30,6 @@ function PostPage(){
   const [lastSent, setLastSent] = useState("");
 
 	useEffect(() => {
-    console.log('fetching')
     fetchEntries();
     // eslint-disable-next-line
   }, [id]);

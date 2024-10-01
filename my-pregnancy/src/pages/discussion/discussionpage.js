@@ -10,7 +10,6 @@ function DiscussionPage(){
         <Navbar></Navbar>
         <DiscussionHome></DiscussionHome>
       </div>
-      
       <Footer></Footer>
     </div>
   );

@@ -315,3 +315,24 @@ export const addReply = async (id, replyText) => {
     return error;
   }
 }
+
+export const createForumPost = async (category, title, post) => {
+  const token = getToken();
+  try {
+    const response = await axios.post(`${apiurl}/forums/create`, {
+      category: category,
+      title: title,
+      postText: post,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    console.log(response)
+    return response;
+  } catch (error) {
+    console.error('Failed to create post:', error);
+    return error;
+  }
+}

@@ -12,6 +12,7 @@ function ForumHome(){
   useEffect(() => {
     async function fetchEntries() {
       const response = await getForumsHome();
+      console.log(response)
       if(response.message === "Network Error"){ return serverErrorNotif(); }
       if(response.status === 200){
         return setPosts(response.data);
@@ -35,17 +36,32 @@ function ForumHome(){
         </div>
       ) : (
         <div>
-          <ForumHomeCategory post={posts.general} name={"General Discussion"} link={"general"} imagesURL={posts.imagesURL}/>
-          <br/>
-          <br/>
-          <div className={styles.bigLine}></div>
-          <br/>
-          <ForumHomeCategory post={posts.info} name={"Information Sharing"} link={"info"} imagesURL={posts.imagesURL}/>
-          <br/>
-          <br/>
-          <div className={styles.bigLine}></div>
-          <br/>
-          <ForumHomeCategory post={posts.support} name={"Support Groups"} link={"support"} imagesURL={posts.imagesURL}/>
+          {posts.general && (
+            <div>
+              <ForumHomeCategory post={posts.general} name={"General Discussion"} link={"general"} imagesURL={posts.imagesURL}/>
+              <br/>
+              <br/>
+              <div className={styles.bigLine}></div>
+              <br/>
+            </div>
+          )}
+
+          {posts.info && (
+            <div>
+              <ForumHomeCategory post={posts.info} name={"Information Sharing"} link={"info"} imagesURL={posts.imagesURL}/>
+              <br/>
+              <br/>
+              <div className={styles.bigLine}></div>
+              <br/>
+            </div>
+          )}
+
+          {posts.support && (
+            <ForumHomeCategory post={posts.support} name={"Support Groups"} link={"support"} imagesURL={posts.imagesURL}/>
+          )}
+          
+          
+          
         </div> 
       )}
     <br/>
