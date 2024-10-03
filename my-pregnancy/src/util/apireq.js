@@ -55,7 +55,6 @@ export const resetPassword = async (email, callback) => {
   }
 }
 
-
 export const getUser = async () => {
   const token = getToken();
   try {
@@ -121,7 +120,6 @@ export const deleteUserPhoto = async () => {
   }
 };
 
-
 export const createJournalEntry = async (gratitude, onMyMind, selectedMoods, selfCare, waterIntake, dayRating) => {
   const token = getToken();
   try {
@@ -144,7 +142,6 @@ export const createJournalEntry = async (gratitude, onMyMind, selectedMoods, sel
     return error;
   }
 }
-
 
 export const getAllJournalEntries = async () => {
   const token = getToken();
@@ -175,7 +172,6 @@ export const getAllFitnesVideos = async () => {
     return error;
   }
 }
-
 
 export const getAllDoctors = async () => {
   try {
@@ -246,7 +242,6 @@ export const updateConsultationState = async (id, newstatus) => {
     return error;
   }
 }
-
 
 export const getForumsHome = async () => {
   try {
@@ -337,7 +332,6 @@ export const createForumPost = async (category, title, post) => {
   }
 }
 
-
 export const getNotifications = async () => {
   const token = getToken();
   try {
@@ -388,3 +382,43 @@ export const clearAllNotifications = async () => {
     return error;
   }
 }
+
+export const createChecklist = async (checklistData) => {
+  const token = getToken();
+  try {
+    const response = await axios.post(`${apiurl}checklist/create`, checklistData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error creating checklist:', error);
+  }
+};
+
+export const fetchChecklists = async () => {
+  try {
+    const response = await axios.get(`${apiurl}/checklist/all`);  // Updated URL
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching checklists:', error);
+    throw error;
+  }
+};
+
+export const updateChecklist = async (id, updatedChecklist) => {
+  const token = getToken(); // Get the token from your authentication module
+  try {
+    const response = await axios.post(`${apiurl}checklist/update/${id}`, updatedChecklist, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error updating checklist:', error);
+  }
+};

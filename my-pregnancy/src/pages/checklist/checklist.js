@@ -1,36 +1,51 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './checklist.module.css';
 import buttons from '../../css/buttons.module.css';
-
-const initialChecklists = [
-  { id: 1, heading: 'Hospital Care Items List', items: ['Night Robe', 'Socks', 'Toothbrush'], isEditing: false },
-  { id: 2, heading: 'Baby Shopping List 1', items: ['Nappies', 'Talcum Powder', 'Blanket'], isEditing: false },
-  { id: 3, heading: 'Baby Shopping List 2', items: ['Nappies', 'Talcum Powder', 'Blanket'], isEditing: false },
-  { id: 4, heading: 'Postpartum Care Items List 1', items: ['Nappies', 'Baby Food', 'Toys'], isEditing: false },
-  { id: 5, heading: 'Postpartum Care Items List 2', items: ['Nappies', 'Socks', 'Baby Milk Formula'], isEditing: false },
-];
+import { fetchChecklists, createChecklist, updateChecklist } from '../../util/apireq'; // Import API functions
 
 function Checklist() {
-  const [checklists, setChecklists] = useState(initialChecklists);
+  const [checklists, setChecklists] = useState([]); // Initially empty, populated from the backend
   const [expandedChecklist, setExpandedChecklist] = useState(null); // For modal
   const [newItem, setNewItem] = useState(''); // For new item input
   const [isCreating, setIsCreating] = useState(false); // For new list creation modal
   const [newListTitle, setNewListTitle] = useState(''); // New list title
   const [newListItems, setNewListItems] = useState([]); // New list items
-  const [newListItemEditingIndex, setNewListItemEditingIndex] = useState(null); // Index of editing item in new list
+
+  // Fetch checklists from the backend
+  const loadChecklists = async () => {
+    try {
+      const data = await fetchChecklists(); // Fetch from the backend
+      setChecklists(data); // Populate checklists
+    } catch (error) {
+      console.error("Failed to fetch checklists:", error);
+    }
+  };
+
+  useEffect(() => {
+    loadChecklists(); // Load checklists on mount
+  }, []);
 
   // Pop-out the selected checklist
   const toggleExpand = (id) => {
+    // console.log(id)
     const checklist = checklists.find((checklist) => checklist.id === id);
     setExpandedChecklist(checklist); // Set the checklist to show in modal
   };
 
   // Close the modal and save changes
-  const closeModal = () => {
+  const closeModal = async () => {
     if (expandedChecklist) {
-      setChecklists(checklists.map((checklist) =>
-        checklist.id === expandedChecklist.id ? expandedChecklist : checklist
-      ));
+      try {
+        // Ensure that the checklist ID is not undefined
+        // console.log("Updating checklist ID:", expandedChecklist.id); // Log the ID
+        await updateChecklist(expandedChecklist.id, expandedChecklist); // Call your update function here
+        // Update the local state with the new checklist
+        setChecklists(checklists.map((checklist) =>
+          checklist.id === expandedChecklist.id ? expandedChecklist : checklist
+        ));
+      } catch (error) {
+        console.error("Failed to update checklist:", error);
+      }
     }
     setExpandedChecklist(null);
     setNewItem(''); // Reset new item input on close
@@ -46,7 +61,6 @@ function Checklist() {
     }
   };
 
-  // Handle editing of list items in the modal
   const handleEditItem = (itemIndex, newValue) => {
     if (expandedChecklist) {
       setExpandedChecklist({
@@ -92,16 +106,20 @@ function Checklist() {
   };
 
   // Handle creating a new list
-  const handleCreateList = () => {
+  const handleCreateList = async () => {
     if (newListTitle.trim() !== '') {
       const newList = {
-        id: checklists.length + 1, // Incremental ID
         heading: newListTitle,
         items: newListItems,
-        isEditing: false,
       };
-      setChecklists([...checklists, newList]);
-      closeCreateListModal(); // Close the modal after creating
+
+      try {
+        await createChecklist(newList); // Create the new checklist
+        await loadChecklists(); // Refresh the checklist data
+        closeCreateListModal();
+      } catch (error) {
+        console.error("Failed to create checklist:", error);
+      }
     }
   };
 
