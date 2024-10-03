@@ -7,7 +7,7 @@ import Journal from "./components/journal/journal.js";
 import Forums from "./components/forums/forums.js";
 import Recommended from "./components/recommended/pregnantrecommended.js";
 
-import styles from "./pregnanthome.module.css";
+import styles from "./home.module.css";
 
 
 function PregnantHomePage({user}){
@@ -20,8 +20,8 @@ function PregnantHomePage({user}){
         <div>
           <Welcome user={user}></Welcome>
           <div>
-            <div className={styles.journalAndForums}>
-              <Journal currentDay={user.pregnancyMonth} nextCycle={user.pregnancyMonth} weight={user.weight} currentStage={user.pregnancyMonth}/>
+            <div className={styles.topContainer}>
+              <Journal conceptionDate={user.conceptionDate} weight={user.weight}/>
               <Forums/>
             </div>
             <Recommended/>

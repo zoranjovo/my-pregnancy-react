@@ -1,0 +1,34 @@
+.topContainer {
+  padding: 0px 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+}
+
+
+@media (max-width: 800px) {
+  .topContainer {
+    display: block;
+  }
+  .topContainer > div {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 415px) {
+  .topContainer {
+    display: block;
+    padding: 0;
+    margin: 0;
+  }
+  .topContainer > div {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

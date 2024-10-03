@@ -56,9 +56,7 @@ function ForumHome(){
             </div>
           )}
 
-          {posts.support && (
-            <ForumHomeCategory post={posts.support} name={"Support Groups"} link={"support"} imagesURL={posts.imagesURL}/>
-          )}
+          <ForumHomeCategory post={posts.support} name={"Support Groups"} link={"support"} imagesURL={posts.imagesURL}/>  
           
           
           

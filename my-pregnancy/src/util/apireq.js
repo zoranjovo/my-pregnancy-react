@@ -336,3 +336,55 @@ export const createForumPost = async (category, title, post) => {
     return error;
   }
 }
+
+
+export const getNotifications = async () => {
+  const token = getToken();
+  try {
+    const response = await axios.get(`${apiurl}/notifications/get`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to get notifications:', error);
+    return error;
+  }
+}
+
+export const clearNotification = async (id) => {
+  const token = getToken();
+  try {
+    const response = await axios.post(`${apiurl}/notifications/clear`, {
+      notificationId: id,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to clear notification:', error);
+    return error;
+  }
+}
+
+export const clearAllNotifications = async () => {
+  const token = getToken();
+  try {
+    const response = await axios.post(`${apiurl}/notifications/clearall`, {},
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to clear all notifications:', error);
+    return error;
+  }
+}

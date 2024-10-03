@@ -1,3 +1,8 @@
+.box {
+  width: 350px;
+  height: 210px;
+}
+
 .forumEntry {
   background-color: #ececec;
   padding: 8px;
@@ -8,4 +13,19 @@
 
 .forumEntry > h1 {
   text-decoration: underline;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;     
+}
+
+
+@media (max-width: 800px) {
+  .topContainer {
+    display: block;
+  }
+  .topContainer > div {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

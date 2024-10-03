@@ -1,3 +1,13 @@
+.notificationsContainer {
+  width: 500px;
+  margin-bottom: 10px;
+}
+
+.notificationsScroller {
+  max-height: 150px;
+  overflow-y: scroll;
+}
+
 .notificationsContainer h3 {
   font-size: 1.2rem;
   margin-bottom: 15px;
@@ -13,6 +23,10 @@
   padding: 10px;
   margin-bottom: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notificationItem > a > p {
+  text-decoration: underline;
 }
 
 .notificationItem p {
@@ -44,3 +58,13 @@
   background-color: #e91e63;
 }
 
+@media (max-width: 600px) {
+  .notificationsContainer {
+    width: 100%;
+  }
+}
+@media (max-width: 430px) {
+  .notificationsContainer {
+    width: 350px;
+  }
+}

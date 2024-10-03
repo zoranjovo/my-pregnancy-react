@@ -1,14 +1,8 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(90deg, #f4dadd 5%, #ffb7c9 25%, #ffbacf 50%, #ffc4d3 75%, #fbdeea 100%);
-}
-
 .container {
     width: 100%;
     margin: 0 auto;
     text-align: center;
+    overflow-x: hidden;
 }
 
 .header {
@@ -181,4 +175,12 @@ body {
     color: #000000;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
+}
+
+
+@media (max-width: 1400px) {
+    .headerText {
+        position: absolute;
+        left: 0px;
+    }
 }

@@ -24,7 +24,7 @@ function Forums(){
   }, []);
 
   return (
-    <div className={boxes.standard}>
+    <div className={`${boxes.standard} ${styles.box}`}>
       {!posts ? (
         <div className={`flex items-center justify-center`} style={{marginTop: "100px", width: "300px"}}>
           <l-dot-wave
@@ -37,21 +37,29 @@ function Forums(){
       ) : (
         <div>
           <h1>Top Forums</h1>
-          <Link to={`/post/${posts.general._id}`}>
-            <div className={styles.forumEntry}>
-              <h1>{posts.general.title}</h1>
-            </div>
-          </Link>
-          <Link to={`/post/${posts.info._id}`}>
-            <div className={styles.forumEntry}>
-              <h1>{posts.info.title}</h1>
-            </div>
-          </Link>
-          <Link to={`/post/${posts.support._id}`}>
-            <div className={styles.forumEntry}>
-              <h1>{posts.support.title}</h1>
-            </div>
-          </Link>
+          {posts.general && (
+            <Link to={`/post/${posts.general._id}`}>
+              <div className={styles.forumEntry}>
+                <h1>{posts.general.title}</h1>
+              </div>
+            </Link>
+          )}
+          
+          {posts.info && (
+            <Link to={`/post/${posts.info._id}`}>
+              <div className={styles.forumEntry}>
+                <h1>{posts.info.title}</h1>
+              </div>
+            </Link>
+          )}
+
+          {posts.support && (
+            <Link to={`/post/${posts.support._id}`}>
+              <div className={styles.forumEntry}>
+                <h1>{posts.support.title}</h1>
+              </div>
+            </Link>
+          )}
         </div>
       )}
       

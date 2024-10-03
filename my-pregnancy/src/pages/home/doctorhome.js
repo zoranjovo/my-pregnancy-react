@@ -8,7 +8,7 @@ import Notifications from "./components/notifications/notifications.js";
 import Forums from "./components/forums/forums.js";
 import Recommended from "./components/recommended/doctorrecommended.js";
 
-import styles from "./home2.module.css";
+import styles from "./home.module.css";
 
 function DoctorHomePage({user}){
   dotWave.register();
@@ -19,8 +19,8 @@ function DoctorHomePage({user}){
         <Navbar/>
         <div>
           <Welcome user={user}></Welcome>
-          <div className={styles.journalAndForums}>
-            <Notifications/> {/* Notifications box placed here */}
+          <div className={styles.topContainer}>
+            <Notifications/>
             <Forums/>
           </div>
           <Recommended/>

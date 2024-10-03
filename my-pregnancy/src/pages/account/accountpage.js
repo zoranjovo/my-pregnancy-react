@@ -95,7 +95,6 @@ function AccountPage(){
       const response = await getUser();
       if(response.message === "Network Error"){ return serverErrorNotif(); }
       if(response.status === 200){
-        console.log(response.data)
         setUser(response.data);
         setRole(response.data.role);
         if(response.data.pfpExists){
