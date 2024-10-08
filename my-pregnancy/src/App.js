@@ -26,9 +26,9 @@ import NotFoundPage from './pages/notfound/notfoundpage.js';
 import PostPage from './pages/post/postpage.js';
 import PrivacyPolicyPage from './pages/privacypolicy/privacypolicypage.js';
 import ResetpasswordPage from './pages/resetpassword/resetpasswordpage.js';
-import ResourcearticlePage from './pages/resourcearticle/resourcearticlepage.js';
 import ResourcesPage from './pages/resources/resourcespage.js';
 import SignUpPage from './pages/signup/signuppage.js';
+import ExampleArticle from './pages/resourcearticle/example.js';
 
 
 function Wrapper() {
@@ -58,11 +58,13 @@ function Wrapper() {
       <Route path="/post/:id" element={<PostPage/>}/>
       <Route path="/privacypolicy" element={<PrivacyPolicyPage/>}/>
       <Route path="/resetpassword" element={<ResetpasswordPage/>}/>
-      <Route path="/resourcearticle" element={<ResourcearticlePage/>}/>
       <Route path="/resources" element={<ResourcesPage/>}/>
       <Route path="/signup" element={<SignUpPage/>}/>
   
       <Route path="*" element={<NotFoundPage/>}/>
+
+      {/* put additional articles down here */}
+      <Route path="/resourcearticle/example" element={<ExampleArticle/>}/>
     </Routes>
   );
 }

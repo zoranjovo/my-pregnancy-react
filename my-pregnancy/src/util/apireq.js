@@ -422,3 +422,17 @@ export const deleteChecklist = async (id) => {
     throw error;
   }
 };
+
+export const getAllResources = async () => {
+  try {
+    const response = await axios.get(`${apiurl}/resources`, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to fetch all resources:', error);
+    return error;
+  }
+}
