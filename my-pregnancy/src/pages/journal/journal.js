@@ -100,6 +100,9 @@ function Journal() {
           <button className={`${buttons.stylisedBtn} ${styles.addBtn}`}>+ Add Journal Entry</button>
         </Link>
         
+        <Link to={`/checklist`}>
+          <button className={`${buttons.stylisedBtn} ${styles.addBtn}`} style={{ marginLeft: 25 }}>To Checklist</button>
+        </Link>
       </div>
     </div>
   );

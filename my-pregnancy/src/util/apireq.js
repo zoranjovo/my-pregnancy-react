@@ -408,17 +408,17 @@ export const fetchChecklists = async () => {
   }
 };
 
-export const updateChecklist = async (id, updatedChecklist) => {
-  const token = getToken(); // Get the token from your authentication module
+export const deleteChecklist = async (id) => {
+  const token = getToken();
   try {
-    const response = await axios.post(`${apiurl}checklist/update/${id}`, updatedChecklist, {
+    const response = await axios.post(`${apiurl}checklist/delete/${id}`, {}, {
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       }
     });
     return response.data;
   } catch (error) {
-    console.error('Error updating checklist:', error);
+    console.error('Error deleting checklist:', error);
+    throw error;
   }
 };

@@ -28,6 +28,7 @@
   height: auto;
   min-height: 130px;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .boardName {
@@ -158,14 +159,7 @@ ul {
 }
 
 .createButton {
-  margin: 20px 0;
-  padding: 10px 20px;
-  background-color: #f590c2;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
+  margin-left: 20px;
 }
 
 .modalContent input[type='text'] {
@@ -203,4 +197,46 @@ ul {
 
 .deleteButton:hover {
   color: #e60000;
+}
+\.checklistItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+  background-color: #fdfdfd;
+  transition: background-color 0.3s;
+}
+
+.checklistItem::before {
+  content: "•";
+  font-size: 20px;
+  color: #ff66b3;
+  margin-right: 10px;
+}
+
+.itemList {
+  padding-left: 20px;
+  list-style: none;
+}
+
+.headerSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.deleteButton {
+  font-size: 14px;
+  color: #e60000;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  transition: color 0.3s;
+}
+
+.checklistBubble:hover {
+  transform: translateY(-5px);
 }

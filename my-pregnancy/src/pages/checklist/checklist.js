@@ -1,21 +1,24 @@
 import { useState, useEffect } from 'react';
-import styles from './checklist.module.css';
 import buttons from '../../css/buttons.module.css';
-import { fetchChecklists, createChecklist, updateChecklist } from '../../util/apireq'; // Import API functions
+import { Link } from 'react-router-dom';
+import styles from './checklist.module.css';
+import { fetchChecklists, createChecklist, deleteChecklist } from '../../util/apireq'; // Import API functions
 
 function Checklist() {
   const [checklists, setChecklists] = useState([]); // Initially empty, populated from the backend
-  const [expandedChecklist, setExpandedChecklist] = useState(null); // For modal
   const [newItem, setNewItem] = useState(''); // For new item input
   const [isCreating, setIsCreating] = useState(false); // For new list creation modal
   const [newListTitle, setNewListTitle] = useState(''); // New list title
   const [newListItems, setNewListItems] = useState([]); // New list items
+  const [checklistIds, setChecklistIds] = useState([]); // Store checklist IDs
 
   // Fetch checklists from the backend
   const loadChecklists = async () => {
     try {
       const data = await fetchChecklists(); // Fetch from the backend
       setChecklists(data); // Populate checklists
+      const ids = data.map((checklist) => checklist._id); // Extract the checklist IDs
+      setChecklistIds(ids); // Store checklist IDs
     } catch (error) {
       console.error("Failed to fetch checklists:", error);
     }
@@ -25,71 +28,22 @@ function Checklist() {
     loadChecklists(); // Load checklists on mount
   }, []);
 
-  // Pop-out the selected checklist
-  const toggleExpand = (id) => {
-    // console.log(id)
-    const checklist = checklists.find((checklist) => checklist.id === id);
-    setExpandedChecklist(checklist); // Set the checklist to show in modal
-  };
+  // Delete a checklist
+  const handleDeleteChecklist = async (index) => {
+    try {
+      const checklistId = checklistIds[index]; // Get checklist ID using the index
 
-  // Close the modal and save changes
-  const closeModal = async () => {
-    if (expandedChecklist) {
-      try {
-        // Ensure that the checklist ID is not undefined
-        // console.log("Updating checklist ID:", expandedChecklist.id); // Log the ID
-        await updateChecklist(expandedChecklist.id, expandedChecklist); // Call your update function here
-        // Update the local state with the new checklist
-        setChecklists(checklists.map((checklist) =>
-          checklist.id === expandedChecklist.id ? expandedChecklist : checklist
-        ));
-      } catch (error) {
-        console.error("Failed to update checklist:", error);
+      if (!checklistId) {
+        console.error("No checklist ID found at index:", index); // Handle undefined IDs
+        return;
       }
-    }
-    setExpandedChecklist(null);
-    setNewItem(''); // Reset new item input on close
-  };
 
-  // Toggle edit mode for the checklist in the modal
-  const toggleEditMode = () => {
-    if (expandedChecklist) {
-      setExpandedChecklist({
-        ...expandedChecklist,
-        isEditing: !expandedChecklist.isEditing,
-      });
-    }
-  };
+      await deleteChecklist(checklistId); // Call the delete API
 
-  const handleEditItem = (itemIndex, newValue) => {
-    if (expandedChecklist) {
-      setExpandedChecklist({
-        ...expandedChecklist,
-        items: expandedChecklist.items.map((item, index) =>
-          index === itemIndex ? newValue : item
-        ),
-      });
-    }
-  };
-
-  // Handle adding new list items in the modal
-  const handleAddItem = () => {
-    if (newItem.trim() !== '' && expandedChecklist) {
-      setExpandedChecklist({
-        ...expandedChecklist,
-        items: [...expandedChecklist.items, newItem],
-      });
-      setNewItem(''); // Clear the input field after adding
-    }
-  };
-
-  // Handle editing the title of an expanded checklist
-  const handleEditTitle = (newTitle) => {
-    if (expandedChecklist) {
-      setExpandedChecklist({
-        ...expandedChecklist,
-        heading: newTitle,
-      });
+      setChecklists(checklists.filter((_, idx) => idx !== index)); // Update the list locally
+      setChecklistIds(checklistIds.filter((_, idx) => idx !== index)); // Update the checklist IDs list
+    } catch (error) {
+      console.error("Failed to delete checklist:", error);
     }
   };
 
@@ -141,75 +95,34 @@ function Checklist() {
   return (
     <div className={styles.outerdiv}>
       <h1 className={styles.header}>Checklist</h1>
-      <button className={styles.createButton} onClick={openCreateListModal}>
+      <Link to={`/journal`}>
+        <button className={`${buttons.stylisedBtn} ${styles.addBtn}`}>Back to Journal</button>
+      </Link>
+      <button className={`${buttons.stylisedBtn} ${styles.createButton}`} onClick={openCreateListModal}>
         Create New List
       </button>
       <div className={styles.innerdiv}>
-        {checklists.map(({ id, heading }) => (
-          <div key={id} className={styles.checklistBubble}>
+        {checklists.map(({ _id, heading, items }, index) => (
+          <div key={_id} className={styles.checklistBubble}>
             <div className={styles.headerSection}>
               <h2 className={styles.boardName}>{heading}</h2>
-              <button className={styles.expandButton} onClick={() => toggleExpand(id)}>
-                Expand
+              <button
+                className={styles.deleteButton}
+                onClick={() => handleDeleteChecklist(index)}
+              >
+                Delete
               </button>
             </div>
+            <ul className={styles.itemList}>
+              {items && items.map((item, itemIndex) => (
+                <li key={itemIndex} className={styles.checklistItem}>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>
-
-      {/* Existing checklist modal */}
-      {expandedChecklist && (
-        <div className={styles.modalOverlay} onClick={closeModal}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.closeButton} onClick={closeModal}>&times;</button>
-            {expandedChecklist.isEditing ? (
-              <input
-                type="text"
-                value={expandedChecklist.heading}
-                onChange={(e) => handleEditTitle(e.target.value)}
-                placeholder="Edit title"
-              />
-            ) : (
-              <h2>{expandedChecklist.heading}</h2>
-            )}
-            <div className={styles.contentSection}>
-              <ul>
-                {expandedChecklist.items.map((item, index) => (
-                  <li key={index}>
-                    {expandedChecklist.isEditing ? (
-                      <input
-                        type="text"
-                        value={item}
-                        onChange={(e) => handleEditItem(index, e.target.value)}
-                      />
-                    ) : (
-                      item
-                    )}
-                  </li>
-                ))}
-              </ul>
-              <div className={styles.addItemSection}>
-                {expandedChecklist.isEditing && (
-                  <>
-                    <input
-                      type="text"
-                      value={newItem}
-                      onChange={(e) => setNewItem(e.target.value)}
-                      placeholder="Add new item"
-                    />
-                    <button className={`${buttons.addButton} ${styles.editButton}`} onClick={handleAddItem}>
-                      Add
-                    </button>
-                  </>
-                )}
-                <button className={styles.editButton} onClick={toggleEditMode}>
-                  {expandedChecklist.isEditing ? 'Save' : 'Edit'}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Create new list modal */}
       {isCreating && (
