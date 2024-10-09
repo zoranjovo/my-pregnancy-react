@@ -106,12 +106,13 @@ function Checklist() {
           <div key={_id} className={styles.checklistBubble}>
             <div className={styles.headerSection}>
               <h2 className={styles.boardName}>{heading}</h2>
-              <button
-                className={styles.deleteButton}
-                onClick={() => handleDeleteChecklist(index)}
-              >
-                Delete
-              </button>
+              <div className={styles.addItemSection}>
+                <button
+                  onClick={() => handleDeleteChecklist(index)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
             <ul className={styles.itemList}>
               {items && items.map((item, itemIndex) => (
@@ -156,9 +157,11 @@ function Checklist() {
               />
               <button onClick={handleAddNewItemToList}>Add Item</button>
             </div>
-            <button className={styles.createButton} onClick={handleCreateList}>
-              Create List
-            </button>
+            <div className={styles.addItemSection}>
+              <button onClick={handleCreateList}>
+                Create List
+              </button>
+            </div>
           </div>
         </div>
       )}
