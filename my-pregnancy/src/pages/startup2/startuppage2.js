@@ -74,7 +74,6 @@ function StartupPage2({userCache, setUserCache}){
             <Link to='/home'>
               <button className={styles.joinButton}>Dashboard</button>
             </Link>
-            
           ) : (
             <Link to='/signup'>
               <button className={styles.joinButton}>Join Now!</button>

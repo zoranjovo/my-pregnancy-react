@@ -8,39 +8,24 @@ import { serverErrorNotif } from '../../global-components/notify.js';
 
 const stages = ["1st Trimester", "2nd Trimester", "3rd Trimester"];
 
-const tempResources = [
-  {
-    title: "Example",
-    desc: "blah blah blah",
-    link: "example",
-    bgIMG: "/assets/e51564f6e1c60c926aff35d378d5aa12.jpg",
-    authorName: "Dr. Vera",
-    doctorIMG: "/assets/2154d24d02286926b6e1b308e5640639.png",
-    stageOfPregnancy: "1st Trimester",
-    stage: "1st Trimester",
-  },
-];
-
 function ResourcesPage(){
   const [resources, setResources] = useState(null);
   const [filteredResources, setFilteredResources] = useState([]);
   const [selectedStage, setSelectedStage] = useState('');
 
-  // useEffect(() => {
-  //   async function fetchEntries() {
-  //     const response = await getAllResources();
-  //     if(response.message === "Network Error"){ return serverErrorNotif(); }
-  //     if(response.status === 200){
-  //       return setResources(response.data);
-  //     }
-  //   }
-  //   fetchEntries();
-  // }, []);
-
   useEffect(() => {
-    setResources(tempResources);
-    setFilteredResources(tempResources);
+    async function fetchEntries() {
+      const response = await getAllResources();
+      if(response.message === "Network Error"){ return serverErrorNotif(); }
+      if(response.status === 200){
+        setResources(response.data);
+        setFilteredResources(response.data);
+        return;
+      }
+    }
+    fetchEntries();
   }, []);
+
 
   const handleStageChange = (e) => {
     const selectedValue = e.target.value;

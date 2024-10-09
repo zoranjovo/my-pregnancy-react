@@ -16,6 +16,7 @@ import ContactPage from './pages/contact/contactpage.js';
 import DiscussionPage from './pages/discussion/discussionpage.js';
 import FAQPage from './pages/faq/faqpage.js';
 import FitnessPage from './pages/fitness/fitnesspage.js';
+import FitnessManagePage from './pages/fitness/manage/FitnessManagePage.js';
 import FitnessarticlePage from './pages/fitnessarticle/fitnessarticlepage.js';
 import ForumsPage from './pages/forums/forumspage.js';
 import HomePageHandler from './pages/home/HomeHandler.js';
@@ -49,6 +50,7 @@ function Wrapper() {
       <Route path="/discussion/:id" element={<DiscussionPage/>}/>
       <Route path="/faq" element={<FAQPage/>}/>
       <Route path="/fitness" element={<FitnessPage/>}/>
+      <Route path="/fitness/manage" element={<FitnessManagePage/>}/>
       <Route path="/fitnessarticle/:id" element={<FitnessarticlePage/>}/>
       <Route path="/forums" element={<ForumsPage/>}/>
       <Route path="/home" element={<HomePageHandler/>}/>

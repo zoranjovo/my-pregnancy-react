@@ -61,7 +61,7 @@ useEffect(() => {
                   referrerPolicy="strict-origin-when-cross-origin" >
                 </iframe>
                 <h3 className={styles.time}>{`${video.time} watch`}</h3>
-                <h3 className={styles.desc}>{`${video.desc} watch`}</h3>
+                <h3 className={styles.desc}>{`${video.desc}`}</h3>
               </div>
             )}
           </div>

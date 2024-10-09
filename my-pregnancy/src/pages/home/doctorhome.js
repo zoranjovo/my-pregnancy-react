@@ -6,7 +6,7 @@ import Navbar from "../../global-components/navbar2/navbar2.js";
 import Welcome from "./components/welcome/welcome.js";
 import Notifications from "./components/notifications/notifications.js";
 import Forums from "./components/forums/forums.js";
-import Recommended from "./components/recommended/doctorrecommended.js";
+import DoctorsVideos from "./components/recommendedvideos/doctorrecommended.js";
 
 import styles from "./home.module.css";
 
@@ -23,7 +23,7 @@ function DoctorHomePage({user}){
             <Notifications/>
             <Forums/>
           </div>
-          <Recommended/>
+          <DoctorsVideos/>
         </div>
       </div>
       
