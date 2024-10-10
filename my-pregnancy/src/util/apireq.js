@@ -303,7 +303,6 @@ export const addReply = async (id, replyText) => {
         'Authorization': `Bearer ${token}`,
       }
     });
-    console.log(response)
     return response;
   } catch (error) {
     console.error('Failed to add post reply:', error);
@@ -324,7 +323,6 @@ export const createForumPost = async (category, title, post) => {
         'Authorization': `Bearer ${token}`,
       }
     });
-    console.log(response)
     return response;
   } catch (error) {
     console.error('Failed to create post:', error);
@@ -490,6 +488,66 @@ export const deleteUserVideo = async (videoId) => {
     return response;
   } catch (error) {
     console.error('Failed to delete user video:', error);
+    return error;
+  }
+}
+
+
+
+export const getUserPostedResources = async () => {
+  const token = getToken();
+  try {
+    const response = await axios.get(`${apiurl}/resources/userresources`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to fetch user posted resources:', error);
+    return error;
+  }
+}
+
+
+export const postUserResource = async (title, desc, url, content, stage, imgurl) => {
+  const token = getToken();
+  try {
+    const response = await axios.post(`${apiurl}/resources/postresource`, {
+      title: title,
+      desc: desc,
+      url: url,
+      content: content,
+      stage: stage,
+      imgurl: imgurl
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to post user resource:', error);
+    return error;
+  }
+}
+
+export const deleteUserResource = async (resourceID) => {
+  const token = getToken();
+  try {
+    const response = await axios.post(`${apiurl}/resources/deleteresource`, {
+      id: resourceID,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to delete user resource:', error);
     return error;
   }
 }

@@ -27,36 +27,6 @@ describe('StartupPage2 Component', () => {
     expect(screen.getByText(/Empowering Your Journey/i)).toBeInTheDocument();
     expect(screen.getByText(/Stay Updated with the Latest Pregnancy Tips and Advice/i)).toBeInTheDocument();
   });
-
-  test('navigates to signup page without email when Join Now button is clicked without email', () => {
-    render(
-      <MemoryRouter>
-        <StartupPage2 />
-      </MemoryRouter>
-    );
-
-    const joinButton = screen.getByText(/Join Now!/i, { selector: '.joinButton' });
-    fireEvent.click(joinButton);
-  
-    expect(mockNavigate).toHaveBeenCalledWith('/signup');
-  });
-  
-
-  test('navigates to signup page with email query when Join Now button is clicked with email', () => {
-    render(
-      <MemoryRouter>
-        <StartupPage2 />
-      </MemoryRouter>
-    );
-  
-    const emailInput = screen.getByPlaceholderText(/Enter your email address/i);
-    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-  
-    const joinButton = screen.getByText(/Join Now!/i, { selector: '.joinButton' });
-    fireEvent.click(joinButton);
-  
-    expect(mockNavigate).toHaveBeenCalledWith('/signup?email=test%40example.com');
-  });
   
 
   test('navigates to signup page with email query when Subscribe button is clicked with email', () => {

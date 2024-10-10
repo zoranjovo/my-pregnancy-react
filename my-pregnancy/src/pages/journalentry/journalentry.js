@@ -182,7 +182,6 @@ function JournalEntry(){
       customSuccessNotif('Succesfully created entry');
       return navigate('/journal');
     }
-    console.log(response);
   }
 
   

@@ -70,7 +70,6 @@ function SignUpPane(){
     if(password !== passwordConfirm){ return displayErr('Passwords do not match'); }
     if(!boxChecked){ return displayErr('Please agree to the terms and conditions'); }
     
-    console.log('sending sign up request');
     setErrorMsgShown(false);
     setLoadingShown(true);
     const response = await registerReq(role, firstname, lastname, email, password);

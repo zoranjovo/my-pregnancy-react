@@ -1,20 +1,24 @@
 import Footer from "../../../global-components/footer/footer";
 import Navbar from "../../../global-components/navbar2/navbar2.js"
-import styles from './fitnessmanage.module.css';
+import styles from './resourcemanage.module.css';
 import buttons from '../../../css/buttons.module.css';
 import boxes from '../../../css/boxes.module.css';
-import { deleteUserVideo, getUser, getUserPostedVideos, postUserVideo } from "../../../util/apireq.js";
+import { deleteUserResource, getUser, getUserPostedResources, postUserResource } from "../../../util/apireq.js";
 import { useState, useEffect } from "react";
 import { serverErrorNotif, customWarningNotif, customSuccessNotif } from "../../../global-components/notify.js";
 
-function FitnessManagePage(){
+const stages = ["1st Trimester", "2nd Trimester", "3rd Trimester"];
+
+function ResourceManagePage(){
   const [role, setRole] = useState(null);
   const [videos, setVideos] = useState(null);
 
   const [newVidName, setNewVidName] = useState("");
   const [newVidDesc, setNewVidDesc] = useState("");
   const [newVidURL, setNewVidURL] = useState("");
-  const [newVidTime, setNewVidTime] = useState("");
+  const [newVidContent, setNewVidContent] = useState("");
+  const [selectedStage, setSelectedStage] = useState('');
+  const [imgURL, setImgURL] = useState('');
 
   useEffect(() => {
     async function fetchUser() {
@@ -28,7 +32,7 @@ function FitnessManagePage(){
     }
 
     async function fetchVideos() {
-      const response = await getUserPostedVideos();
+      const response = await getUserPostedResources();
       if(response.message === "Network Error"){ return serverErrorNotif(); }
       if(response.status === 200){
         setVideos(response.data);
@@ -45,29 +49,35 @@ function FitnessManagePage(){
   const addNewVideo = async () => {
     // Check if name and description are not empty
     if (!newVidName.trim()) {
-      return customWarningNotif("Video name is required.");
+      return customWarningNotif("Resource name is required.");
     }
 
     if (!newVidDesc.trim()) {
-      return customWarningNotif("Video description is required.");
+      return customWarningNotif("Resource description is required.");
     }
 
     // Validate the YouTube video ID format
-    const youtubeIDPattern = /^[a-zA-Z0-9_-]{11}$/;
-    if (!youtubeIDPattern.test(newVidURL)) {
-      return customWarningNotif("Invalid YouTube video ID.");
+    if (!newVidURL.trim()) {
+      return customWarningNotif("Resource URL is required.");
     }
 
-    // Validate the time (must be a number between 1 and 9999)
-    const videoTime = parseInt(newVidTime, 10);
-    if (isNaN(videoTime) || videoTime < 1 || videoTime > 9999) {
-      return customWarningNotif("Invalid video time.");
+    if (!newVidContent.trim()) {
+      return customWarningNotif("Resource content is required.");
     }
 
-    const response = await postUserVideo(newVidName, newVidDesc, newVidURL, `${newVidTime} min`);
+    if (selectedStage === "") {
+      return customWarningNotif("Select a stage.");
+    }
+
+    if (imgURL === "") {
+      return customWarningNotif("Insert an image URL.");
+    }
+    
+
+    const response = await postUserResource(newVidName, newVidDesc, newVidURL, newVidContent, selectedStage, imgURL);
     if(response.message === "Network Error"){ return serverErrorNotif(); }
     if(response.status === 200){
-      return customSuccessNotif("Successfully added video. Please refresh page to see it.");
+      return customSuccessNotif("Successfully added resource. Please refresh page to see it.");
     } else if(response.response.status === 404 || response.response.status === 401){
       customWarningNotif("Account not found, please sign in again");
     } else if(response.response.status === 500){
@@ -79,10 +89,10 @@ function FitnessManagePage(){
 
 
   const deleteVid = async(id) => {
-    const response = await deleteUserVideo(id);
+    const response = await deleteUserResource(id);
     if(response.message === "Network Error"){ return serverErrorNotif(); }
     if(response.status === 200){
-      return customSuccessNotif("Successfully deleted video. Please refresh page to see updated list.");
+      return customSuccessNotif("Successfully deleted resource. Please refresh page to see updated list.");
     } else if(response.response.status === 404 || response.response.status === 401){
       customWarningNotif("Account not found, please sign in again");
     } else if(response.response.status === 500){
@@ -92,12 +102,17 @@ function FitnessManagePage(){
     }
   }
 
+  const handleStageChange = (e) => {
+    const selectedValue = e.target.value;
+    setSelectedStage(selectedValue);
+  };
+
   return (
     <div>
       <div style={{minHeight: 'calc(100vh - 202px)'}}>
         <Navbar></Navbar>
         <div className={styles.outerdiv}>
-          <h1 className="text-3xl font-bold text-blue">Manage Fitness Videos</h1>
+          <h1 className="text-3xl font-bold text-blue">Manage Resources</h1>
           {!role ? (
             <div className={`flex items-center justify-center`} style={{marginTop: "100px"}}>
               <l-dot-wave size="47" speed="1" color="#f06292" data-testid="loading-indicator"/>
@@ -129,25 +144,49 @@ function FitnessManagePage(){
                     
                     <div>
                       <input className={styles.newVidInput}
-                        placeholder="Youtube Video ID"
+                        placeholder="Page URL"
                         value={newVidURL}
                         onChange={(e) => setNewVidURL(e.target.value)}
                       ></input>
                     </div>
 
-                    <div style={{display: "flex", alignItems: "center"}}>
+                    <div>
                       <input className={styles.newVidInput}
-                        placeholder="Time"
-                        value={newVidTime}
-                        onChange={(e) => setNewVidTime(e.target.value)}
-                        type="number"
-                        style={{width: "100px"}}
+                        placeholder="Image URL"
+                        value={imgURL}
+                        onChange={(e) => setImgURL(e.target.value)}
                       ></input>
-                      <p style={{marginLeft: "10px"}}>Minutes</p>
                     </div>
 
                     <div>
-                      <button className={buttons.stylisedBtn} onClick={addNewVideo}>Add New Video</button>
+                      <img src={imgURL} alt="Preview" className={styles.imgPreview}></img>
+                    </div>
+
+                    <div>
+                      <select
+                        value={selectedStage} 
+                        onChange={handleStageChange} 
+                        className={styles.dropdown}
+                      >
+                        <option value="">Stage</option>
+                        {stages.map((stage, index) => (
+                          <option key={index} value={stage}>
+                            {stage}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <textarea className={styles.inputTA}
+                        placeholder="Content"
+                        value={newVidContent}
+                        onChange={(e) => setNewVidContent(e.target.value)}
+                      ></textarea>
+                    </div>
+
+                    <div>
+                      <button className={buttons.stylisedBtn} onClick={addNewVideo}>Add New Resource</button>
                     </div>
                   </div>
                 </div>
@@ -160,22 +199,20 @@ function FitnessManagePage(){
                   ) : (
                     videos.length === 0 ? (
                       <div className={`flex items-center justify-center`} style={{marginTop: "100px"}}>
-                        <h1>No Videos</h1>
+                        <h1>No Resources</h1>
                       </div>
                     ) : (
                       <div className={styles.videosDiv} style={{marginTop: "10px"}}>
                         {videos.map((v, i) => (
                           <div key={i} className={boxes.standard}>
-                            <h1 style={{fontWeight: "700"}}>{v.name}</h1>
-                            <p>{v.desc}</p>
-                            <p>{v.time}</p>
-                            <iframe 
-                              className={styles.embed}
-                              src={`https://www.youtube-nocookie.com/embed/${v.url}`}
-                              title="YouTube video player" 
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                              referrerPolicy="strict-origin-when-cross-origin" >
-                            </iframe>
+                            <a href={v.url}><h1 style={{fontWeight: "700"}}>{v.name}</h1></a>
+                            <a href={v.url}><h1>{`URL: ${v.url}`}</h1></a>
+                            <p>{`Stage: ${v.stage}`}</p>
+                            <p>{`Description: ${v.desc}`}</p>
+                            <p>{`Content: ${v.content}`}</p>
+                            <div>
+                              <img src={v.imgurl} alt="Preview" className={styles.imgPreview}></img>
+                            </div>
                             <button className={buttons.stylisedBtn} style={{marginTop: "10px"}} onClick={() => deleteVid(v._id)}>Delete</button>
                           </div>
                         ))}
@@ -195,4 +232,4 @@ function FitnessManagePage(){
   );
 }
 
-export default FitnessManagePage;
+export default ResourceManagePage;

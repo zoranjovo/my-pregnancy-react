@@ -17,7 +17,6 @@ function DoctorsVideos() {
       if(response.message === "Network Error"){ return serverErrorNotif(); }
       if(response.status === 200){
         setVideos(response.data);
-        console.log(response.data)
       } else {
         return customWarningNotif("Error");
       }

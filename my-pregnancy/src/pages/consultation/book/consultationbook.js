@@ -75,7 +75,6 @@ function ConsultationBook() {
     } else if(response.response.status === 404 || response.response.status === 401){
       customWarningNotif("Account not found, please sign in again");
     } else if(response.response.status === 400){
-      console.log(response.response.data.error);
       customWarningNotif(response.response.data.error);
       setSendingBookingRequest(0);
     } else if(response.response.status === 500){
@@ -85,6 +84,17 @@ function ConsultationBook() {
 
   const cap = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
+
+  const handleTimeChange = (e) => {
+    let [hours, minutes] = e.target.value.split(':').map(Number);
+    minutes = Math.round(minutes / 5) * 5;
+    if (minutes === 60) {
+      minutes = 0;
+      hours = (hours + 1) % 24;
+    }
+    const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+    setPreferredTime(formattedTime);
+  };
 
   return (
     <div className={styles.outerdiv}>
@@ -101,7 +111,7 @@ function ConsultationBook() {
                       type="time"
                       id="preferredTime"
                       value={preferredTime}
-                      onChange={(e) => setPreferredTime(e.target.value)}
+                      onChange={handleTimeChange}
                     />
                   </div>
       

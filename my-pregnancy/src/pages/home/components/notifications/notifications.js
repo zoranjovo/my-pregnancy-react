@@ -13,7 +13,11 @@ const Notifications = () => {
     const response = await getNotifications();
     if(response.message === "Network Error"){ return serverErrorNotif(); }
     if(response.status === 200){
-      return setNotifications(response.data);
+      const now = Date.now();
+      const validNotifications = response.data
+        .filter(notification => new Date(notification.date).getTime() <= now) // Exclude future notifications
+        .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by newest on top
+      setNotifications(validNotifications);
     } else {
       return customWarningNotif("Server Error");
     }
@@ -77,9 +81,3 @@ const Notifications = () => {
 };
 
 export default Notifications;
-
-
-{/* <div className={styles.notificationItem}>
-  <p>New consultation request for 17:30-18:00, 11/11</p>
-  <button className={styles.closeButton}>✕</button>
-</div> */}

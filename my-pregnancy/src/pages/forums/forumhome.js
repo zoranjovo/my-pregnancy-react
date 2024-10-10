@@ -12,7 +12,6 @@ function ForumHome(){
   useEffect(() => {
     async function fetchEntries() {
       const response = await getForumsHome();
-      console.log(response)
       if(response.message === "Network Error"){ return serverErrorNotif(); }
       if(response.status === 200){
         return setPosts(response.data);

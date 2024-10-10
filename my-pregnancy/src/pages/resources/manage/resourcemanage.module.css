@@ -1,0 +1,45 @@
+.outerdiv {
+  margin: 20px 40px;
+}
+
+.newVidInput {
+  padding: 5px 10px;
+  margin: 5px 0px 5px 0px;
+  border: 1px solid var(--pink1);
+  border-radius: 5px;
+}
+
+.videosDiv > div {
+  width: 330px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.inputTA {
+  padding: 5px 10px;
+  margin: 5px 0px 5px 0px;
+  width: 100%;
+  border: 1px solid var(--pink1);
+  border-radius: 5px;
+  min-height: 200px;
+  height: 200px;
+}
+
+.dropdown {
+  padding: 5px 10px;
+  margin: 5px 0px 5px 0px;
+  width: 100%;
+  border: 1px solid var(--pink1);
+  border-radius: 5px;
+}
+
+.imgPreview {
+  max-width: 200px;
+}
+
+@media (max-width: 450px) {
+  .outerdiv {
+    margin: 4px 8px;
+  }
+}

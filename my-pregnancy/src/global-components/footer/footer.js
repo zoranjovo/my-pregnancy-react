@@ -21,11 +21,12 @@ function Footer() {
             <div className={styles.socials}>
                 <h1>Follow us on</h1>
                 <div className={styles.icons}>
-                    <a href='https://facebook.com'><img src={`../assets/footer-icons/facebook.webp`} alt='facebook' /></a>
-                    <a href='https://instagram.com'><img src={`../assets/footer-icons/instagram.png`} alt='instagram' /></a>
-                    <a href='https://youtube.com'><img src={`../assets/footer-icons/youtube.webp`} alt='youtube' /></a>
-                    <a href='https://tiktok.com'><img src={`../assets/footer-icons/tiktok.png`} alt='tiktok' /></a>
-                    <a href='https://x.com'><img src={`../assets/footer-icons/x.png`} alt='x' /></a>
+                    <a href='https://www.facebook.com/profile.php?id=61565667462464&sk=about'><img src={`../assets/footer-icons/facebook.webp`} alt='facebook' /></a>
+                    <a href='https://instagram.com'><img src={`../assets/footer-icons/instagram.webp`} alt='instagram' /></a>
+                    <a href='https://linkedin.com'><img src={`../assets/footer-icons/linkedin.png`} alt='linkedin' /></a>
+                    {/* <a href='https://youtube.com'><img src={`../assets/footer-icons/youtube.webp`} alt='youtube' /></a> */}
+                    {/* <a href='https://tiktok.com'><img src={`../assets/footer-icons/tiktok.png`} alt='tiktok' /></a> */}
+                    {/* <a href='https://x.com'><img src={`../assets/footer-icons/x.png`} alt='x' /></a> */}
                 </div>
                 <div className={styles.info}>
                     <h3>Wollongong, New South Wales - 2500</h3>

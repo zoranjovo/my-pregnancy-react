@@ -28,6 +28,8 @@ import PostPage from './pages/post/postpage.js';
 import PrivacyPolicyPage from './pages/privacypolicy/privacypolicypage.js';
 import ResetpasswordPage from './pages/resetpassword/resetpasswordpage.js';
 import ResourcesPage from './pages/resources/resourcespage.js';
+import ResourceGeneratedArticlePage from './pages/resourcearticle/generated.js';
+import ResourceManagePage from './pages/resources/manage/ResourceManagePage.js';
 import SignUpPage from './pages/signup/signuppage.js';
 import ExampleArticle from './pages/resourcearticle/example.js';
 
@@ -61,6 +63,8 @@ function Wrapper() {
       <Route path="/privacypolicy" element={<PrivacyPolicyPage/>}/>
       <Route path="/resetpassword" element={<ResetpasswordPage/>}/>
       <Route path="/resources" element={<ResourcesPage/>}/>
+      <Route path="/resourcearticle/:id" element={<ResourceGeneratedArticlePage/>}/>
+      <Route path="/resources/manage" element={<ResourceManagePage/>}/>
       <Route path="/signup" element={<SignUpPage/>}/>
   
       <Route path="*" element={<NotFoundPage/>}/>

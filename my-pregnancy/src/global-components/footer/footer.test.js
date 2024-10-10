@@ -63,11 +63,8 @@ describe('Footer Component', () => {
       </MemoryRouter>
     );
 
-    //TODO change these once we have proper link or remove unused before production
-    expect(screen.getByAltText('facebook').closest('a')).toHaveAttribute('href', 'https://facebook.com');
+    expect(screen.getByAltText('facebook').closest('a')).toHaveAttribute('href', 'https://www.facebook.com/profile.php?id=61565667462464&sk=about');
     expect(screen.getByAltText('instagram').closest('a')).toHaveAttribute('href', 'https://instagram.com');
-    expect(screen.getByAltText('youtube').closest('a')).toHaveAttribute('href', 'https://youtube.com');
-    expect(screen.getByAltText('tiktok').closest('a')).toHaveAttribute('href', 'https://tiktok.com');
-    expect(screen.getByAltText('x').closest('a')).toHaveAttribute('href', 'https://x.com');
+    expect(screen.getByAltText('linkedin').closest('a')).toHaveAttribute('href', 'https://linkedin.com');
   });
 });

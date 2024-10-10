@@ -29,7 +29,6 @@ function AskForEmail(){
       setErrorMsgShown(true)
       return
     }
-    console.log('sending request')
     setErrorMsgShown(false)
     setLoadingShown(true)
     resetPassword(email, resetPasswordCallback)

@@ -1,0 +1,38 @@
+.body {
+  margin: 10px;
+}
+.imageContainer > img {
+  width: 100px;
+  height: 100px;
+  border: 2px solid var(--pink1);
+  border-radius: 999px;
+}
+
+.contentContainer {
+  border-top: 1px solid var(--pink3);
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.contentContainer > img {
+  margin-top: 10px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 450px) {
+  .body {
+    margin: 0px;
+  }
+  .contentContainer {
+    width: 95%;
+  }
+  .imageContainer > img {
+    width: 80px;
+    height: 80px;
+  }
+}
