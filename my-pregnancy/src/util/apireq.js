@@ -436,3 +436,60 @@ export const getAllResources = async () => {
     return error;
   }
 }
+
+
+export const getUserPostedVideos = async () => {
+  const token = getToken();
+  try {
+    const response = await axios.get(`${apiurl}/fitness/uservideos`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to fetch user posted videos:', error);
+    return error;
+  }
+}
+
+
+export const postUserVideo = async (title, desc, url, time) => {
+  const token = getToken();
+  try {
+    const response = await axios.post(`${apiurl}/fitness/postvideo`, {
+      title: title,
+      desc: desc,
+      url: url,
+      time: time
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to post user video:', error);
+    return error;
+  }
+}
+
+export const deleteUserVideo = async (videoId) => {
+  const token = getToken();
+  try {
+    const response = await axios.post(`${apiurl}/fitness/deletevideo`, {
+      id: videoId,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to delete user video:', error);
+    return error;
+  }
+}

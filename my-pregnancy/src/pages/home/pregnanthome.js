@@ -5,7 +5,8 @@ import Navbar from "../../global-components/navbar2/navbar2.js"
 import Welcome from "./components/welcome/welcome.js";
 import Journal from "./components/journal/journal.js";
 import Forums from "./components/forums/forums.js";
-import Recommended from "./components/recommended/pregnantrecommended.js";
+import RecommendedVideos from "./components/recommendedvideos/pregnantrecommendedvideos.js";
+import RecommendedResources from "./components/recommendedresources/pregnantresources.js";
 
 import styles from "./home.module.css";
 
@@ -24,7 +25,8 @@ function PregnantHomePage({user}){
               <Journal conceptionDate={user.conceptionDate} weight={user.weight}/>
               <Forums/>
             </div>
-            <Recommended/>
+            <RecommendedResources/>
+            <RecommendedVideos/>
           </div>
         </div>
       </div>
