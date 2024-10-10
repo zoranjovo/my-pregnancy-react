@@ -1,18 +1,26 @@
-# How to run locally
-
-1. Make sure you have node js installed
+# How to Run the Frontend Locally
+## The Setup 
+1. Ensure you have nodeJS installed
 2. Clone/download the repository
-3. Navigate into the `my-pregnancy` folder (there should be a public and src folder in it)
-4. Create a `.env` file in this directory and paste the following in: `REACT_APP_API_URL=http://localhost:8000/` (change the url when needed, this is the default for a locally hosted backend)
-5. Open a terminal window in this directory
-6. Run `npm install` and wait until its done
-7. Run `npm run build` and wait until its done
-8. Now navigate into the build folder using `cd build`
-9. Type `serve -s` to serve the generated static files (if you do not have serve run `npm install --global serve`)
-10. It will give you a local url, put it into  your browser and the site will load
+3. Navigate into the `my-pregnancy` folder/directory:
+```bash
+# From an elevated privelege Command Prompt:
+C:\Windows\System32> cd "C:\Users\TestUser\Downloads\GitHub\my-pregnancy-react\my-pregnancy"
+```
+4. Create a `.env` file in this directory and paste the following in: `REACT_APP_API_URL=http://localhost:8000/`
+    - **Please Note**: Change the URL when needed. This is the default for a locally hosted backend
+5. _If you have not done so already_ - Open a terminal window in this directory
+6. Run `npm install` and `npm install --global serve` to install all the necessary packages. When complete, we are ready to Build the project!
 
-# How to develop upon
-In step 7 instead of doing `npm run build` do `npm run start` and the site will automatically open and any code changes will automatically display, you will probably need to refresh the site at times.
+## The Build and Runtime
+1. Again within the `my-pregnancy` directory, run `npm run build` and wait until completed
+3. Type `serve -s build`, to serve the generated static files
+4. It will give you a local URL, enter this into your browser and the site will load
+
+# How to Develop Upon
+In Step 1 of [The Build and Runtime](#the-build-and-runtime), instead of entering `npm run build`, try, `npm run start`, and the site will automatically open and any code changes will automatically display. 
+
+**Please Note**: You may need to refresh the site at times for changes to be seen.
 
 # Note
-if you get errors saying stuff is not found, try run `npm install` again
+If there are any errors indicating that packages or other necessary components are **Not Found**, attempt to run `npm install` again.
