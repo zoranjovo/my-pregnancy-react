@@ -31,7 +31,7 @@ function RecommendedResources(){
           <div className={`flex items-center justify-center`} style={{marginTop: "100px"}}><p>No Resources Found</p></div>
         ) : (
           resources.map((r, i) => (
-            <Link key={i} to={`/resourcearticle/${r.url}`} className={styles.resourceLink} style={{background: `linear-gradient(to right, #F6A2B8 50%, rgba(246, 162, 184, 0) 80%), url('${r.imgurl}') right center / cover no-repeat`}}>
+            <a key={i} href={`${r.url}`}  className={styles.resourceLink} style={{background: `linear-gradient(to right, #F6A2B8 50%, rgba(246, 162, 184, 0) 80%), url('${r.imgurl}') right center / cover no-repeat`}}>
               <div className={styles.imageContainer}>
                 {!r.pfpExists ? (
                   <img src='/assets/blank-profile-picture.webp' alt='profile'></img>
@@ -50,7 +50,7 @@ function RecommendedResources(){
                 <h2>{r.name}</h2>
                 <p>{r.desc}</p>
               </div>
-            </Link>
+            </a>
           ))
         )
       )}

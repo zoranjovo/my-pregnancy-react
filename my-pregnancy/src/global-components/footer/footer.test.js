@@ -64,7 +64,7 @@ describe('Footer Component', () => {
     );
 
     expect(screen.getByAltText('facebook').closest('a')).toHaveAttribute('href', 'https://www.facebook.com/profile.php?id=61565667462464&sk=about');
-    expect(screen.getByAltText('instagram').closest('a')).toHaveAttribute('href', 'https://instagram.com');
+    expect(screen.getByAltText('instagram').closest('a')).toHaveAttribute('href', 'https://www.instagram.com/mypregnancy5/');
     expect(screen.getByAltText('linkedin').closest('a')).toHaveAttribute('href', 'https://linkedin.com');
   });
 });

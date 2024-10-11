@@ -2,7 +2,6 @@ import Footer from "../../global-components/footer/footer";
 import Navbar from "../../global-components/navbar2/navbar2.js";
 import styles from './resourcespage.module.css';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { getAllResources, getUser } from '../../util/apireq';
 import { serverErrorNotif, customWarningNotif } from '../../global-components/notify.js';
 import { useNavigate } from "react-router-dom";
@@ -89,7 +88,7 @@ function ResourcesPage(){
                   <div className={`flex items-center justify-center`} style={{marginTop: "100px"}}><p>No Resources Found</p></div>
                 ) : (
                   filteredResources.map((r, i) => (
-                    <Link key={i} to={`/resourcearticle/${r.url}`} className={styles.resourceLink} style={{background: `linear-gradient(to right, #F6A2B8 50%, rgba(246, 162, 184, 0) 80%), url('${r.imgurl}') right center / cover no-repeat`}}>
+                    <a key={i} href={`${r.url}`} className={styles.resourceLink} style={{background: `linear-gradient(to right, #F6A2B8 50%, rgba(246, 162, 184, 0) 80%), url('${r.imgurl}') right center / cover no-repeat`}}>
                       <div className={styles.imageContainer}>
                         {!r.pfpExists ? (
                           <img src='/assets/blank-profile-picture.webp' alt='profile'></img>
@@ -109,7 +108,7 @@ function ResourcesPage(){
                         <p>{r.desc}</p>
                       </div>
                       <button className={styles.readButton}>Read</button>
-                    </Link>
+                    </a>
                   ))
                 )
               )}
