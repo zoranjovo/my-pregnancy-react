@@ -3,6 +3,7 @@
     margin: 0 auto;
     text-align: center;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .header {
@@ -14,6 +15,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow-y: hidden;
 }
 
 .headerImg {
@@ -182,5 +184,37 @@
     .headerText {
         position: absolute;
         left: 0px;
+    }
+}
+
+@media (max-width: 900px) {
+    .headerImg {
+        left: unset;
+        right: 0; /* Align the right side of the image to the right edge of the screen */
+    }
+}
+
+
+@media (max-width: 600px) {
+    .approach, .journey {
+        padding: 0;
+        margin-bottom: 20px;
+    }
+    .approach p, .journey p {
+        font-size: 1.2em;
+        line-height: 1.6;
+        text-align: center;
+        margin-left: 1em;
+        margin-right: 1em;
+       
+    }
+    .subscribe {
+        width: 100%;
+    }
+    .subscribe input[type="email"] {
+        width: 100px;
+    }
+    .subscribe button {
+        width: 200px;
     }
 }
